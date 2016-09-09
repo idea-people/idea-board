@@ -50,13 +50,6 @@ function idea_board_comment_list( $comment, $args, $depth ) { ?>
 	<?php
 	comment_form( array(
 		'id_form'    => 'idea-board-comment-form',
-		'class_form' => 'idea-board-reset idea-board-comment-form'
+		'class_form' => 'idea-board-reset idea-board-comment-form idea-board-validate'
 	) ); ?>
 </div>
-<script>
-	(function ($) {
-		$(document).ready(function () {
-			$('#idea-board-comment-form').validate({});
-		});
-	})(jQuery);
-</script>

@@ -37,7 +37,7 @@ $custom_fields      = Setting::get_custom_fields();
 $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 
 ?>
-<form action="<?php echo $action_url; ?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo $action_url; ?>" method="post" enctype="multipart/form-data" class="idea-board-validate">
 	<table class="idea-board-table">
 		<colgroup>
 			<col style="width:15%;">
@@ -95,7 +95,9 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 				<label for="post_title">제목</label>
 			</th>
 			<td>
-				<input type="text" name="post_title" size="30" id="post_title" class="idea-block"
+				<input type="text"
+				       required="required"
+				       name="post_title" size="30" id="post_title" class="idea-block"
 				       value="<?php echo esc_attr( $post_title ); ?>"/>
 			</td>
 		</tr>
@@ -103,8 +105,9 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 			<tr class="idea-board-row-email">
 				<th scope="col"><label for="meta_input[idea_board_email]"><?php _e( '이메일' ); ?></label></th>
 				<td>
-					<input type="text" name="meta_input[idea_board_email]" id="meta_input[idea_board_email]"
+					<input type="email" name="meta_input[idea_board_email]" id="meta_input[idea_board_email]"
 					       class="idea-block idea-block-middle"
+					       required="required"
 					       value="<?php echo $user_email; ?>"/>
 				</td>
 			</tr>
@@ -113,6 +116,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 				<td>
 					<input type="text" name="meta_input[idea_board_user_name]" id="meta_input[idea_board_user_name]"
 					       class="idea-block idea-block-middle"
+					       required="required"
 					       value="<?php echo $user_name; ?>"/>
 				</td>
 			</tr>
@@ -120,7 +124,8 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 				<th><label for="post_password">패스워드</label></th>
 				<td>
 					<input type="password" name="post_password" id="post_password" class="idea-block idea-block-middle"
-					       value="<?php echo $post_password ?>"/>
+					       value="<?php echo $post_password ?>"
+					       required="required"/>
 				</td>
 			</tr>
 		<?php endif; ?>
@@ -130,10 +135,12 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		<tr class="idea-board-row-title ">
 			<th class="idea-vertical-top">내용</th>
 			<td>
-				<?php echo Editor::get_the_editor( array(
+				<?php
+				echo Editor::get_the_editor( array(
 					'name'    => 'idea_board_post_content',
 					'content' => $content
-				) ); ?>
+				) );
+				?>
 			</td>
 		</tr>
 

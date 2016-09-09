@@ -5,5 +5,7 @@
         });
 
         $('#idea-board').find('.idea-board-file-inputs').css('visibility', 'visible');
+
+        $('.idea-board-validate').validate({});
     });
 })(jQuery);

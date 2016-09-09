@@ -23,15 +23,18 @@ class Assets {
 
 		wp_localize_script( PluginConfig::$plugin_name, PluginConfig::$plugin_name, array() );
 
-		wp_enqueue_script( PluginConfig::$plugin_name );
-
 		wp_register_script( 'jquery-validate',
 			'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js',
 			array(
 				'jquery',
 				'jquery-form'
 			) );
+
 		wp_register_script( 'jquery-validate-ko', PluginConfig::$plugin_url . 'assets/js/lib/jquery-validate/localization/messages_ko.js', array( 'jquery-validate' ) );
+
+		wp_enqueue_script( 'jquery-validate' );
+		wp_enqueue_script( 'jquery-validate-ko' );
+		wp_enqueue_script( PluginConfig::$plugin_name );
 	}
 
 	public function public_euqueue_styles() {

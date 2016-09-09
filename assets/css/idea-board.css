@@ -721,10 +721,11 @@ reset
     line-height: 30px;
 }
 
-#idea-board-comment-form label.error {
+#idea-board .error {
     margin: 0;
-    color: #ff3f44;
     font-weight: bold;
+    padding: 5px 0;
+    display: block;
 }
 
 #idea-board-comment-form .form-submit {
