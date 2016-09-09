@@ -69,6 +69,10 @@ class CommonUtils {
 				<input type="hidden" name="idea_board_category"
 				       value="<?php echo $query_category; ?>">
 				<input type="hidden" name="paged" value="0">
+
+				<?php if ( ! PluginConfig::$permalink_structure ) { ?>
+					<input type="hidden" name="page_id" value="<?php echo get_the_ID() ?>">
+				<?php } ?>
 			</form>
 		</div>
 		<?php

@@ -36,6 +36,7 @@ class SingleView extends AbstractView {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				$post = get_post();
+				break;
 			}
 		}
 
@@ -92,7 +93,7 @@ class SingleView extends AbstractView {
 
 	public function _comments_template( $template ) {
 		$skin_path = Setting::get_board_skin_path();
-		
+
 		return $skin_path . '/comments.php';
 	}
 

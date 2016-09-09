@@ -1,18 +1,24 @@
 <?php
 /**
+ * Created by PhpStorm.
  * User: ideapeople
- * Mail: ideapeople@ideapeople.co.kr
- * Homepage : ideapeople@ideapeople.co.kr
+ * Date: 2016-09-09
+ * Time: 오후 8:44
  */
 
 namespace ideapeople\board\view;
 
 
+use ideapeople\board\Post;
 use ideapeople\board\Query;
 use ideapeople\board\setting\Setting;
 use ideapeople\util\view\View;
 
-class EditView extends AbstractView {
+class DeleteView extends AbstractView {
+	public function getViewName() {
+		return 'delete';
+	}
+
 	public function render( $model = null ) {
 		$post = null;
 
@@ -35,6 +41,8 @@ class EditView extends AbstractView {
 			$post  = new \WP_Post( $p );
 		}
 
+		$post->comment_status = 'close';
+
 		$view = apply_filters( 'pre_cap_check_edit_view', null, $post, Setting::get_board() );
 
 		if ( $view instanceof View ) {
@@ -43,12 +51,6 @@ class EditView extends AbstractView {
 			$output = parent::render( $model );
 		}
 
-		wp_reset_query();
-
 		return $output;
-	}
-
-	public function getViewName() {
-		return 'edit';
 	}
 }

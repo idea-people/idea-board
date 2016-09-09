@@ -18,11 +18,15 @@ class PluginConfig {
 
 	static $__FILE__;
 
+	static $permalink_structure;
+
 	public static function init( $__FILE__ ) {
 		self::$__FILE__ = $__FILE__;
 
 		self::$plugin_path = plugin_dir_path( $__FILE__ );
 		self::$plugin_url  = plugin_dir_url( $__FILE__ );
+
+		self::$permalink_structure = get_option( 'permalink_structure' );
 	}
 
 	static $board_tax = 'idea_board';

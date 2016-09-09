@@ -89,9 +89,10 @@ class Post {
 
 		if ( $result && $post->post_parent != 0 ) {
 			$parent = get_post( $post->post_parent );
-
+			
 			return self::password_required( $parent );
 		}
+
 
 		return $result;
 	}

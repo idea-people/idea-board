@@ -53,7 +53,7 @@ class ViewInterceptor {
 		if ( Post::password_required( $post ) ) {
 			return $passwordView;
 		}
-
+		
 		return $view;
 	}
 

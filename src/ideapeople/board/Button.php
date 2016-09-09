@@ -14,6 +14,12 @@ class Button {
 	}
 
 	public static function edit_button( $post = null ) {
+		$post = get_post( $post );
+
+		if ( $post->post_author != 0 && get_current_user_id() != $post->post_author ) {
+			return null;
+		}
+
 		return self::button( 'edit', 'edit', '수정', Rewrite::edit_link( $post ), $post );
 	}
 
@@ -26,6 +32,12 @@ class Button {
 	}
 
 	public static function delete_button( $post = null ) {
+		$post = get_post( $post );
+
+		if ( $post->post_author != 0 && get_current_user_id() != $post->post_author ) {
+			return null;
+		}
+
 		return self::button( 'delete', 'delete', '삭제', Rewrite::delete_link( $post ), $post );
 	}
 

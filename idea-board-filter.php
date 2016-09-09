@@ -7,15 +7,6 @@ use ideapeople\util\wp\MetaUtils;
 use ideapeople\util\wp\PostUtils;
 use ideapeople\util\wp\TermUtils;
 
-function idea_upload_cap( $caps ) {
-	$caps[] = 'upload_files';
-
-	return $caps;
-}
-
-add_filter( 'user_has_cap', 'idea_upload_cap' );
-
-
 function idea_board_save_board_id( $post_ID ) {
 	$post = get_post( $post_ID );
 
@@ -97,9 +88,6 @@ function idea_board_taxonomy_term_in_query( $query ) {
 
 add_filter( 'parse_query', 'idea_board_taxonomy_term_in_query' );
 
-/**
- * @param $post_type
- */
 function idea_board_add_search_category( $post_type ) {
 	global $typenow;
 	global $wp_query;

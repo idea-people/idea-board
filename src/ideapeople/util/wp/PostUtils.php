@@ -125,11 +125,6 @@ class PostUtils {
 	 * @return bool
 	 */
 	public static function password_check( $password ) {
-		/**
-		 * @var $wp_hasher PasswordHash
-		 */
-		global $wp_hasher;
-
 		if ( empty( $password ) ) {
 			return false;
 		}
@@ -158,7 +153,7 @@ class PostUtils {
 
 		$check = $hash === $stored_hash;
 
-		return ! apply_filters( 'check_password', $check, $password, $hash );
+		return ! apply_filters( 'idea_board_check_password', $check, $password, $hash );
 	}
 
 	public static function is_author( $post ) {

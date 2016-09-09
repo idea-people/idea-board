@@ -20,13 +20,7 @@ class Rewrite {
 		'idea_board_category'
 	);
 
-	public $rewrite_modes = array( 'list', 'edit', 'read' );
-
-	public $structure;
-
-	public function __construct() {
-		$this->structure = get_option( 'permalink_structure' );
-	}
+	public $rewrite_modes = array( 'list', 'edit', 'read', 'delete' );
 
 	public function add_rewrite_rules() {
 		$posts = get_posts( array(
@@ -106,7 +100,7 @@ class Rewrite {
 		return $q;
 	}
 
-	public static function delete_link( $post = null ) {
+	public static function delete_action_link( $post = null ) {
 		$post = get_post( $post );
 
 		$page = Post::get_board_page( $post->ID );
@@ -114,10 +108,26 @@ class Rewrite {
 		if ( is_object( $page ) && $page->post_type != PluginConfig::$board_post_type ) {
 			return add_query_arg( array(
 				'pid'                                     => $post->ID,
-				PluginConfig::$idea_board_edit_nonce_name => wp_create_nonce( PluginConfig::$idea_board_edit_nonce_action ),
 				'mode'                                    => 'delete',
-				'return_url'                              => get_permalink( $page->ID )
+				'return_url'                              => get_permalink( $page->ID ),
+				PluginConfig::$idea_board_edit_nonce_name => wp_create_nonce( PluginConfig::$idea_board_edit_nonce_action ),
 			), self::edit_ajax_link() );
+		}
+
+		return false;
+	}
+
+	public static function delete_link( $post = null ) {
+		$post = get_post( $post );
+
+		$page = Post::get_board_page( $post->ID );
+
+		if ( is_object( $page ) && $page->post_type != PluginConfig::$board_post_type ) {
+			return add_query_arg( array(
+				'pid'        => $post->ID,
+				'page_mode'  => 'delete',
+				'return_url' => get_permalink( $page->ID )
+			) );
 		}
 
 		return false;

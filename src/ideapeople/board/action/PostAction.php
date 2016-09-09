@@ -38,12 +38,13 @@ class PostAction {
 		}
 
 		$post_data = wp_parse_args( $post_data, array(
-			'post_type'    => PluginConfig::$board_post_type,
-			'post_status'  => 'publish',
 			'post_content' => Request::getParameter( 'idea_board_post_content' ),
-			'post_parent'  => Request::getParameter( 'parent', 0 ),
-			'post_author'  => ! is_user_logged_in() ? - 1 : null
+			'post_parent'  => Request::getParameter( 'parent', 0 )
 		) );
+
+		$post_data[ 'post_type' ]   = PluginConfig::$board_post_type;
+		$post_data[ 'post_status' ] = 'publish';
+		$post_data[ 'post_author' ] = ! is_user_logged_in() ? - 1 : null;
 
 		if ( ! Capability::is_board_admin() ) {
 			$post_data[ 'post_content' ] = strip_shortcodes( $post_data[ 'post_content' ] );
@@ -100,7 +101,9 @@ class PostAction {
 
 				break;
 			case 'delete':
-				$post_id = wp_trash_post( $post_id );
+				$post = Post::get_post( $post_id );
+
+				$post_id = wp_trash_post( $post->ID );
 				break;
 			default :
 				break;

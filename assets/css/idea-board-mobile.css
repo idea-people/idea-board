@@ -54,4 +54,11 @@
     #idea-board-comment-form .comment-form-comment label {
         margin-left: 0;
     }
+
+    #idea-board .idea-board-meta ul li {
+        width: 100%;
+        padding: 0;
+        margin: 3px 0;
+        border: none;
+    }
 }

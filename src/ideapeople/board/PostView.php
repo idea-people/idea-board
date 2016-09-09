@@ -10,6 +10,7 @@ namespace ideapeople\board;
 
 
 use ideapeople\board\setting\Setting;
+use ideapeople\board\view\DeleteView;
 use ideapeople\board\view\EditView;
 use ideapeople\board\view\ErrorView;
 use ideapeople\board\view\ListView;
@@ -40,6 +41,9 @@ class PostView {
 			case 'read':
 				$view = new SingleView();
 				break;
+			case 'delete':
+				$view = new DeleteView();
+				break;
 			default:
 				$view = new ListView();
 				break;
@@ -60,8 +64,12 @@ class PostView {
 
 	public static function handle_view( $view ) {
 		$skin_path = Setting::get_board_skin_path();
-		$header    = new PathView( $skin_path . '/header.php' );
-		$footer    = new PathView( $skin_path . '/footer.php' );
+
+		$header = new PathView( $skin_path . '/header.php' );
+		$footer = new PathView( $skin_path . '/footer.php' );
+
+		wp_enqueue_style( 'theme-style', get_template_directory_uri() . '/style.css' );
+		wp_enqueue_style( 'theme-child-style', get_stylesheet_directory_uri() . '/style.css' );
 
 		if ( $view instanceof View ) {
 			ob_start();

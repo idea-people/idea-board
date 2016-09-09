@@ -41,6 +41,7 @@ class Query extends WP_Query {
 		parent::parse_query( $query );
 
 		global $wp_the_query;
+
 		$this->query_vars = wp_parse_args( $this->query_vars, $wp_the_query->query_vars );
 	}
 
