@@ -5,8 +5,6 @@ Tags: idea-board,board,게시판,forum
 Requires at least: 4.0
 Tested up to: 4.6
 Stable tag: 1.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 아이디어보드는 간단하게 워드프레스에 추가할수 있는 한국형 게시판 플러그인 입니다.
 
