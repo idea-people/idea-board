@@ -18,7 +18,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 아이디어보드는 워드프레스 커스텀 포스트타입을 이용하여 다양한 플러그인과 호환이 가능하게 제작되었습니다.
 
 * [Disqus Comment System](https://wordpress.org/plugins/disqus-comment-system) 을 이용하여 댓글 작성을 할수 있습니다.
-* [WordPress Popular Posts](https://ko.wordpress.org/plugins/wordpress-popular-posts) , [Recent Posts Widget Extended](https://wordpress.org/plugins/recent-posts-widget-extended/)를 이용하여 최신글 위젯을 만들수 있습니다.
+* [WordPress Popular Posts](https://ko.wordpress.org/plugins/wordpress-popular-posts) , [Recent Posts Widget Extended](https://wordpress.org/plugins/recent-posts-widget-extended/) 을 이용하여 최신글 위젯을 만들수 있습니다.
 * [Captcha by BestWebSoft](https://wordpress.org/plugins/captcha/) 플러그인을 이용하여 캡차 기능을 연결할수 있습니다.
 * [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) 플러그인을 이용하여 사용자필드를 마음대로 추가할수 있습니다.
 * 비회원도 글을 작성할수 있습니다.
