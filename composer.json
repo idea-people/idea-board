@@ -1,0 +1,11 @@
+{
+  "autoload": {
+    "psr-4": {
+      "ideapeople\\": "src/"
+    }
+  },
+  "require": {
+  },
+  "require-dev": {
+  }
+}

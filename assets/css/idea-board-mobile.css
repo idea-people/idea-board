@@ -1,0 +1,34 @@
+@media all and (max-width: 600px) {
+    #idea-board .idea-col-date,
+    #idea-board .idea-col-author,
+    #idea-board .idea-col-hit {
+        display: none;
+    }
+
+    #idea-board .idea-search-form {
+        width: 100%;
+    }
+
+    #idea-board .idea-search-form #searchType,
+    #idea-board .idea-search-form #searchValue {
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+        float: none;
+        clear: both;
+    }
+
+    #idea-board .idea-search-form #searchType {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    #idea-board .idea-search-form input[type="submit"] {
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    #idea-board .NFI-wrapper {
+        width: 100%;
+    }
+}
