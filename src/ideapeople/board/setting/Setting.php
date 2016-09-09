@@ -148,7 +148,7 @@ class Setting {
 		return self::get_meta( 'board_editor', $board_term, $defaultValue );
 	}
 
-	public static function get_use_pages( $board_term = null, $defaultValue = '' ) {
+	public static function get_use_pages( $board_term = null, $defaultValue = array() ) {
 		return self::get_meta( 'board_use_page', $board_term, $defaultValue );
 	}
 
