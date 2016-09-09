@@ -21,6 +21,14 @@
     display: none;
 }
 
+#idea-board ul {
+    margin: 0;
+}
+
+#idea-board ul.children {
+    padding-left: 4%;
+}
+
 /**
 reset
 */
@@ -110,6 +118,34 @@ reset
     color: #fff;
     min-width: inherit;
     text-align: center;
+}
+
+#idea-board input[type="radio"],
+#idea-board input[type="checkbox"] {
+    position: relative;
+    -webkit-appearance: none;
+    height: 1.5em;
+    width: 1.5em;
+    margin-bottom: -0.25em;
+    margin-right: 5px;
+    vertical-align: top;
+    padding: 0;
+}
+
+#idea-board input[type="checkbox"]:checked:before {
+    content: "\2713";
+    position: absolute;
+    font-size: 1em;
+    left: 1px;
+    top: 2px;
+    text-align: center;
+    width: 1.25em;
+    color: #337ab7;
+}
+
+#idea-board .idea-vertical-top,
+#idea-board .idea-board-table .idea-vertical-top {
+    vertical-align: top;
 }
 
 #idea-board .idea-board-category {
@@ -296,6 +332,15 @@ reset
     text-align: center;
 }
 
+#idea-board .idea-block {
+    display: block;
+    width: 100%;
+}
+
+#idea-board .idea-block-middle {
+    width: 50%;
+}
+
 #idea-board.idea-board-archive tbody tr:hover {
     background: #f2f2f2;
 }
@@ -394,6 +439,11 @@ reset
     line-height: normal;
 }
 
+#idea-board li:before,
+#idea-board li:after {
+    display: none;
+}
+
 #idea-board .idea-board-meta ul li:last-child {
     border-right: none;
 }
@@ -469,3 +519,203 @@ reset
     margin-right: 5px;
 }
 
+#idea-board-comments {
+    font-size: .8rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+#idea-board-comments .idea-board-comments-title {
+    font-size: 1rem;
+}
+
+#idea-board-comments textarea:focus {
+    background: #fff;
+}
+
+#idea-board-comments,
+#idea-board-comments.idea-board-comments-area {
+    width: 100%;
+    max-width: inherit;
+}
+
+#idea-board-comments .idea-board-comment-list {
+    width: 100%;
+    clear: both;
+    margin-bottom: 5px;
+    line-height: normal;
+}
+
+#idea-board-comments .idea-board-comment-list li {
+    margin-left: 0;
+}
+
+#idea-board-comments .idea-board-comment-list li li {
+    margin-left: 20px;
+}
+
+#idea-board-comments .idea-board-comment-list li.idea-board-comment-body {
+    list-style: none;
+    padding: 10px;
+    overflow: hidden;
+    background: #fbfbfc;
+    border: 1px solid #dedede;
+    margin: 0 0 5px;
+}
+
+#idea-board-comments .idea-board-comment-list li.idea-board-comment-body a {
+    float: right;
+    margin-left: 5px;
+    text-decoration: none;
+    background: #fff;
+    font-size: 12px;
+    display: inline-block;
+    padding: 4px 10px;
+    text-transform: uppercase;
+    border: 1px solid #dedede;
+}
+
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-user-avatar {
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+}
+
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-user-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-author,
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-date {
+    display: inline-block;
+}
+
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-author,
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-content {
+    padding-left: 40px;
+}
+
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-author {
+    margin-right: 5px;
+}
+
+#idea-board-comments .idea-board-comment-list li .idea-board-comment-content {
+    display: block;
+    padding-top: 10px;
+}
+
+#idea-board-comments .comment-reply-title {
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+#idea-board-comment-form {
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+#idea-board-comment-form h3 {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 5px;
+}
+
+#idea-board-comment-form .comment-form-author,
+#idea-board-comment-form .comment-form-email,
+#idea-board-comment-form .comment-form-url {
+    display: inline-block;
+    width: 33.3%;
+    overflow: hidden;
+    float: left;
+}
+
+#idea-board-comment-form .comment-form-url label,
+#idea-board-comment-form .comment-form-author label,
+#idea-board-comment-form .comment-form-email label,
+#idea-board-comment-form .comment-form-author input,
+#idea-board-comment-form .comment-form-email input,
+#idea-board-comment-form .comment-form-url input {
+    float: left;
+    line-height: 22px;
+    vertical-align: middle;
+    display: block;
+    margin-bottom: 10px;
+    width: auto;
+
+}
+
+#idea-board-comment-form .comment-form-comment {
+    overflow: hidden;
+}
+
+#idea-board-comment-form .comment-form-url input,
+#idea-board-comment-form .comment-form-author input,
+#idea-board-comment-form .comment-form-email input,
+#idea-board-comment-form .comment-form-comment textarea {
+    border: 1px solid #dedede;
+    width: 98%;
+    padding: 5px 10px;
+    background: #fbfbfc;
+}
+
+#idea-board-comment-form .comment-form-comment textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+}
+
+#idea-board-comment-form .comment-form-url input {
+    width: 100%;
+}
+
+#idea-board-comment-form .comment-form-url input:focus,
+#idea-board-comment-form .comment-form-author input:focus,
+#idea-board-comment-form .comment-form-email input:focus,
+#idea-board-comment-form .comment-form-comment textarea:focus {
+    background: #fff;
+}
+
+#idea-board-comment-form .comment-form-url label,
+#idea-board-comment-form .comment-form-author label,
+#idea-board-comment-form .comment-form-email label,
+#idea-board-comment-form .comment-form-comment label {
+    width: 86px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+#idea-board-comment-form .comment-form-comment label,
+#idea-board-comment-form .comment-form-author label {
+    margin-left: 0;
+}
+
+#idea-board-comment-form label.error {
+    display: block;
+    float: left;
+    width: auto;
+    clear: left;
+    margin-left: 70px;
+}
+
+#idea-board-comment-form .logged-in-as {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+#idea-board-comment-form .comment-form-comment {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+#idea-board-comment-form .comment-form-comment label {
+    vertical-align: top;
+    line-height: 30px;
+}
+
+#idea-board-comment-form .form-submit {
+    text-align: right;
+}

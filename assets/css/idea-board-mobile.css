@@ -31,4 +31,27 @@
     #idea-board .NFI-wrapper {
         width: 100%;
     }
+
+    #idea-board .idea-block-middle {
+        width: 100%;
+    }
+
+    #idea-board-comment-form .comment-form-url,
+    #idea-board-comment-form .comment-form-author,
+    #idea-board-comment-form .comment-form-email {
+        width: 100%;
+    }
+
+    #idea-board-comment-form .comment-form-url input,
+    #idea-board-comment-form .comment-form-author input,
+    #idea-board-comment-form .comment-form-email input {
+        width: 100%;
+    }
+
+    #idea-board-comment-form .comment-form-url label,
+    #idea-board-comment-form .comment-form-author label,
+    #idea-board-comment-form .comment-form-email label,
+    #idea-board-comment-form .comment-form-comment label {
+        margin-left: 0;
+    }
 }
