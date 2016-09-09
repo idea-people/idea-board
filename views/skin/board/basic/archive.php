@@ -1,4 +1,5 @@
 <?php
+use ideapeople\board\Button;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Post;
 use ideapeople\board\Rewrite;
@@ -68,5 +69,5 @@ the_posts_pagination( array(
 ?>
 
 <div class="idea-board-buttons">
-	<a href="<?php echo Rewrite::write_link(); ?>" class="idea-board-button">글쓰기</a>
+	<?php echo Button::write_button(); ?>
 </div>

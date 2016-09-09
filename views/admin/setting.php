@@ -214,6 +214,11 @@ $board_skins = Skins::get_board_skins();
 			</p>
 
 			<p>
+				<label for="roles[reply][]"><?php _e( '답글' ); ?></label>
+				<?php echo CommonUtils::role_as_select_box( 'roles[reply][]', Setting::get_role( $board->term_id, 'reply', Capability::get_default_cap( 'reply' ) ) ); ?>
+			</p>
+
+			<p>
 				<label for="roles[delete][]"><?php _e( '삭제' ); ?></label>
 				<?php echo CommonUtils::role_as_select_box( 'roles[delete][]', Setting::get_role( $board->term_id, 'delete', Capability::get_default_cap( 'delete' ) ) ); ?>
 			</p>

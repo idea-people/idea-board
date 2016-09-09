@@ -1,4 +1,5 @@
 <?php
+use ideapeople\board\Button;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Post;
 use ideapeople\board\Rewrite;
@@ -48,10 +49,10 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'single' );
 	<?php Post::the_file_list(); ?>
 
 	<div class="idea-board-buttons">
-		<a href="<?php echo Rewrite::list_link() ?>" class="idea-board-button">목록</a>
-		<a href="<?php echo Rewrite::edit_link() ?>" class="idea-board-button">수정</a>
-		<a href="<?php echo Rewrite::delete_link() ?>" class="idea-board-button">삭제</a>
-		<a href="<?php echo Rewrite::reply_link() ?>" class="idea-board-button">답글</a>
+		<?php echo Button::list_button(); ?>
+		<?php echo Button::edit_button(); ?>
+		<?php echo Button::delete_button(); ?>
+		<?php echo Button::reply_button(); ?>
 	</div>
 </article>
 

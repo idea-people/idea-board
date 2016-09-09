@@ -288,6 +288,7 @@ reset
 
 #idea-board .idea-col-title a {
     display: block;
+    color: #333;
 }
 
 #idea-board .idea-col-no {

@@ -1,4 +1,5 @@
 <?php
+use ideapeople\board\Button;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Capability;
 use ideapeople\board\Editor;
@@ -151,7 +152,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 	</table>
 
 	<div class="idea-board-buttons">
-		<a href="<?php echo Rewrite::list_link(); ?>" class="idea-board-button">목록</a>
+		<?php echo Button::list_button(); ?>
 		<input type="submit" value="저장">
 	</div>
 
