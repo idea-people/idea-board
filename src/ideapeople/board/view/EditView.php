@@ -8,6 +8,7 @@
 namespace ideapeople\board\view;
 
 
+use ideapeople\board\Post;
 use ideapeople\board\Query;
 use ideapeople\board\setting\Setting;
 use ideapeople\util\view\View;
@@ -18,7 +19,7 @@ class EditView extends AbstractView {
 
 		$query = new Query( array(
 			'board' => Setting::get_board()->name,
-			'p'     => get_query_var( 'pid', - 1 )
+			'p'     => get_query_var( 'pid', 1 )
 		) );
 
 		$GLOBALS[ 'wp_query' ] = $query;

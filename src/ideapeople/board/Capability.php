@@ -21,13 +21,13 @@ class Capability {
 		'list'           => self::ROLE_ALL,
 		'read'           => self::ROLE_ALL,
 		'edit'           => self::ROLE_ALL,
+		'reply'          => self::ROLE_ALL,
 		'delete'         => self::ROLE_ALL,
 		'notice_edit'    => self::ROLE_ADMIN,
 		'comment_edit'   => self::ROLE_ALL,
 		'comment_status' => self::ROLE_ADMIN,
 		'file_down'      => self::ROLE_ALL,
 		'file_upload'    => self::ROLE_ALL,
-		'reply_edit'     => self::ROLE_ALL,
 		'secret_edit'    => self::ROLE_ADMIN,
 		'secret_read'    => self::ROLE_ADMIN
 	);

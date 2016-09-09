@@ -180,6 +180,8 @@ class PostAction {
 				} else {
 					if ( ! MetaUtils::has_meta( 'post', $key, $post->ID ) ) {
 						add_post_meta( $post->ID, $key, false );
+					} else {
+						update_post_meta( $post->ID, $key, false );
 					}
 				}
 			} else {
@@ -188,7 +190,7 @@ class PostAction {
 				}
 			}
 		}
-
+		
 		if ( Setting::is_only_secret() ) {
 			PostUtils::insert_or_update_meta( $post->ID, 'idea_board_is_secret', true );
 		}
