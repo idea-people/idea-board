@@ -706,6 +706,11 @@ reset
     margin-bottom: 10px;
 }
 
+#idea-board-comment-form .comment-notes {
+    line-height: 2;
+    font-weight: bold;
+}
+
 #idea-board-comment-form .comment-form-comment {
     clear: both;
     margin-bottom: 10px;
@@ -714,6 +719,12 @@ reset
 #idea-board-comment-form .comment-form-comment label {
     vertical-align: top;
     line-height: 30px;
+}
+
+#idea-board-comment-form label.error {
+    margin: 0;
+    color: #ff3f44;
+    font-weight: bold;
 }
 
 #idea-board-comment-form .form-submit {

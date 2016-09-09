@@ -14,6 +14,8 @@ use ideapeople\util\view\View;
 
 class EditView extends AbstractView {
 	public function render( $model = null ) {
+		wp_enqueue_script( 'jquery-form' );
+
 		$post = null;
 
 		$query = new Query( array(

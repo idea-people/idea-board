@@ -24,7 +24,7 @@ class ViewInterceptor {
 	 *
 	 * @return bool|AbstractView|AuthFailView|PasswordView
 	 */
-	public function pre_cap_check_edit_view( $view, $post, $board ) {
+	public function pre_cap_check_edit_view( $view, $post, $board = null ) {
 		$post = get_post( $post );
 
 		if ( ! $post || $post->post_type != PluginConfig::$board_post_type ) {
@@ -53,7 +53,7 @@ class ViewInterceptor {
 		if ( Post::password_required( $post ) ) {
 			return $passwordView;
 		}
-		
+
 		return $view;
 	}
 

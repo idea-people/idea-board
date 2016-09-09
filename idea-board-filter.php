@@ -3,6 +3,7 @@ use ideapeople\board\PostView;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Post;
 use ideapeople\board\PluginConfig;
+use ideapeople\util\http\Request;
 use ideapeople\util\wp\MetaUtils;
 use ideapeople\util\wp\PostUtils;
 use ideapeople\util\wp\TermUtils;
@@ -202,3 +203,4 @@ function idea_board_allow_html( $t ) {
 }
 
 add_filter( 'wp_kses_allowed_html', 'idea_board_allow_html' );
+

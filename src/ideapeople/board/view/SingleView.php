@@ -21,6 +21,9 @@ use ideapeople\util\wp\TermUtils;
 
 class SingleView extends AbstractView {
 	public function render( $model = null ) {
+		wp_enqueue_script( 'jquery-validate' );
+		wp_enqueue_script( 'jquery-validate-ko' );
+
 		$post = null;
 
 		$query = new Query( array(

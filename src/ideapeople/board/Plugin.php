@@ -121,6 +121,8 @@ class Plugin {
 		$comment_action = new CommentAction();
 		$this->loader->add_action( 'preprocess_comment', $comment_action, 'preprocess_comment' );
 
+		$comment_action->change_wp_handle_comment_submission();
+
 		$file_action = new FileAction();
 		$file_action->add_ajax_action();
 		$this->loader->add_action( 'wp_ajax_idea_board_delete_attach', $file_action, 'delete_attach_redirect' );

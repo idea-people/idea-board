@@ -1,6 +1,6 @@
 <?php
 function idea_board_comment_list( $comment, $args, $depth ) { ?>
-	<li class="idea-board-comment-body">
+	<li class="idea-board-comment-body" id="comment-<?php comment_ID() ?>">
 		<?php if ( '0' == $comment->comment_approved ) : ?>
 			<p class="idea-board-comment-awaiting-moderation"><?php __( '댓글이 승인을 기다리고 있습니다.' ); ?></p>
 		<?php endif; ?>
@@ -47,8 +47,16 @@ function idea_board_comment_list( $comment, $args, $depth ) { ?>
 		<p class="idea-board-no-comments"><?php _e( 'Comments are closed.', 'twentyfifteen' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form( array(
+	<?php
+	comment_form( array(
 		'id_form'    => 'idea-board-comment-form',
 		'class_form' => 'idea-board-reset idea-board-comment-form'
 	) ); ?>
 </div>
+<script>
+	(function ($) {
+		$(document).ready(function () {
+			$('#idea-board-comment-form').validate({});
+		});
+	})(jQuery);
+</script>
