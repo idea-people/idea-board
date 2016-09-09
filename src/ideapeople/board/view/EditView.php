@@ -35,7 +35,7 @@ class EditView extends AbstractView {
 			$post  = new \WP_Post( $p );
 		}
 
-		$view = apply_filters_ref_array( 'pre_cap_check_edit_view', array( null, $post, 'update' ) );
+		$view = apply_filters( 'pre_cap_check_edit_view', null, $post, Setting::get_board() );
 
 		if ( $view instanceof View ) {
 			$output = $view->render( $this->model );

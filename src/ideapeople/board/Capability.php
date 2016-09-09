@@ -14,6 +14,7 @@ use ideapeople\util\wp\RoleUtils;
 
 class Capability {
 	const ROLE_ALL = 'all';
+	const ROLE_ONLY_AUTHOR = 'onlyAuthor';
 	const ROLE_IS_LOGIN = 'isLogin';
 	const ROLE_ADMIN = 'administrator';
 

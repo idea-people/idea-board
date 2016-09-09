@@ -9,15 +9,13 @@
 namespace ideapeople\board\action;
 
 
-use ideapeople\board\setting\Setting;
 use ideapeople\board\Capability;
-use ideapeople\board\Post;
-use ideapeople\board\Rewrite;
-use ideapeople\board\PostView;
 use ideapeople\board\PluginConfig;
-use ideapeople\board\view\ErrorView;
+use ideapeople\board\Post;
+use ideapeople\board\PostView;
+use ideapeople\board\Rewrite;
+use ideapeople\board\setting\Setting;
 use ideapeople\util\http\Request;
-use ideapeople\util\view\View;
 use ideapeople\util\wp\MetaUtils;
 use ideapeople\util\wp\PostUtils;
 
@@ -78,7 +76,7 @@ class PostAction {
 			wp_die( 'BOARD REQUIRED' );
 		}
 
-		$view = apply_filters( 'pre_cap_check_edit_view', null, get_post( $post_id ) );
+		$view = apply_filters( 'pre_cap_check_edit_view', null, get_post( $post_id ), $board );
 
 		PostView::handle_view( $view );
 
@@ -190,7 +188,7 @@ class PostAction {
 				}
 			}
 		}
-		
+
 		if ( Setting::is_only_secret() ) {
 			PostUtils::insert_or_update_meta( $post->ID, 'idea_board_is_secret', true );
 		}
@@ -227,10 +225,7 @@ class PostAction {
 
 		if ( is_array( $this->post_data ) && isset( $this->post_data[ 'tax_input' ] ) ) {
 			$tax = $this->post_data[ 'tax_input' ][ PluginConfig::$board_tax ];
-
-			if ( count( $tax ) == 2 ) {
-				$this->post_update_private_meta( $tax[ 1 ], $post_id );
-			}
+			$this->post_update_private_meta( $tax[ count( $tax ) - 1 ], $post_id );
 		}
 
 		return $post_id;

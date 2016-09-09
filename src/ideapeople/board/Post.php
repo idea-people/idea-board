@@ -300,6 +300,12 @@ class Post {
 	}
 
 	public static function get_board_term( $post = null ) {
+		$terms = wp_get_post_terms( $post->ID, PluginConfig::$board_tax );
+
+		if ( ! empty( $terms ) && count( $terms ) == 1 ) {
+			return $terms[ 0 ]->term_id;
+		}
+
 		return self::get_post_meta( $post, 'idea_board_term', false );
 	}
 

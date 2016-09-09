@@ -8,6 +8,7 @@
 
 namespace ideapeople\board;
 
+use ideapeople\board\setting\Setting;
 use ideapeople\board\view\AbstractView;
 use ideapeople\board\view\AuthFailView;
 use ideapeople\board\view\PasswordView;
@@ -19,9 +20,11 @@ class ViewInterceptor {
 	 * @param $post
 	 *
 	 *
+	 * @param $board Setting
+	 *
 	 * @return bool|AbstractView|AuthFailView|PasswordView
 	 */
-	public function pre_cap_check_edit_view( $view, $post ) {
+	public function pre_cap_check_edit_view( $view, $post, $board ) {
 		$post = get_post( $post );
 
 		if ( ! $post || $post->post_type != PluginConfig::$board_post_type ) {

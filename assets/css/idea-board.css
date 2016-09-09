@@ -296,6 +296,10 @@ reset
     text-align: center;
 }
 
+#idea-board.idea-board-archive tbody tr:hover {
+    background: #f2f2f2;
+}
+
 #idea-board .idea-col-date {
     width: 14%;
     text-align: center;

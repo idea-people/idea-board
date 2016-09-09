@@ -31,10 +31,10 @@ abstract class AbstractView extends PathView {
 		/**
 		 * @var $board_term \WP_Term
 		 */
-		$board_term = Setting::get_board( $board_term );
+		$board = Setting::get_board( $board_term );
 
-		if ( is_object( $board_term ) ) {
-			$path = Setting::get_skin_info( $board_term->term_id );
+		if ( is_object( $board ) ) {
+			$path = Setting::get_skin_info( $board->term_id );
 			$this->setViewPath( $path[ 'path' ] . '/' . $this->getViewName() . '.php' );
 		}
 	}

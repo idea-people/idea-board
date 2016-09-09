@@ -19,9 +19,10 @@ class Roles {
 		/* @var $wp_roles WP_Roles */
 		global $wp_roles;
 
-		$roles              = array();
-		$roles[ 'all' ]     = '전체공개';
-		$roles[ 'isLogin' ] = '로그인 사용자';
+		$roles                 = array();
+		$roles[ 'all' ]        = '전체공개';
+		$roles[ 'isLogin' ]    = '로그인 사용자';
+		$roles[ 'onlyAuthor' ] = '본인만';
 
 		$roles = array_merge( $roles, $wp_roles->get_names() );
 
