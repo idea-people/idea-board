@@ -626,9 +626,10 @@ reset
 
 #idea-board-comment-form .comment-form-author,
 #idea-board-comment-form .comment-form-email,
-#idea-board-comment-form .comment-form-url {
+#idea-board-comment-form .comment-form-url,
+#idea-board-comment-form .comment-form-password {
     display: inline-block;
-    width: 33.3%;
+    width: 50%;
     overflow: hidden;
     float: left;
 }
@@ -636,16 +637,17 @@ reset
 #idea-board-comment-form .comment-form-url label,
 #idea-board-comment-form .comment-form-author label,
 #idea-board-comment-form .comment-form-email label,
+#idea-board-comment-form .comment-form-password label,
 #idea-board-comment-form .comment-form-author input,
 #idea-board-comment-form .comment-form-email input,
-#idea-board-comment-form .comment-form-url input {
+#idea-board-comment-form .comment-form-url input,
+#idea-board-comment-form .comment-form-password input {
     float: left;
     line-height: 22px;
     vertical-align: middle;
     display: block;
     margin-bottom: 10px;
     width: auto;
-
 }
 
 #idea-board-comment-form .comment-form-comment {
@@ -655,11 +657,17 @@ reset
 #idea-board-comment-form .comment-form-url input,
 #idea-board-comment-form .comment-form-author input,
 #idea-board-comment-form .comment-form-email input,
+#idea-board-comment-form .comment-form-password input,
 #idea-board-comment-form .comment-form-comment textarea {
     border: 1px solid #dedede;
     width: 98%;
     padding: 5px 10px;
     background: #fbfbfc;
+}
+
+#idea-board-comment-form .comment-form-email input,
+#idea-board-comment-form .comment-form-password input {
+    width: 100%;
 }
 
 #idea-board-comment-form .comment-form-comment textarea {
@@ -669,7 +677,6 @@ reset
 }
 
 #idea-board-comment-form .comment-form-url input {
-    width: 100%;
 }
 
 #idea-board-comment-form .comment-form-url input:focus,
@@ -682,7 +689,8 @@ reset
 #idea-board-comment-form .comment-form-url label,
 #idea-board-comment-form .comment-form-author label,
 #idea-board-comment-form .comment-form-email label,
-#idea-board-comment-form .comment-form-comment label {
+#idea-board-comment-form .comment-form-comment label,
+#idea-board-comment-form .comment-form-password label {
     width: 86px;
     font-weight: bold;
     margin-bottom: 4px;
@@ -695,10 +703,8 @@ reset
 
 #idea-board-comment-form label.error {
     display: block;
-    float: left;
-    width: auto;
-    clear: left;
-    margin-left: 70px;
+    margin-left: 0;
+    width: 100%;
 }
 
 #idea-board-comment-form .logged-in-as {

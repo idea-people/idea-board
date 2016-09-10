@@ -13,27 +13,24 @@ use ideapeople\board\PluginConfig;
 use ideapeople\board\Post;
 use ideapeople\board\setting\Setting;
 use ideapeople\util\http\Request;
+use ideapeople\util\wp\CommentUtils;
+use ideapeople\util\wp\MetaUtils;
+use ideapeople\util\wp\PostUtils;
 use WP_Error;
 
 class CommentAction {
-	/**
-	 * @var \WP_Post
-	 */
-	public $post;
-
 	/**
 	 * @var \WP_Term
 	 */
 	public $board_term;
 
 	public function preprocess_comment( $comment ) {
-		$post = get_post( $comment[ 'comment_post_ID' ] );
+		$post = get_post( $comment['comment_post_ID'] );
 
 		if ( $post->post_type != PluginConfig::$board_post_type ) {
 			return $comment;
 		}
 
-		$this->post       = &$post;
 		$this->board_term = Setting::get_board_from_post( $post->ID );
 
 		add_filter( 'option_comment_whitelist', array( $this, 'option_comment_whitelist' ) );
@@ -46,8 +43,8 @@ class CommentAction {
 	}
 
 	function change_wp_handle_comment_submission() {
-		if ( strpos( $_SERVER[ 'URL' ], 'wp-comments-post.php' ) ) {
-			$comment_post_ID = @$_POST[ 'comment_post_ID' ];
+		if ( strpos( $_SERVER['URL'], 'wp-comments-post.php' ) ) {
+			$comment_post_ID = @$_POST['comment_post_ID'];
 			$post            = Post::get_post( $comment_post_ID );
 
 			if ( $post->post_type == PluginConfig::$board_post_type ) {
@@ -88,26 +85,30 @@ class CommentAction {
 	}
 
 	public function wp_handle_comment_submission( $comment_data ) {
-		$comment_post_ID = $comment_parent = 0;
-		$comment_author  = $comment_author_email = $comment_author_url = $comment_content = null;
+		$comment_post_ID  = $comment_parent = 0;
+		$comment_author   = $comment_author_email = $comment_author_url = $comment_content = null;
+		$comment_password = false;
 
-		if ( isset( $comment_data[ 'comment_post_ID' ] ) ) {
-			$comment_post_ID = (int) $comment_data[ 'comment_post_ID' ];
+		if ( isset( $comment_data['comment_post_ID'] ) ) {
+			$comment_post_ID = (int) $comment_data['comment_post_ID'];
 		}
-		if ( isset( $comment_data[ 'author' ] ) && is_string( $comment_data[ 'author' ] ) ) {
-			$comment_author = trim( strip_tags( $comment_data[ 'author' ] ) );
+		if ( isset( $comment_data['author'] ) && is_string( $comment_data['author'] ) ) {
+			$comment_author = trim( strip_tags( $comment_data['author'] ) );
 		}
-		if ( isset( $comment_data[ 'email' ] ) && is_string( $comment_data[ 'email' ] ) ) {
-			$comment_author_email = trim( $comment_data[ 'email' ] );
+		if ( isset( $comment_data['email'] ) && is_string( $comment_data['email'] ) ) {
+			$comment_author_email = trim( $comment_data['email'] );
 		}
-		if ( isset( $comment_data[ 'url' ] ) && is_string( $comment_data[ 'url' ] ) ) {
-			$comment_author_url = trim( $comment_data[ 'url' ] );
+		if ( isset( $comment_data['url'] ) && is_string( $comment_data['url'] ) ) {
+			$comment_author_url = trim( $comment_data['url'] );
 		}
-		if ( isset( $comment_data[ 'comment' ] ) && is_string( $comment_data[ 'comment' ] ) ) {
-			$comment_content = trim( $comment_data[ 'comment' ] );
+		if ( isset( $comment_data['comment'] ) && is_string( $comment_data['comment'] ) ) {
+			$comment_content = trim( $comment_data['comment'] );
 		}
-		if ( isset( $comment_data[ 'comment_parent' ] ) ) {
-			$comment_parent = absint( $comment_data[ 'comment_parent' ] );
+		if ( isset( $comment_data['comment_parent'] ) ) {
+			$comment_parent = absint( $comment_data['comment_parent'] );
+		}
+		if ( isset( $comment_data['comment_password'] ) ) {
+			$comment_password = $comment_data['comment_password'];
 		}
 
 		$post = get_post( $comment_post_ID );
@@ -166,8 +167,8 @@ class CommentAction {
 			$comment_author_url   = $user->user_url;
 			$user_ID              = $user->ID;
 			if ( current_user_can( 'unfiltered_html' ) ) {
-				if ( ! isset( $comment_data[ '_wp_unfiltered_html_comment' ] )
-				     || ! wp_verify_nonce( $comment_data[ '_wp_unfiltered_html_comment' ], 'unfiltered-html-comment_' . $comment_post_ID )
+				if ( ! isset( $comment_data['_wp_unfiltered_html_comment'] )
+				     || ! wp_verify_nonce( $comment_data['_wp_unfiltered_html_comment'], 'unfiltered-html-comment_' . $comment_post_ID )
 				) {
 					kses_remove_filters(); // start with a clean slate
 					kses_init_filters(); // set up the filters
@@ -190,21 +191,21 @@ class CommentAction {
 			}
 		}
 
-		if ( isset( $comment_author ) && $max_lengths[ 'comment_author' ] < mb_strlen( $comment_author, '8bit' ) ) {
+		if ( isset( $comment_author ) && $max_lengths['comment_author'] < mb_strlen( $comment_author, '8bit' ) ) {
 			return new WP_Error( 'comment_author_column_length', __( '<strong>ERROR</strong>: your name is too long.' ), 200 );
 		}
 
-		if ( isset( $comment_author_email ) && $max_lengths[ 'comment_author_email' ] < strlen( $comment_author_email ) ) {
+		if ( isset( $comment_author_email ) && $max_lengths['comment_author_email'] < strlen( $comment_author_email ) ) {
 			return new WP_Error( 'comment_author_email_column_length', __( '<strong>ERROR</strong>: your email address is too long.' ), 200 );
 		}
 
-		if ( isset( $comment_author_url ) && $max_lengths[ 'comment_author_url' ] < strlen( $comment_author_url ) ) {
+		if ( isset( $comment_author_url ) && $max_lengths['comment_author_url'] < strlen( $comment_author_url ) ) {
 			return new WP_Error( 'comment_author_url_column_length', __( '<strong>ERROR</strong>: your url is too long.' ), 200 );
 		}
 
 		if ( '' == $comment_content ) {
 			return new WP_Error( 'require_valid_comment', __( '<strong>ERROR</strong>: please type a comment.' ), 200 );
-		} elseif ( $max_lengths[ 'comment_content' ] < mb_strlen( $comment_content, '8bit' ) ) {
+		} elseif ( $max_lengths['comment_content'] < mb_strlen( $comment_content, '8bit' ) ) {
 			return new WP_Error( 'comment_content_column_length', __( '<strong>ERROR</strong>: your comment is too long.' ), 200 );
 		}
 
@@ -225,7 +226,12 @@ class CommentAction {
 			return new WP_Error( 'comment_save_error', __( '<strong>ERROR</strong>: The comment could not be saved. Please try again later.' ), 500 );
 		}
 
-		@wp_redirect( $comment_data[ 'return_url' ] . '#comment-' . $comment_id );
+		if ( $comment_password ) {
+			CommentUtils::insert_or_update_meta( $comment_id, 'comment_password', $comment_password );
+		}
+
+		@wp_redirect( $comment_data['return_url'] . '#comment-' . $comment_id );
+
 		die;
 	}
 }

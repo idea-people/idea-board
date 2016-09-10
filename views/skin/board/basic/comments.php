@@ -1,5 +1,6 @@
 <?php
-function idea_board_comment_list( $comment, $args, $depth ) { ?>
+function idea_board_comment_list( $comment, $args, $depth ) {
+	$comment_ID = $comment->comment_ID; ?>
 	<li class="idea-board-comment-body" id="comment-<?php comment_ID() ?>">
 		<?php if ( '0' == $comment->comment_approved ) : ?>
 			<p class="idea-board-comment-awaiting-moderation"><?php __( '댓글이 승인을 기다리고 있습니다.' ); ?></p>
@@ -7,14 +8,14 @@ function idea_board_comment_list( $comment, $args, $depth ) { ?>
 		<div class="idea-board-comment-user-avatar">
 			<?php echo get_avatar( $comment->comment_author_email, 30 ); ?>
 		</div>
-		<div class="idea-board-comment-author"><?php comment_author( $comment->comment_ID ); ?></div>
+		<div class="idea-board-comment-author"><?php comment_author( $comment_ID ); ?></div>
 		<div class="idea-board-comment-date"><?php comment_date( 'Y-m-d' ); ?></div>
-		<div class="idea-board-comment-content"><?php comment_text( $comment->comment_ID ); ?></div>
+		<div class="idea-board-comment-content"><?php comment_text( $comment_ID ); ?></div>
 		<div class="reply">
 			<?php
 			comment_reply_link( array_merge( $args, array(
 				'depth'     => $depth,
-				'max_depth' => $args[ 'max_depth' ]
+				'max_depth' => $args['max_depth']
 			) ) );
 			?>
 		</div>
