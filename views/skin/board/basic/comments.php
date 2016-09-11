@@ -39,7 +39,7 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 	<?php if ( have_comments() ) : ?>
 		<h2 class="idea-board-comments-title">
 			<?php
-			printf( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'twentyfifteen' ),
+			printf( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title' ),
 				number_format_i18n( get_comments_number() ), get_the_title() );
 			?>
 		</h2>
@@ -56,7 +56,7 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 
 	<?php
 	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
-		<p class="idea-board-no-comments"><?php _e( 'Comments are closed.', 'twentyfifteen' ); ?></p>
+		<p class="idea-board-no-comments"><?php _e( 'Comments are closed.' ); ?></p>
 	<?php endif; ?>
 
 	<?php

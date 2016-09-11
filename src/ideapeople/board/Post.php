@@ -171,6 +171,8 @@ class Post {
 			$name = PostUtils::get_post_meta( get_the_ID(), 'idea_board_user_name' );
 		}
 
+		apply_filters( 'idea_board_get_the_author_nicename', $name, $author_id, $post );
+
 		$name = esc_html( $name );
 
 		return $name;

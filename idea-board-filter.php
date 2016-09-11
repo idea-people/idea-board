@@ -8,41 +8,6 @@ use ideapeople\util\wp\MetaUtils;
 use ideapeople\util\wp\PostUtils;
 use ideapeople\util\wp\TermUtils;
 
-function idea_board_save_board_id( $post_ID ) {
-	$post = get_post( $post_ID );
-
-	if ( $post->post_type == 'page' ) {
-
-		if ( has_shortcode( $post->post_content, 'idea_board' ) ) {
-			$data = PostUtils::get_shortcode_data( 'idea_board', $post->post_content );
-
-			$board_name = $data[ 'attributes' ][ 'name' ];
-
-			$board = Setting::get_board( $board_name );
-
-			if ( $board ) {
-				PostUtils::insert_or_update_meta( $post_ID, 'idea_board_page_term', $board->term_id );
-
-				if ( MetaUtils::has_meta( 'term', 'idea_board_page_id', $board->term_id, $post_ID ) ) {
-					TermUtils::insert_or_update_meta( $board->term_id, 'idea_board_page_id', $post_ID );
-				} else {
-					add_term_meta( $board->term_id, 'idea_board_page_id', $post_ID );
-				}
-			}
-		} else {
-			$meta = PostUtils::get_post_meta( $post_ID, 'idea_board_page_term', false );
-
-			if ( $meta ) {
-				$board = Setting::get_board( $meta );
-				delete_term_meta( $board->term_id, 'idea_board_page' );
-				delete_post_meta( $post_ID, 'idea_board_page_term' );
-			}
-		}
-	}
-}
-
-//add_action( 'save_post', 'idea_board_save_board_id' );
-
 /**
  * @param $protected
  * @param $post
@@ -211,13 +176,3 @@ function idea_board_allow_html( $t ) {
 }
 
 add_filter( 'wp_kses_allowed_html', 'idea_board_allow_html' );
-
-
-add_action( 'idea_board_action_comment_edit_pre', array( 'ideapeople\board\AjaxDieHandler', 'start_die_handler' ) );
-add_action( 'idea_board_action_comment_edit_after', array( 'ideapeople\board\AjaxDieHandler', 'end_die_handler' ) );
-
-add_action( 'idea_board_action_comment_delete_pre', array( 'ideapeople\board\AjaxDieHandler', 'start_die_handler' ) );
-add_action( 'idea_board_action_comment_delete_after', array( 'ideapeople\board\AjaxDieHandler', 'end_die_handler' ) );
-
-add_action( 'idea_board_action_post_edit_pre', array( 'ideapeople\board\AjaxDieHandler', 'start_die_handler' ) );
-add_action( 'idea_board_action_post_edit_after', array( 'ideapeople\board\AjaxDieHandler', 'end_die_handler' ) );

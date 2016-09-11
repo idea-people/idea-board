@@ -33,6 +33,7 @@ class PluginConfig {
 	static $board_post_type = 'idea_board_item';
 	static $board_admin_role = 'IDEA_BOARD_ADMIN';
 	static $board_ajax_edit_name = 'idea_board_edit_post';
+
 	static $idea_board_edit_nonce_name = 'idea_board_edit_nonce';
 	static $idea_board_edit_nonce_action = 'idea_board_edit';
 }
