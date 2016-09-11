@@ -20,13 +20,14 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 		<div class="idea-board-comment-content"><?php comment_text( $comment_ID ); ?></div>
 
 		<div class="idea-board-comment-buttons">
+			<a href="<?php echo Rewrite::comment_delete_link( $comment_ID, get_the_ID() ) ?>">삭제</a>
+			<a href="<?php echo Rewrite::comment_edit_link( $comment_ID, get_the_ID() ) ?>">수정</a>
 			<?php
 			comment_reply_link( array_merge( $args, array(
 				'depth'     => $depth,
 				'max_depth' => $args[ 'max_depth' ]
 			) ) );
 			?>
-			<a href="<?php echo Rewrite::comment_edit_link( $comment_ID, get_the_ID() ) ?>">수정</a>
 		</div>
 	</li>
 	<?php

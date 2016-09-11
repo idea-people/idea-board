@@ -42,9 +42,6 @@ class PostView {
 			case 'read':
 				$view = new SingleView();
 				break;
-			case 'delete':
-				$view = new DeleteView();
-				break;
 			case 'comment_edit':
 				$view = new CommentView();
 				break;

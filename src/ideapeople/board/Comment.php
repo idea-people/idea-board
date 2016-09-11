@@ -27,7 +27,7 @@ class Comment {
 		if ( Capability::is_board_admin() ) {
 			return false;
 		}
-
+		
 		$comment = get_comment( $comment_ID );
 
 		if ( $comment->user_id != get_current_user_id() && is_user_logged_in() ) {

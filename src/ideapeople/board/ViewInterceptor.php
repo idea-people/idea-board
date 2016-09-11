@@ -57,7 +57,7 @@ class ViewInterceptor {
 		return $view;
 	}
 
-	public function pre_cap_check_comment_view( $view, $comment_ID, $post_ID ) {
+	public function pre_cap_check_comment_view( $view, $comment_ID ) {
 		$failView = new AuthFailView();
 
 		$password = Comment::get_comment_password( $comment_ID );

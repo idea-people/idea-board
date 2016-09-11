@@ -123,9 +123,10 @@ class Plugin {
 		$this->loader->add_action( 'preprocess_comment', $comment_action, 'preprocess_comment' );
 		$this->loader->add_action( 'wp_ajax_idea_comment_password_check', $comment_action, 'password_check' );
 		$this->loader->add_action( 'wp_ajax_nopriv_idea_comment_password_check', $comment_action, 'password_check' );
-
 		$this->loader->add_action( 'wp_ajax_idea_handle_comment_submission', $comment_action, 'handle_comment_submission' );
 		$this->loader->add_action( 'wp_ajax_nopriv_idea_handle_comment_submission', $comment_action, 'handle_comment_submission' );
+		$this->loader->add_action( 'wp_ajax_idea_board_comment_delete', $comment_action, 'handle_comment_delete' );
+		$this->loader->add_action( 'wp_ajax_nopriv_idea_board_comment_delete', $comment_action, 'handle_comment_delete' );
 
 		$file_action = new FileAction();
 		$file_action->add_ajax_action();

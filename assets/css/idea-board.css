@@ -618,6 +618,10 @@ reset
     margin-top: 10px;
 }
 
+#idea-board-comment-form .form-submit input[type="submit"] {
+    margin-right: 0;
+}
+
 #idea-board-comment-form h3 {
     margin-bottom: 10px;
     border-bottom: 1px solid #dedede;

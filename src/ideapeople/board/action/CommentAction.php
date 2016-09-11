@@ -72,6 +72,25 @@ class CommentAction {
 		return Setting::get_comment_whitelist( $term_id );
 	}
 
+	public function handle_comment_delete( $comment_ID ) {
+		if ( empty( $comment_ID ) ) {
+			$comment_ID = &$_GET[ 'comment_ID' ];
+		}
+
+		$return_url = Request::getParameter( 'return_url', wp_get_referer() );
+
+		$view = apply_filters( 'pre_cap_check_comment_view', null, $comment_ID );
+
+		if ( $view ) {
+			wp_die();
+		}
+
+		wp_delete_comment( $comment_ID );
+
+		wp_redirect( $return_url );
+		die;
+	}
+
 	public function handle_comment_submission( $comment_data ) {
 		if ( empty( $comment_data ) ) {
 			$comment_data = &$_POST;

@@ -18,10 +18,28 @@ class Rewrite {
 		'searchType',
 		'searchValue',
 		'idea_board_category',
-		'comment_ID'
+		'comment_ID',
+		'edit_mode'
 	);
 
 	public $rewrite_modes = array( 'list', 'edit', 'read', 'delete' );
+
+	public static function delete_comment_link( $comment_ID ) {
+		$comment = get_comment( $comment_ID );
+
+		$post = get_comment( $comment->comment_post_ID );
+
+		if ( $post->post_type == PluginConfig::$board_post_type ) {
+			$url = add_query_arg( array(
+				'comment_ID' => $comment_ID,
+				'return_url' => urlencode( get_permalink( $post->ID ) )
+			), admin_url( '/admin-ajax.php' ) . '?action=idea_board_comment_delete' );;
+
+			return $url;
+		}
+
+		return null;
+	}
 
 	public function add_rewrite_rules() {
 		$posts = get_posts( array(
@@ -126,7 +144,8 @@ class Rewrite {
 		if ( is_object( $page ) && $page->post_type != PluginConfig::$board_post_type ) {
 			return add_query_arg( array(
 				'pid'        => $post->ID,
-				'page_mode'  => 'delete',
+				'page_mode'  => 'edit',
+				'edit_mode'  => 'delete',
 				'return_url' => get_permalink( $page->ID )
 			) );
 		}
@@ -151,7 +170,8 @@ class Rewrite {
 		$post = get_post( $post );
 
 		$args = wp_parse_args( array(
-			'page_mode'  => 'comment_delete',
+			'page_mode'  => 'comment_edit',
+			'edit_mode'  => 'delete',
 			'comment_ID' => $comment_ID
 		), self::default_args( $post ) );
 
