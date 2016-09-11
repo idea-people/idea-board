@@ -6,24 +6,17 @@
  * Time: 오후 10:22
  */
 
-namespace ideapeople\board;
+namespace ideapeople\board\validator;
 
-use ideapeople\board\setting\Setting;
-use ideapeople\board\view\AbstractView;
+use ideapeople\board\Capability;
+use ideapeople\board\Comment;
+use ideapeople\board\PluginConfig;
+use ideapeople\board\Post;
 use ideapeople\board\view\AuthFailView;
 use ideapeople\board\view\PasswordView;
 use ideapeople\util\wp\PostUtils;
 
-class ViewInterceptor {
-	/**
-	 * @param $view AbstractView
-	 * @param $post
-	 *
-	 *
-	 * @param $board Setting
-	 *
-	 * @return bool|AbstractView|AuthFailView|PasswordView
-	 */
+class ViewValidator {
 	public function pre_cap_check_edit_view( $view, $post ) {
 		$post = get_post( $post );
 
@@ -77,12 +70,6 @@ class ViewInterceptor {
 		return $view;
 	}
 
-	/**
-	 * @param $view
-	 * @param $post \WP_Post
-	 *
-	 * @return bool|AuthFailView|PasswordView
-	 */
 	public function pre_cap_check_read_view( $view, $post ) {
 		$post = get_post( $post );
 
@@ -103,10 +90,19 @@ class ViewInterceptor {
 		}
 
 		if ( Post::is_secret( $post->ID ) ) {
-			if ( ! is_user_logged_in() && Post::password_required( $post ) ) {
-				return new PasswordView();
+			if ( ! is_user_logged_in() ) {
+				if ( empty( $post->post_password ) ) {
+					return new AuthFailView();
+				}
+				if ( Post::password_required( $post ) ) {
+					return new PasswordView();
+				} else {
+					return true;
+				}
 			} else {
-				return new AuthFailView();
+				if ( ! PostUtils::is_author( $post ) ) {
+					return new AuthFailView();
+				}
 			}
 		}
 

@@ -1,11 +1,15 @@
 (function ($) {
     $(document).ready(function () {
-        $('#idea-board .idea-board-file-inputs').find("input[type=file]").nicefileinput({
-            label: '파일선택'
-        });
+        var $idea_board = $('#idea-board');
 
-        $('#idea-board').find('.idea-board-file-inputs').css('visibility', 'visible');
+        $idea_board
+            .find('.idea-board-file-inputs')
+            .css('visibility', 'visible')
+            .find("input[type=file]")
+            .nicefileinput({
+                label: '파일선택'
+            });
 
-        $('.idea-board-validate').validate({});
+        $('.idea-board-validate').validate();
     });
 })(jQuery);

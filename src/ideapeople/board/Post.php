@@ -15,6 +15,15 @@ use ideapeople\util\wp\PostUtils;
 use ideapeople\util\wp\TermUtils;
 
 class Post {
+	public static function get_force_meta_keys( $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'idea_board_is_secret',
+			'idea_board_is_notice'
+		) );
+
+		return apply_filters( 'idea_board_force_meta_keys', $args );
+	}
+
 	public static function get_public_meta_keys( $args = array() ) {
 		$args = wp_parse_args( $args, array(
 			'idea_board_is_secret',
@@ -90,7 +99,7 @@ class Post {
 
 		if ( $result && $post->post_parent != 0 ) {
 			$parent = get_post( $post->post_parent );
-			
+
 			return self::password_required( $parent );
 		}
 

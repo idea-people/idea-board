@@ -16,6 +16,7 @@ use ideapeople\board\helper\BwsCaptchaHelper;
 use ideapeople\board\helper\core\HelperLoader;
 use ideapeople\board\helper\WordpressPopularPostsHelper;
 use ideapeople\board\setting\GlobalSetting;
+use ideapeople\board\validator\ViewValidator;
 use ideapeople\util\wp\PluginLoader;
 use ideapeople\util\wp\PostOrderGenerator;
 use ideapeople\util\wp\WpNoprivUploader;
@@ -111,7 +112,7 @@ class Plugin {
 		$this->loader->add_action( 'wp_ajax_nopriv_idea_board_edit_post', $action, 'idea_board_edit_post' );
 		$this->loader->add_action( 'save_post_' . PluginConfig::$board_post_type, $action, 'update_idea_post' );
 
-		$viewInterceptor = new ViewInterceptor();
+		$viewInterceptor = new ViewValidator();
 		$this->custom_loader->add_filter( 'pre_cap_check_read_view', $viewInterceptor, 'pre_cap_check_read_view', 10, 2 );
 		$this->custom_loader->add_filter( 'pre_cap_check_edit_view', $viewInterceptor, 'pre_cap_check_edit_view', 10, 2 );
 		$this->custom_loader->add_filter( 'pre_cap_check_comment_view', $viewInterceptor, 'pre_cap_check_comment_view', 10, 3 );

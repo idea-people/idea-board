@@ -50,6 +50,8 @@ class PostAction {
 			$post_data[ 'post_content' ] = strip_shortcodes( $post_data[ 'post_content' ] );
 		}
 
+		do_action( 'idea_board_action_post_edit_pre', $post_data );
+
 		$error      = new \WP_Error();
 		$post_id    = ! empty( $post_data[ 'ID' ] ) ? $post_data[ 'ID' ] : $post_data[ 'pid' ];
 		$return_url = Request::getParameter( 'return_url', null );
@@ -57,6 +59,12 @@ class PostAction {
 
 		if ( ! $this->is_valid_nonce( $nonce ) ) {
 			wp_die();
+		}
+
+		if ( ! is_user_logged_in() ) {
+			if ( ! isset( $post_data[ 'post_password' ] ) && empty( $post_data[ 'post_password' ] ) ) {
+				wp_die();
+			}
 		}
 
 		if ( isset( $post_data[ 'mode' ] ) ) {
@@ -117,7 +125,7 @@ class PostAction {
 			}
 		}
 
-		do_action( 'idea_board_edited_post', $post_id, $post_data, $return_url );
+		do_action( 'idea_board_action_post_edit_after', $post_data, $post_id );
 
 		if ( $return_url ) {
 			wp_redirect( $return_url );
@@ -169,6 +177,7 @@ class PostAction {
 		}
 
 		$idea_board_public_meta_keys = Post::get_public_meta_keys();
+		$idea_board_force_meta_keys  = Post::get_force_meta_keys();
 
 		foreach ( $idea_board_public_meta_keys as $key ) {
 			if ( is_array( $meta_values ) ) {
@@ -182,7 +191,9 @@ class PostAction {
 					if ( ! MetaUtils::has_meta( 'post', $key, $post->ID ) ) {
 						add_post_meta( $post->ID, $key, false );
 					} else {
-						update_post_meta( $post->ID, $key, false );
+						if ( in_array( $key, $idea_board_force_meta_keys ) ) {
+							update_post_meta( $post->ID, $key, false );
+						}
 					}
 				}
 			} else {

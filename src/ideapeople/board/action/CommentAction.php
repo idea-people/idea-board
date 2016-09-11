@@ -9,6 +9,8 @@
 namespace ideapeople\board\action;
 
 
+use ideapeople\board\AjaxDieHandler;
+use ideapeople\board\Capability;
 use ideapeople\board\PluginConfig;
 use ideapeople\board\Post;
 use ideapeople\board\setting\Setting;
@@ -77,6 +79,8 @@ class CommentAction {
 			$comment_ID = &$_GET[ 'comment_ID' ];
 		}
 
+		do_action( 'idea_board_action_comment_delete_pre', $comment_ID );
+
 		$return_url = Request::getParameter( 'return_url', wp_get_referer() );
 
 		$view = apply_filters( 'pre_cap_check_comment_view', null, $comment_ID );
@@ -87,7 +91,10 @@ class CommentAction {
 
 		wp_delete_comment( $comment_ID );
 
+		do_action( 'idea_board_action_comment_delete_after', $comment_ID );
+
 		wp_redirect( $return_url );
+
 		die;
 	}
 
@@ -97,6 +104,8 @@ class CommentAction {
 		}
 
 		check_ajax_referer( 'idea_comment_edit', 'idea_comment_nonce' );
+
+		do_action( 'idea_board_action_comment_edit_pre', $comment_data );
 
 		$comment_post_ID  = $comment_parent = 0;
 		$comment_author   = $comment_author_email = $comment_author_url = $comment_content = null;
@@ -167,20 +176,23 @@ class CommentAction {
 		require_once ABSPATH . '/wp-includes/pluggable.php';
 
 		$user = wp_get_current_user();
+
 		if ( $user->exists() ) {
 			if ( empty( $user->display_name ) ) {
 				$user->display_name = $user->user_login;
 			}
+
 			$comment_author       = $user->display_name;
 			$comment_author_email = $user->user_email;
 			$comment_author_url   = $user->user_url;
 			$user_ID              = $user->ID;
+
 			if ( current_user_can( 'unfiltered_html' ) ) {
 				if ( ! isset( $comment_data[ '_wp_unfiltered_html_comment' ] )
 				     || ! wp_verify_nonce( $comment_data[ '_wp_unfiltered_html_comment' ], 'unfiltered-html-comment_' . $comment_post_ID )
 				) {
-					kses_remove_filters(); // start with a clean slate
-					kses_init_filters(); // set up the filters
+					kses_remove_filters();
+					kses_init_filters();
 				}
 			}
 		} else {
@@ -234,6 +246,21 @@ class CommentAction {
 
 			$comment_id = $_POST[ 'comment_ID' ];
 
+			if ( Capability::is_board_admin() ) {
+				$comment = get_comment( $comment_id );
+
+				$comment_author       = $comment->comment_author;
+				$comment_author_email = $comment->comment_author_email;
+				$comment_author_url   = $comment->comment_author_url;
+				$user_ID              = $comment->user_id;
+
+				$commentdata = wp_parse_args( compact(
+					'comment_author',
+					'comment_author_email',
+					'comment_author_url',
+					'user_ID' ), $commentdata );
+			}
+
 			wp_update_comment( $commentdata );
 		} else {
 			$comment_id = wp_new_comment( wp_slash( $commentdata ) );
@@ -246,6 +273,8 @@ class CommentAction {
 		if ( $comment_password ) {
 			CommentUtils::insert_or_update_meta( $comment_id, 'comment_password', $comment_password );
 		}
+
+		do_action( 'idea_board_action_comment_edit_after', $comment_data, $comment_id );
 
 		wp_redirect( get_permalink( $post->ID ) . '#comment-' . $comment_id );
 

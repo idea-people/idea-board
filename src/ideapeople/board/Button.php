@@ -16,7 +16,7 @@ class Button {
 	public static function edit_button( $post = null ) {
 		$post = get_post( $post );
 
-		if ( $post->post_author != 0 && get_current_user_id() != $post->post_author ) {
+		if ( $post->post_author != 0 && get_current_user_id() != $post->post_author && ! Capability::is_board_admin() ) {
 			return null;
 		}
 
@@ -36,7 +36,7 @@ class Button {
 	}
 
 	public static function prev_button() {
-		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', wp_get_referer(), '이전' );
+		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', 'javascript:history.back();', '이전' );
 
 		return $html;
 	}
@@ -44,11 +44,35 @@ class Button {
 	public static function delete_button( $post = null ) {
 		$post = get_post( $post );
 
-		if ( $post->post_author != 0 && get_current_user_id() != $post->post_author ) {
+		if ( $post->post_author != 0 && get_current_user_id() != $post->post_author && ! Capability::is_board_admin() ) {
 			return null;
 		}
 
 		return self::button( 'delete', 'delete', '삭제', Rewrite::delete_link( $post ), $post );
+	}
+
+	public static function comment_edit_button( $comment_ID, $post = null ) {
+		$post = get_post( $post );
+
+		if ( ! is_user_logged_in() && Comment::is_logged_in_comment( $comment_ID ) ) {
+			return null;
+		}
+
+		$html = sprintf( '<a href="%s">수정</a>', Rewrite::comment_edit_link( $comment_ID, $post->ID ) );
+
+		return $html;
+	}
+
+	public static function comment_delete_button( $comment_ID, $post = null ) {
+		$post = get_post( $post );
+
+		if ( ! is_user_logged_in() && Comment::is_logged_in_comment( $comment_ID ) ) {
+			return null;
+		}
+
+		$html = sprintf( '<a href="%s">삭제</a>', Rewrite::comment_delete_link( $comment_ID, $post->ID ) );
+
+		return $html;
 	}
 
 	public static function button( $type, $check_role, $title, $link, $post = null ) {

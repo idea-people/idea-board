@@ -212,3 +212,12 @@ function idea_board_allow_html( $t ) {
 
 add_filter( 'wp_kses_allowed_html', 'idea_board_allow_html' );
 
+
+add_action( 'idea_board_action_comment_edit_pre', array( 'ideapeople\board\AjaxDieHandler', 'start_die_handler' ) );
+add_action( 'idea_board_action_comment_edit_after', array( 'ideapeople\board\AjaxDieHandler', 'end_die_handler' ) );
+
+add_action( 'idea_board_action_comment_delete_pre', array( 'ideapeople\board\AjaxDieHandler', 'start_die_handler' ) );
+add_action( 'idea_board_action_comment_delete_after', array( 'ideapeople\board\AjaxDieHandler', 'end_die_handler' ) );
+
+add_action( 'idea_board_action_post_edit_pre', array( 'ideapeople\board\AjaxDieHandler', 'start_die_handler' ) );
+add_action( 'idea_board_action_post_edit_after', array( 'ideapeople\board\AjaxDieHandler', 'end_die_handler' ) );

@@ -167,7 +167,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 	</table>
 
 	<div class="idea-board-buttons">
-		<?php echo Button::list_button(); ?>
+		<?php echo Button::prev_button(); ?>
 		<input type="submit" value="저장">
 	</div>
 

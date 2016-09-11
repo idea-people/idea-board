@@ -11,6 +11,18 @@ namespace ideapeople\board;
 use ideapeople\util\wp\PasswordUtils;
 
 class Comment {
+	public static function is_logged_in_comment( $comment_ID ) {
+		$comment = get_comment( $comment_ID );
+
+		return $comment->user_id && empty( self::get_comment_password( $comment_ID ) );
+	}
+
+	public static function is_author( $comment_ID ) {
+		$comment = get_comment( $comment_ID );
+
+		return $comment->user_id == get_current_user_id();
+	}
+
 	public static function comment_password_form( $comment_ID ) {
 		$comment = get_comment( $comment_ID );
 
@@ -20,6 +32,8 @@ class Comment {
 		<p><label for="' . $label . '">' . __( 'Password:' ) . ' <input name="comment_password" id="' . $label . '" type="password" size="20" /></label> <input type="submit" name="Submit" value="' . esc_attr_x( 'Enter', 'post password form' ) . '" /></p></form>
 		';
 
+		$output .= '<div class="idea-board-buttons">' . Button::prev_button() . '</div>';
+
 		return $output;
 	}
 
@@ -27,7 +41,7 @@ class Comment {
 		if ( Capability::is_board_admin() ) {
 			return false;
 		}
-		
+
 		$comment = get_comment( $comment_ID );
 
 		if ( $comment->user_id != get_current_user_id() && is_user_logged_in() ) {

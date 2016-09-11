@@ -1,4 +1,5 @@
 <?php
+use ideapeople\board\Button;
 use ideapeople\board\Rewrite;
 
 /**
@@ -20,8 +21,8 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 		<div class="idea-board-comment-content"><?php comment_text( $comment_ID ); ?></div>
 
 		<div class="idea-board-comment-buttons">
-			<a href="<?php echo Rewrite::comment_delete_link( $comment_ID, get_the_ID() ) ?>">삭제</a>
-			<a href="<?php echo Rewrite::comment_edit_link( $comment_ID, get_the_ID() ) ?>">수정</a>
+			<?php echo Button::comment_delete_button( $comment_ID ) ?>
+			<?php echo Button::comment_edit_button( $comment_ID ) ?>
 			<?php
 			comment_reply_link( array_merge( $args, array(
 				'depth'     => $depth,

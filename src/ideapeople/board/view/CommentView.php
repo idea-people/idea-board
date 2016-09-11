@@ -26,8 +26,6 @@ class CommentView extends AbstractView {
 			'p'     => get_query_var( 'pid', 1 )
 		) );
 
-		add_filter( 'wp_get_current_commenter', array( $this, 'wp_get_current_commenter' ) );
-
 		$comment_ID = get_query_var( 'comment_ID' );
 
 		$view = apply_filters( 'pre_cap_check_comment_view', null, $comment_ID, $post->ID );
@@ -46,13 +44,14 @@ class CommentView extends AbstractView {
 			if ( $view instanceof View ) {
 				$output = $view->render( $this->model );
 			} else {
+				add_filter( 'wp_get_current_commenter', array( $this, 'wp_get_current_commenter' ) );
 				$output = parent::render( $model );
+				remove_filter( 'wp_get_current_commenter', array( $this, 'wp_get_current_commenter' ) );
 			}
 		}
 
 		wp_reset_query();
 
-		remove_filter( 'wp_get_current_commenter', array( $this, 'wp_get_current_commenter' ) );
 
 		return $output;
 	}
