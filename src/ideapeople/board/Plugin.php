@@ -12,6 +12,7 @@ use ideapeople\board\action\CommentAction;
 use ideapeople\board\action\FileAction;
 use ideapeople\board\action\PostAction;
 use ideapeople\board\helper\AdvancedCustomFieldHelper;
+use ideapeople\board\helper\BpHelper;
 use ideapeople\board\helper\BwsCaptchaHelper;
 use ideapeople\board\helper\core\HelperLoader;
 use ideapeople\board\helper\WordpressPopularPostsHelper;
@@ -79,6 +80,7 @@ class Plugin {
 		$this->helper_loader->add_helper( new WordpressPopularPostsHelper() );
 		$this->helper_loader->add_helper( new AdvancedCustomFieldHelper() );
 		$this->helper_loader->add_helper( new BwsCaptchaHelper() );
+		$this->helper_loader->add_helper( new BpHelper());
 
 		$assets = new Assets();
 		$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'admin_enqueue_styles' );

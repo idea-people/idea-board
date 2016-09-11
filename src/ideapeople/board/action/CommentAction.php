@@ -28,7 +28,7 @@ class CommentAction {
 	public $board_term;
 
 	public function password_check() {
-		$password = $_POST[ 'comment_password' ];
+		$password = $_POST['comment_password'];
 
 		if ( is_user_logged_in() ) {
 			wp_redirect( wp_get_referer() );
@@ -39,7 +39,7 @@ class CommentAction {
 	}
 
 	public function preprocess_comment( $comment ) {
-		$post = get_post( $comment[ 'comment_post_ID' ] );
+		$post = get_post( $comment['comment_post_ID'] );
 
 		if ( $post->post_type != PluginConfig::$board_post_type ) {
 			return $comment;
@@ -76,7 +76,7 @@ class CommentAction {
 
 	public function handle_comment_delete( $comment_ID ) {
 		if ( empty( $comment_ID ) ) {
-			$comment_ID = &$_GET[ 'comment_ID' ];
+			$comment_ID = &$_GET['comment_ID'];
 		}
 
 		do_action( 'idea_board_action_comment_delete_pre', $comment_ID );
@@ -105,39 +105,40 @@ class CommentAction {
 
 		check_ajax_referer( 'idea_comment_edit', 'idea_comment_nonce' );
 
-		do_action( 'idea_board_action_comment_edit_pre', $comment_data );
-
 		$comment_post_ID  = $comment_parent = 0;
 		$comment_author   = $comment_author_email = $comment_author_url = $comment_content = null;
 		$comment_password = false;
 
-		if ( isset( $comment_data[ 'comment_post_ID' ] ) ) {
-			$comment_post_ID = (int) $comment_data[ 'comment_post_ID' ];
+		if ( isset( $comment_data['comment_post_ID'] ) ) {
+			$comment_post_ID = (int) $comment_data['comment_post_ID'];
 		}
-		if ( isset( $comment_data[ 'author' ] ) && is_string( $comment_data[ 'author' ] ) ) {
-			$comment_author = trim( strip_tags( $comment_data[ 'author' ] ) );
+		if ( isset( $comment_data['author'] ) && is_string( $comment_data['author'] ) ) {
+			$comment_author = trim( strip_tags( $comment_data['author'] ) );
 		}
-		if ( isset( $comment_data[ 'email' ] ) && is_string( $comment_data[ 'email' ] ) ) {
-			$comment_author_email = trim( $comment_data[ 'email' ] );
+		if ( isset( $comment_data['email'] ) && is_string( $comment_data['email'] ) ) {
+			$comment_author_email = trim( $comment_data['email'] );
 		}
-		if ( isset( $comment_data[ 'url' ] ) && is_string( $comment_data[ 'url' ] ) ) {
-			$comment_author_url = trim( $comment_data[ 'url' ] );
+		if ( isset( $comment_data['url'] ) && is_string( $comment_data['url'] ) ) {
+			$comment_author_url = trim( $comment_data['url'] );
 		}
-		if ( isset( $comment_data[ 'comment' ] ) && is_string( $comment_data[ 'comment' ] ) ) {
-			$comment_content = trim( $comment_data[ 'comment' ] );
+		if ( isset( $comment_data['comment'] ) && is_string( $comment_data['comment'] ) ) {
+			$comment_content = trim( $comment_data['comment'] );
 		}
-		if ( isset( $comment_data[ 'comment_parent' ] ) ) {
-			$comment_parent = absint( $comment_data[ 'comment_parent' ] );
+		if ( isset( $comment_data['comment_parent'] ) ) {
+			$comment_parent = absint( $comment_data['comment_parent'] );
 		}
-		if ( isset( $comment_data[ 'comment_password' ] ) ) {
-			$comment_password = $comment_data[ 'comment_password' ];
+		if ( isset( $comment_data['comment_password'] ) ) {
+			$comment_password = $comment_data['comment_password'];
 		}
 
 		if ( ! is_user_logged_in() && ! $comment_password ) {
 			wp_die();
 		}
 
-		$post = get_post( $comment_post_ID );
+		$post  = get_post( $comment_post_ID );
+		$board = Setting::get_board_from_post( $post );
+
+		do_action( 'idea_board_action_comment_edit_pre', $comment_data, $board );
 
 		if ( $post->post_type != PluginConfig::$board_post_type ) {
 			wp_die();
@@ -188,8 +189,8 @@ class CommentAction {
 			$user_ID              = $user->ID;
 
 			if ( current_user_can( 'unfiltered_html' ) ) {
-				if ( ! isset( $comment_data[ '_wp_unfiltered_html_comment' ] )
-				     || ! wp_verify_nonce( $comment_data[ '_wp_unfiltered_html_comment' ], 'unfiltered-html-comment_' . $comment_post_ID )
+				if ( ! isset( $comment_data['_wp_unfiltered_html_comment'] )
+				     || ! wp_verify_nonce( $comment_data['_wp_unfiltered_html_comment'], 'unfiltered-html-comment_' . $comment_post_ID )
 				) {
 					kses_remove_filters();
 					kses_init_filters();
@@ -212,21 +213,21 @@ class CommentAction {
 			}
 		}
 
-		if ( isset( $comment_author ) && $max_lengths[ 'comment_author' ] < mb_strlen( $comment_author, '8bit' ) ) {
+		if ( isset( $comment_author ) && $max_lengths['comment_author'] < mb_strlen( $comment_author, '8bit' ) ) {
 			return new WP_Error( 'comment_author_column_length', __( '<strong>ERROR</strong>: your name is too long.' ), 200 );
 		}
 
-		if ( isset( $comment_author_email ) && $max_lengths[ 'comment_author_email' ] < strlen( $comment_author_email ) ) {
+		if ( isset( $comment_author_email ) && $max_lengths['comment_author_email'] < strlen( $comment_author_email ) ) {
 			return new WP_Error( 'comment_author_email_column_length', __( '<strong>ERROR</strong>: your email address is too long.' ), 200 );
 		}
 
-		if ( isset( $comment_author_url ) && $max_lengths[ 'comment_author_url' ] < strlen( $comment_author_url ) ) {
+		if ( isset( $comment_author_url ) && $max_lengths['comment_author_url'] < strlen( $comment_author_url ) ) {
 			return new WP_Error( 'comment_author_url_column_length', __( '<strong>ERROR</strong>: your url is too long.' ), 200 );
 		}
 
 		if ( '' == $comment_content ) {
 			return new WP_Error( 'require_valid_comment', __( '<strong>ERROR</strong>: please type a comment.' ), 200 );
-		} elseif ( $max_lengths[ 'comment_content' ] < mb_strlen( $comment_content, '8bit' ) ) {
+		} elseif ( $max_lengths['comment_content'] < mb_strlen( $comment_content, '8bit' ) ) {
 			return new WP_Error( 'comment_content_column_length', __( '<strong>ERROR</strong>: your comment is too long.' ), 200 );
 		}
 
@@ -241,10 +242,12 @@ class CommentAction {
 			'user_ID'
 		);
 
-		if ( isset( $_POST[ 'comment_ID' ] ) && ! empty( $_POST[ 'comment_ID' ] ) ) {
-			$commentdata[ 'comment_ID' ] = $_POST[ 'comment_ID' ];
+		$mode = false;
 
-			$comment_id = $_POST[ 'comment_ID' ];
+		if ( isset( $_POST['comment_ID'] ) && ! empty( $_POST['comment_ID'] ) ) {
+			$commentdata['comment_ID'] = $_POST['comment_ID'];
+
+			$comment_id = $_POST['comment_ID'];
 
 			if ( Capability::is_board_admin() ) {
 				$comment = get_comment( $comment_id );
@@ -261,8 +264,13 @@ class CommentAction {
 					'user_ID' ), $commentdata );
 			}
 
+			$mode = 'update';
+
 			wp_update_comment( $commentdata );
 		} else {
+
+			$mode = 'insert';
+
 			$comment_id = wp_new_comment( wp_slash( $commentdata ) );
 		}
 
@@ -274,7 +282,7 @@ class CommentAction {
 			CommentUtils::insert_or_update_meta( $comment_id, 'comment_password', $comment_password );
 		}
 
-		do_action( 'idea_board_action_comment_edit_after', $comment_data, $comment_id );
+		do_action( 'idea_board_action_comment_edit_after', $comment_data, $comment_id, $board, $mode );
 
 		wp_redirect( get_permalink( $post->ID ) . '#comment-' . $comment_id );
 
