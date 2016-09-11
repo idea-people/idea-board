@@ -25,8 +25,6 @@ class DeleteView extends AbstractView {
 			'p'     => get_query_var( 'pid', 1 )
 		) );
 
-		$post->comment_status = 'close';
-
 		$view = apply_filters( 'pre_cap_check_edit_view', null, $post, Setting::get_board() );
 
 		if ( $view instanceof View ) {

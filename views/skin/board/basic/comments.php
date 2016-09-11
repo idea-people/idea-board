@@ -59,7 +59,10 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 
 	<?php
 	comment_form( array(
-		'id_form'    => 'idea-board-comment-form',
-		'class_form' => 'idea-board-reset idea-board-comment-form idea-board-validate'
-	) ); ?>
+		'action'      => admin_url( '/admin-ajax.php' ) . '?action=idea_handle_comment_submission',
+		'id_form'     => 'idea-board-comment-form',
+		'class_form'  => 'idea-board-reset idea-board-comment-form idea-board-validate',
+		'title_reply' => __( 'Comments' ) . ' ' . __( 'Edit' ),
+	) );
+	?>
 </div>

@@ -66,6 +66,10 @@ class ViewInterceptor {
 			return $failView;
 		}
 
+		if ( is_user_logged_in() && ! empty( $password ) ) {
+			return $failView;
+		}
+
 		if ( Comment::password_required( $comment_ID ) ) {
 			return Comment::comment_password_form( $comment_ID );
 		}

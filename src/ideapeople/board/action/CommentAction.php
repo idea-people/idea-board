@@ -28,6 +28,11 @@ class CommentAction {
 	public function password_check() {
 		$password = $_POST[ 'comment_password' ];
 
+		if ( is_user_logged_in() ) {
+			wp_redirect( wp_get_referer() );
+			die;
+		}
+
 		PasswordUtils::action_password( $password, 'comment' );
 	}
 
@@ -44,20 +49,7 @@ class CommentAction {
 
 		add_filter( 'option_comment_moderation', array( $this, 'option_comment_moderation' ) );
 
-		add_action( 'comment_post', array( $this, 'comment_post' ) );
-
 		return $comment;
-	}
-
-	function change_wp_handle_comment_submission() {
-		if ( strpos( $_SERVER[ 'URL' ], 'wp-comments-post.php' ) ) {
-			$comment_post_ID = @$_POST[ 'comment_post_ID' ];
-			$post            = Post::get_post( $comment_post_ID );
-
-			if ( $post->post_type == PluginConfig::$board_post_type ) {
-				$this->wp_handle_comment_submission( $_POST );
-			}
-		}
 	}
 
 	public function option_comment_moderation( $value ) {
@@ -80,18 +72,13 @@ class CommentAction {
 		return Setting::get_comment_whitelist( $term_id );
 	}
 
-	public function comment_post( $comment_ID ) {
-		$return_url = Request::getParameter( 'return_url', '' );
-
-		if ( $return_url ) {
-			$return_url .= '#comment-' . $comment_ID;
-
-			wp_redirect( $return_url );
-			die;
+	public function handle_comment_submission( $comment_data ) {
+		if ( empty( $comment_data ) ) {
+			$comment_data = &$_POST;
 		}
-	}
 
-	public function wp_handle_comment_submission( $comment_data ) {
+		check_ajax_referer( 'idea_comment_edit', 'idea_comment_nonce' );
+
 		$comment_post_ID  = $comment_parent = 0;
 		$comment_author   = $comment_author_email = $comment_author_url = $comment_content = null;
 		$comment_password = false;
@@ -118,21 +105,20 @@ class CommentAction {
 			$comment_password = $comment_data[ 'comment_password' ];
 		}
 
+		if ( ! is_user_logged_in() && ! $comment_password ) {
+			wp_die();
+		}
+
 		$post = get_post( $comment_post_ID );
 
-		if ( empty( $post->comment_status ) ) {
+		if ( $post->post_type != PluginConfig::$board_post_type ) {
+			wp_die();
+		}
 
-			/**
-			 * Fires when a comment is attempted on a post that does not exist.
-			 *
-			 * @since 1.5.0
-			 *
-			 * @param int $comment_post_ID Post ID.
-			 */
+		if ( empty( $post->comment_status ) ) {
 			do_action( 'comment_id_not_found', $comment_post_ID );
 
 			return new WP_Error( 'comment_id_not_found' );
-
 		}
 
 		$status = get_post_status( $post );
@@ -147,17 +133,14 @@ class CommentAction {
 			do_action( 'comment_closed', $comment_post_ID );
 
 			return new WP_Error( 'comment_closed', __( 'Sorry, comments are closed for this item.' ), 403 );
-
 		} elseif ( 'trash' == $status ) {
 			do_action( 'comment_on_trash', $comment_post_ID );
 
 			return new WP_Error( 'comment_on_trash' );
-
 		} elseif ( ! $status_obj->public && ! $status_obj->private ) {
 			do_action( 'comment_on_draft', $comment_post_ID );
 
 			return new WP_Error( 'comment_on_draft' );
-
 		} else {
 			do_action( 'pre_comment_on_post', $comment_post_ID );
 		}
@@ -245,7 +228,7 @@ class CommentAction {
 			CommentUtils::insert_or_update_meta( $comment_id, 'comment_password', $comment_password );
 		}
 
-		@wp_redirect( $comment_data[ 'return_url' ] . '#comment-' . $comment_id );
+		wp_redirect( get_permalink( $post->ID ) . '#comment-' . $comment_id );
 
 		die;
 	}

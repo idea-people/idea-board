@@ -56,7 +56,6 @@ class SingleView extends AbstractView {
 
 		if ( Setting::get_use_comment( $term_id ) ) {
 			if ( Setting::get_use_comment_skin( $term_id ) ) {
-				//comments_open
 				add_filter( 'comments_open', array( $this, 'comments_open' ), 999 );
 				add_filter( 'comments_template', array( $this, '_comments_template' ) );
 				comments_template();

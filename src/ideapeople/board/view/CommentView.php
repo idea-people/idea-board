@@ -25,10 +25,8 @@ class CommentView extends AbstractView {
 			'p'     => get_query_var( 'pid', 1 )
 		) );
 
-		$post->comment_status = 'close';
-
 		$comment_ID = get_query_var( 'comment_ID' );
-		
+
 		$view = apply_filters( 'pre_cap_check_comment_view', null, $comment_ID, $post->ID );
 
 		if ( $view instanceof View ) {

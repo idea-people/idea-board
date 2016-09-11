@@ -147,6 +147,19 @@ class Rewrite {
 		return $link;
 	}
 
+	public static function comment_delete_link( $comment_ID, $post = null ) {
+		$post = get_post( $post );
+
+		$args = wp_parse_args( array(
+			'page_mode'  => 'comment_delete',
+			'comment_ID' => $comment_ID
+		), self::default_args( $post ) );
+
+		$link = add_query_arg( $args );
+
+		return $link;
+	}
+
 	public static function comment_edit_link( $comment_ID, $post = null ) {
 		$post = get_post( $post );
 

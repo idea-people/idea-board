@@ -28,7 +28,13 @@ class Comment {
 			return false;
 		}
 
-		if ( get_comment_author( $comment_ID ) == wp_get_current_user()->user_login && is_user_logged_in() ) {
+		$comment = get_comment( $comment_ID );
+
+		if ( $comment->user_id != get_current_user_id() && is_user_logged_in() ) {
+			return true;
+		}
+
+		if ( $comment->user_id == get_current_user_id() && is_user_logged_in() ) {
 			return false;
 		}
 

@@ -21,7 +21,7 @@ class ListView extends AbstractView {
 
 			return false;
 		}
-
+		
 		$query = new Query( array(
 			'board'          => Setting::get_board()->name,
 			'posts_per_page' => Setting::get_post_per_page()

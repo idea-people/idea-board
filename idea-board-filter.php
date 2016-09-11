@@ -118,25 +118,31 @@ function idea_board_add_search_category( $post_type ) {
 
 add_action( 'restrict_manage_posts', 'idea_board_add_search_category' );
 
-function idea_board_add_comment_fields( $fields ) {
+function idea_board_add_comment_default_fields( $fields ) {
 	$post = get_post();
 
 	if ( $post->post_type != PluginConfig::$board_post_type ) {
 		return $fields;
 	}
 
-	$fields[ 'return_url' ]            = sprintf( '<input type="hidden" name="return_url" value="%s">', get_permalink( $post->ID ) );
-	$fields[ 'comment_ID' ]            = sprintf( '<input type="hidden" name="comment_ID" value="%s">', get_query_var( 'comment_ID' ) );
 	$fields[ 'comment-form-password' ] =
 		'<p class="comment-form-password"><label for="comment_password">' . __( 'Password' ) . '<span class="required">*</span></label> ' .
-		'<input id="comment_password" name="comment_password" type="password"  size="30" maxlength="200" required /></p>';
+		'<input id="comment_password" name="comment_password" type="password" size="30" maxlength="200" required /></p>';
 
 	$fields = apply_filters( 'idea_board_add_comment_fields', $fields, $post );
 
 	return $fields;
 }
 
-add_filter( 'comment_form_default_fields', 'idea_board_add_comment_fields' );
+add_filter( 'comment_form_default_fields', 'idea_board_add_comment_default_fields' );
+
+function idea_board_add_comment_fields() {
+	echo sprintf( '<input type="hidden" name="idea_comment_nonce" value="%s">', wp_create_nonce( 'idea_comment_edit' ) );
+	echo sprintf( '<input type="hidden" name="comment_ID" value="%s">', get_query_var( 'comment_ID' ) );
+}
+
+add_action( 'comment_form', 'idea_board_add_comment_fields' );
+
 
 /**
  * @param $author
