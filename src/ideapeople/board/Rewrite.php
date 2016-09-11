@@ -17,7 +17,8 @@ class Rewrite {
 		'parent',
 		'searchType',
 		'searchValue',
-		'idea_board_category'
+		'idea_board_category',
+		'comment_ID'
 	);
 
 	public $rewrite_modes = array( 'list', 'edit', 'read', 'delete' );
@@ -139,6 +140,19 @@ class Rewrite {
 		$args = wp_parse_args( array(
 			'page_mode' => 'edit',
 			'pid'       => false
+		), self::default_args( $post ) );
+
+		$link = add_query_arg( $args );
+
+		return $link;
+	}
+
+	public static function comment_edit_link( $comment_ID, $post = null ) {
+		$post = get_post( $post );
+
+		$args = wp_parse_args( array(
+			'page_mode'  => 'comment_edit',
+			'comment_ID' => $comment_ID
 		), self::default_args( $post ) );
 
 		$link = add_query_arg( $args );

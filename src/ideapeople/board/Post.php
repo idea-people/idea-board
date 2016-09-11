@@ -10,6 +10,7 @@ namespace ideapeople\board;
 
 use ideapeople\board\action\FileAction;
 use ideapeople\util\html\HtmlUtils;
+use ideapeople\util\wp\PasswordUtils;
 use ideapeople\util\wp\PostUtils;
 use ideapeople\util\wp\TermUtils;
 
@@ -85,7 +86,7 @@ class Post {
 			return false;
 		}
 
-		$result = PostUtils::password_check( $post->post_password );
+		$result = PasswordUtils::post_password_required( $post->post_password );
 
 		if ( $result && $post->post_parent != 0 ) {
 			$parent = get_post( $post->post_parent );

@@ -2,21 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: ideapeople
- * Date: 2016-09-09
- * Time: 오후 8:44
+ * Date: 2016-09-11
+ * Time: 오후 2:08
  */
 
 namespace ideapeople\board\view;
 
 
-use ideapeople\board\Post;
+use ideapeople\board\Comment;
 use ideapeople\board\Query;
 use ideapeople\board\setting\Setting;
 use ideapeople\util\view\View;
 
-class DeleteView extends AbstractView {
+class CommentView extends AbstractView {
 	public function getViewName() {
-		return 'delete';
+		return 'comment_edit';
 	}
 
 	public function render( $model = null ) {
@@ -27,10 +27,14 @@ class DeleteView extends AbstractView {
 
 		$post->comment_status = 'close';
 
-		$view = apply_filters( 'pre_cap_check_edit_view', null, $post, Setting::get_board() );
+		$comment_ID = get_query_var( 'comment_ID' );
+		
+		$view = apply_filters( 'pre_cap_check_comment_view', null, $comment_ID, $post->ID );
 
 		if ( $view instanceof View ) {
 			$output = $view->render( $this->model );
+		} else if ( is_string( $view ) && ! empty( $view ) ) {
+			$output = $view;
 		} else {
 			$output = parent::render( $model );
 		}

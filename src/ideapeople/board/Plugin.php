@@ -114,12 +114,14 @@ class Plugin {
 		$viewInterceptor = new ViewInterceptor();
 		$this->custom_loader->add_filter( 'pre_cap_check_read_view', $viewInterceptor, 'pre_cap_check_read_view', 10, 2 );
 		$this->custom_loader->add_filter( 'pre_cap_check_edit_view', $viewInterceptor, 'pre_cap_check_edit_view', 10, 2 );
+		$this->custom_loader->add_filter( 'pre_cap_check_comment_view', $viewInterceptor, 'pre_cap_check_comment_view', 10, 3 );
 
 		$this->loader->add_filter( 'posts_orderby_request', $this->post_order_generator, 'posts_orderby_request', 10, 2 );
 		$this->loader->add_action( 'save_post_' . PluginConfig::$board_post_type, $this->post_order_generator, 'update_post_order' );
 
 		$comment_action = new CommentAction();
 		$this->loader->add_action( 'preprocess_comment', $comment_action, 'preprocess_comment' );
+		$this->loader->add_action( 'wp_ajax_nopriv_idea_comment_password_check', $comment_action, 'password_check' );
 
 		$comment_action->change_wp_handle_comment_submission();
 

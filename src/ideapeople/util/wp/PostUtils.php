@@ -119,43 +119,6 @@ class PostUtils {
 		}
 	}
 
-	/**
-	 * @param $password
-	 *
-	 * @return bool
-	 */
-	public static function password_check( $password ) {
-		if ( empty( $password ) ) {
-			return false;
-		}
-
-		if ( ! isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) ) {
-			return true;
-		}
-
-		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$hasher = new PasswordHash( 8, true );
-
-		$stored_hash = wp_unslash( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] );
-		if ( 0 !== strpos( $stored_hash, '$P$B' ) ) {
-			return true;
-		}
-
-		if ( strlen( $password ) > 4096 ) {
-			return false;
-		}
-
-		$hash = $hasher->crypt_private( $password, $stored_hash );
-
-		if ( $hash[ 0 ] == '*' ) {
-			$hash = crypt( $password, $stored_hash );
-		}
-
-		$check = $hash === $stored_hash;
-
-		return ! apply_filters( 'idea_board_check_password', $check, $password, $hash );
-	}
-
 	public static function is_author( $post ) {
 		$post = get_post( $post );
 

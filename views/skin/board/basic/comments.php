@@ -1,4 +1,11 @@
 <?php
+use ideapeople\board\Rewrite;
+
+/**
+ * @param $comment
+ * @param $args
+ * @param $depth
+ */
 function idea_board_comment_list( $comment, $args, $depth ) {
 	$comment_ID = $comment->comment_ID; ?>
 	<li class="idea-board-comment-body" id="comment-<?php comment_ID() ?>">
@@ -11,13 +18,15 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 		<div class="idea-board-comment-author"><?php comment_author( $comment_ID ); ?></div>
 		<div class="idea-board-comment-date"><?php comment_date( 'Y-m-d' ); ?></div>
 		<div class="idea-board-comment-content"><?php comment_text( $comment_ID ); ?></div>
-		<div class="reply">
+
+		<div class="idea-board-comment-buttons">
 			<?php
 			comment_reply_link( array_merge( $args, array(
 				'depth'     => $depth,
-				'max_depth' => $args['max_depth']
+				'max_depth' => $args[ 'max_depth' ]
 			) ) );
 			?>
+			<a href="<?php echo Rewrite::comment_edit_link( $comment_ID, get_the_ID() ) ?>">수정</a>
 		</div>
 	</li>
 	<?php

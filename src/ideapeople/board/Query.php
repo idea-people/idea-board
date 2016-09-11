@@ -85,4 +85,31 @@ class Query extends WP_Query {
 
 		return $found_posts - $number;
 	}
+
+	public static function get_single_post( $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'board' => '',
+			'p'     => ''
+		) );
+
+		$post = null;
+
+		$query = new Query( $args );
+
+		$GLOBALS[ 'wp_query' ] = $query;
+
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$post = get_post();
+				break;
+			}
+		} else {
+			$p     = new \stdClass();
+			$p->ID = - 1;
+			$post  = new \WP_Post( $p );
+		}
+
+		return $post;
+	}
 }

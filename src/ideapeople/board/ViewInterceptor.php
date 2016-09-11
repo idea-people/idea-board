@@ -24,7 +24,7 @@ class ViewInterceptor {
 	 *
 	 * @return bool|AbstractView|AuthFailView|PasswordView
 	 */
-	public function pre_cap_check_edit_view( $view, $post, $board = null ) {
+	public function pre_cap_check_edit_view( $view, $post ) {
 		$post = get_post( $post );
 
 		if ( ! $post || $post->post_type != PluginConfig::$board_post_type ) {
@@ -52,6 +52,22 @@ class ViewInterceptor {
 
 		if ( Post::password_required( $post ) ) {
 			return $passwordView;
+		}
+
+		return $view;
+	}
+
+	public function pre_cap_check_comment_view( $view, $comment_ID, $post_ID ) {
+		$failView = new AuthFailView();
+
+		$password = Comment::get_comment_password( $comment_ID );
+
+		if ( ! is_user_logged_in() && empty( $password ) ) {
+			return $failView;
+		}
+
+		if ( Comment::password_required( $comment_ID ) ) {
+			return Comment::comment_password_form( $comment_ID );
 		}
 
 		return $view;

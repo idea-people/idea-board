@@ -10,6 +10,7 @@ namespace ideapeople\board;
 
 
 use ideapeople\board\setting\Setting;
+use ideapeople\board\view\CommentView;
 use ideapeople\board\view\DeleteView;
 use ideapeople\board\view\EditView;
 use ideapeople\board\view\ErrorView;
@@ -43,6 +44,9 @@ class PostView {
 				break;
 			case 'delete':
 				$view = new DeleteView();
+				break;
+			case 'comment_edit':
+				$view = new CommentView();
 				break;
 			default:
 				$view = new ListView();

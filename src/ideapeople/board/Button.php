@@ -31,6 +31,16 @@ class Button {
 		return self::button( 'list', 'list', '목록', Rewrite::list_link( $post ), $post );
 	}
 
+	public static function read_button( $post = null ) {
+		return self::button( 'read', 'read', '글읽기', get_permalink( $post->ID ), $post );
+	}
+
+	public static function prev_button() {
+		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', wp_get_referer(), '이전' );
+
+		return $html;
+	}
+
 	public static function delete_button( $post = null ) {
 		$post = get_post( $post );
 
@@ -47,7 +57,6 @@ class Button {
 		}
 
 		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', $link, $title );
-
 		$html = apply_filters( 'idea_board_button_' . $type, $html, $title, $link, $post );
 
 		return $html;

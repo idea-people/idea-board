@@ -21,24 +21,10 @@ use ideapeople\util\wp\TermUtils;
 
 class SingleView extends AbstractView {
 	public function render( $model = null ) {
-		$post = null;
-
-		$query = new Query( array(
+		$post = Query::get_single_post( array(
 			'board' => Setting::get_board()->name,
 			'p'     => get_query_var( 'pid' )
 		) );
-
-		$GLOBALS[ 'wp_query' ] = $query;
-
-		$this->addAttribute( 'query', $query );
-
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				$post = get_post();
-				break;
-			}
-		}
 
 		$view = apply_filters_ref_array( 'pre_cap_check_read_view', array( null, $post ) );
 
