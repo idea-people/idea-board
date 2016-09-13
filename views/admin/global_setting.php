@@ -1,7 +1,7 @@
 <?php
-use ideapeople\board\setting\GlobalSetting;
+use ideapeople\board\action\AdminGlobalAction;
 
-$o = GlobalSetting::instance();
+$o = AdminGlobalAction::instance();
 ?>
 <div class="wrap">
 	<h2><?php _e( '' ) ?></h2>

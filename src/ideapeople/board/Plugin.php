@@ -8,6 +8,7 @@
 namespace ideapeople\board;
 
 use ideapeople\board\action\AdminAction;
+use ideapeople\board\action\AdminGlobalAction;
 use ideapeople\board\action\CommentAction;
 use ideapeople\board\action\FileAction;
 use ideapeople\board\action\PostAction;
@@ -16,11 +17,11 @@ use ideapeople\board\helper\BpHelper;
 use ideapeople\board\helper\BwsCaptchaHelper;
 use ideapeople\board\helper\core\HelperLoader;
 use ideapeople\board\helper\WordpressPopularPostsHelper;
-use ideapeople\board\setting\GlobalSetting;
 use ideapeople\board\validator\ViewValidator;
 use ideapeople\util\wp\PluginLoader;
 use ideapeople\util\wp\PostOrderGenerator;
 use ideapeople\util\wp\WpNoprivUploader;
+use WP_Session;
 
 class Plugin {
 	/**
@@ -75,12 +76,14 @@ class Plugin {
 	}
 
 	public function plugin_hooks() {
+		WP_Session::get_instance();
+
 		$this->nopriv_uploader->ajax_action();
 
 		$this->helper_loader->add_helper( new WordpressPopularPostsHelper() );
 		$this->helper_loader->add_helper( new AdvancedCustomFieldHelper() );
 		$this->helper_loader->add_helper( new BwsCaptchaHelper() );
-		$this->helper_loader->add_helper( new BpHelper());
+		$this->helper_loader->add_helper( new BpHelper() );
 
 		$assets = new Assets();
 		$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'admin_enqueue_styles' );
@@ -145,7 +148,7 @@ class Plugin {
 		$this->loader->add_action( 'idea_board_action_post_edit_pre', $die_handler, 'start_die_handler' );
 		$this->loader->add_action( 'idea_board_action_post_edit_after', $die_handler, 'end_die_handler' );
 
-		new GlobalSetting();
+		$globalSetting = new AdminGlobalAction();
 	}
 
 	public function run() {
