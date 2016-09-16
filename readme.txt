@@ -2,7 +2,7 @@
 Contributors: ideapeople
 Donate link: http://www.ideapeople.co.kr
 Tags: idea-board,board,게시판,forum
-Requires at least: 4.0
+Requires at least: 4.4
 Tested up to: 4.6
 Stable tag: 1.0
 

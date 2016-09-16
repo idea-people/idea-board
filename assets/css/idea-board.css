@@ -6,6 +6,10 @@
     font-family: "Malgun Gothic", "Dotum", "Arial", serif;
 }
 
+#idea-board label {
+    cursor: pointer;
+}
+
 #idea-board img {
     max-width: 100%;
 }
@@ -74,7 +78,6 @@ reset
     white-space: nowrap;
     vertical-align: middle;
     touch-action: manipulation;
-    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -96,6 +99,10 @@ reset
 
 #idea-board .idea-search-form input[type="submit"] {
     margin-right: 0;
+}
+
+#idea-board input[type="checkbox"] {
+    cursor: pointer;
 }
 
 #idea-board .idea-board-button,
@@ -388,12 +395,14 @@ reset
     background: #337ab7;
     color: #fff;
     width: 30%;
+    cursor: pointer;
 }
 
 #idea-board .NFI-filename {
     border: none;
     width: 64%;
     background-color: #fff !important;
+    cursor: pointer;
 }
 
 #idea-board .idea-board-file-help {

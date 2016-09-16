@@ -21,7 +21,7 @@ class AdvancedCustomFieldHelper extends AbstractHelper {
 	}
 
 	public function add_nonce() {
-		wp_nonce_field( 'input', 'acf_nonce' );
+		wp_nonce_field( 'input', 'acf_nonce', false );
 	}
 
 	public function get_edit_page_meta_fields( $meta, $board, $post ) {

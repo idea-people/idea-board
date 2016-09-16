@@ -10,6 +10,10 @@
                 label: IDEA_BOARD.lang.File
             });
 
+        $idea_board.find('.NFI-filename').click(function () {
+            $(this).siblings('.NFI-button').find('input').trigger('click');
+        });
+
         $('.idea-board-validate').validate();
     });
 })(jQuery);
