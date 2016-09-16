@@ -35,7 +35,11 @@ Using the WordPress custom post type designed to enable a variety of plug-compat
 
 == Frequently Asked Questions ==
 
-If you have any concerns, please contact your questions [IDEA-PEOPLE](http://www.ideapeople.co.kr/plugin-qna)
+If you have any concerns, please contact your questions
+
+[FACEBOOK] (https://www.facebook.com/ipeople2014)
+
+[HOMEPAGE] (http://www.ideapeople.co.kr/plugin-qna)
 
 == Screenshots ==
 

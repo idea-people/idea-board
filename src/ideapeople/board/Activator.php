@@ -13,8 +13,6 @@ class Activator {
 	public $roles, $post_type, $file_action;
 
 	public function __construct() {
-		global $wp_version;
-
 		$this->post_type   = new PostTypes();
 		$this->roles       = new Roles();
 		$this->file_action = new FileAction();

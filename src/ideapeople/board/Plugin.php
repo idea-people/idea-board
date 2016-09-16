@@ -77,8 +77,6 @@ class Plugin {
 	}
 
 	public function plugin_hooks() {
-		WP_Session::get_instance();
-
 		$this->loader->add_action( 'wp', $this, 'register_global_vars', 1 );
 
 		$this->nopriv_uploader->ajax_action();
@@ -166,8 +164,10 @@ class Plugin {
 	}
 
 	public function register_global_vars() {
-		$GLOBALS[ 'idea_board_page_mode' ] = get_query_var( 'page_mode' );
+		$GLOBALS['idea_board_page_mode'] = get_query_var( 'page_mode' );
 
-		$GLOBALS[ 'idea_board_pid' ] = get_query_var( 'pid' );
+		$GLOBALS['idea_board_pid'] = get_query_var( 'pid' );
+
+		$GLOBALS['idea_board_session'] = WP_Session::get_instance();
 	}
 }
