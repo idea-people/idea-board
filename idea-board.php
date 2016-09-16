@@ -2,7 +2,7 @@
 /*
 Plugin Name: idea-board
 Plugin URI: http://www.ideapeople.co.kr
-Description:
+Description: 아이디어 보드는 워드프레스 다양한 플러그인과 호환되는 한국형 게시판 플러그인 입니다.
 Version: 1.0
 Author: ideapeople
 Author URI: http://www.ideapeople.co.kr
@@ -25,6 +25,8 @@ function run_idea_board() {
 	$plugin->run();
 
 	$GLOBALS[ 'idea_board_plugin' ] = $plugin;
+
+	do_action( 'idea_board_init' );
 
 	return $plugin;
 }

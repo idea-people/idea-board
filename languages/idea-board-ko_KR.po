@@ -1,0 +1,201 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: idea-board v1.0\n"
+"Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
+"POT-Creation-Date: 2016-08-12 22:51+0900\n"
+"PO-Revision-Date: 2016-09-16 18:37+0900\n"
+"Last-Translator: IdeaPeople<>\n"
+"Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: ko_KR\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "제목"
+msgstr "제목"
+
+msgid "작성일"
+msgstr "작성일"
+
+msgid "작성자"
+msgstr "작성자"
+
+msgid "조회수"
+msgstr "조회수"
+
+msgid "순번"
+msgstr "순번"
+
+msgid "비밀글"
+msgstr "비밀글"
+
+msgid "카테고리"
+msgstr "카테고리"
+
+msgid "이메일"
+msgstr "이메일"
+
+msgid "공지사항"
+msgstr "공지사항"
+
+msgid "이 글을 공지사항으로 사용하겠습니다"
+msgstr "이 글을 공지사항으로 사용하겠습니다"
+
+msgid "이 글을 비밀글로 사용하겠습니다"
+msgstr "이 글을 비밀글로 사용하겠습니다"
+
+msgid "댓글이 승인을 기다리고 있습니다"
+msgstr "댓글이 승인을 기다리고 있습니다"
+
+msgid "권한이 없습니다"
+msgstr "권한이 없습니다"
+
+msgid "등록된 내역이 없습니다"
+msgstr "등록된 내역이 없습니다"
+
+msgid "파일첨부는 %d개 까지 가능합니다"
+msgstr "파일첨부는 %d개 까지 가능합니다"
+
+msgid "파일당 업로드 가능한 최대 용량은 %sMB 입니다"
+msgstr "파일당 업로드 가능한 최대 용량은 %sMB 입니다"
+
+msgid "저장"
+msgstr "저장"
+
+msgid "목록"
+msgstr "목록"
+
+msgid "비밀글 쓰기를 사용하겠습니다"
+msgstr "비밀글 쓰기를 사용하겠습니다"
+
+msgid "개의 파일을 업로드할수 있습니다"
+msgstr "개의 파일을 업로드할수 있습니다"
+
+msgid "개씩 목록에 표시합니다"
+msgstr "개씩 목록에 표시합니다"
+
+msgid "기타 워드프레스 댓글 플러그인이나 테마 댓글폼을 이용할경우 체크 해제해주세요"
+msgstr "기타 워드프레스 댓글 플러그인이나 테마 댓글폼을 이용할경우 체크 해제해주세요"
+
+msgid "아이디어보드 게시판 댓글 스킨 사용여부"
+msgstr "아이디어보드 게시판 댓글 스킨 사용여부"
+
+msgid "게시판 스킨을 사용하겠습니다"
+msgstr "게시판 스킨을 사용하겠습니다"
+
+msgid "페이지에 자동 추가"
+msgstr "페이지에 자동 추가"
+
+msgid "에디터"
+msgstr "에디터"
+
+msgid "무조건 비밀글 쓰기로 사용하겠습니다"
+msgstr "무조건 비밀글 쓰기로 사용하겠습니다"
+
+msgid "댓글을 쓸 수 있게 합니다"
+msgstr "댓글을 쓸 수 있게 합니다"
+
+msgid "댓글은 수동으로 승인돼야 합니다"
+msgstr "댓글은 수동으로 승인돼야 합니다"
+
+msgid "댓글을 쓴 사람이 예전에 댓글이 승인된 적이 있어야 합니다"
+msgstr "댓글을 쓴 사람이 예전에 댓글이 승인된 적이 있어야 합니다"
+
+msgid "목록보기"
+msgstr "목록보기"
+
+msgid "공지글쓰기"
+msgstr "공지글쓰기"
+
+msgid "파일다운"
+msgstr "파일다운"
+
+msgid "답글"
+msgstr "답글"
+
+msgid "쓰기"
+msgstr "쓰기"
+
+msgid "읽기"
+msgstr "읽기"
+
+msgid "삭제"
+msgstr "삭제"
+
+msgid "수정"
+msgstr "수정"
+
+msgid "글쓰기"
+msgstr "글쓰기"
+
+msgid "글읽기"
+msgstr "글읽기"
+
+msgid "이전"
+msgstr "이전"
+
+msgid "전체"
+msgstr "전체"
+
+msgid "플러그인이 활성화 되었습니다"
+msgstr "플러그인이 활성화 되었습니다"
+
+msgid "플러그인이 비활성화 되었습니다"
+msgstr "플러그인이 비활성화 되었습니다"
+
+msgid "게시판 수정"
+msgstr "게시판 수정"
+
+msgid "게시판 추가"
+msgstr "게시판 추가"
+
+msgid "모든 게시판"
+msgstr "모든 게시판"
+
+msgid "게시판 관리"
+msgstr "게시판 관리"
+
+msgid "아이디어 보드"
+msgstr "아이디어 보드"
+
+msgid "게시판 검색"
+msgstr "게시판 검색"
+
+msgid "게시판"
+msgstr "게시판"
+
+msgid "아이디어 글"
+msgstr "아이디어 글"
+
+msgid "게시글 쓰기"
+msgstr "게시글 쓰기"
+
+msgid "게시글 수정"
+msgstr "게시글 수정"
+
+msgid "게시글 확인"
+msgstr "게시글 확인"
+
+msgid "검색"
+msgstr "검색"
+
+msgid "게시글 관리"
+msgstr "게시글 관리"
+
+msgid "게시판 환경설정"
+msgstr "게시판 환경설정"
+
+msgid "업로드 허용할 파일타입"
+msgstr "업로드 허용할 파일타입"
+
+msgid "MB <p>현재 설정상 최대 업로드 가능한 사이즈는 <strong>%s</strong> 입니다.</p>"
+msgstr "MB <p>현재 설정상 최대 업로드 가능한 사이즈는 <strong>%s</strong> 입니다.</p>"
+
+msgid "업로드 가능한 파일 사이즈(MB)"
+msgstr "업로드 가능한 파일 사이즈(MB)"
+
+msgid "파일 용량 한도초과"
+msgstr "파일 용량 한도초과"

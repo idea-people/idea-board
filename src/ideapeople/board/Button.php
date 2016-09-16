@@ -36,7 +36,7 @@ class Button {
 	}
 
 	public static function prev_button() {
-		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', 'javascript:history.back();', '이전' );
+		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', 'javascript:history.back();', __idea_board( '이전' ) );
 
 		return $html;
 	}
@@ -58,7 +58,7 @@ class Button {
 			return null;
 		}
 
-		$html = sprintf( '<a href="%s">수정</a>', Rewrite::comment_edit_link( $comment_ID, $post->ID ) );
+		$html = sprintf( '<a href="%s">%s</a>', Rewrite::comment_edit_link( $comment_ID, $post->ID ), __idea_board( '수정' ) );
 
 		return $html;
 	}
@@ -70,7 +70,7 @@ class Button {
 			return null;
 		}
 
-		$html = sprintf( '<a href="%s">삭제</a>', Rewrite::comment_delete_link( $comment_ID, $post->ID ) );
+		$html = sprintf( '<a href="%s">%s</a>', Rewrite::comment_delete_link( $comment_ID, $post->ID ), __idea_board( '삭제' ) );
 
 		return $html;
 	}
@@ -80,7 +80,8 @@ class Button {
 			return null;
 		}
 
-		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', $link, $title );
+		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', $link, __idea_board( $title ) );
+
 		$html = apply_filters( 'idea_board_button_' . $type, $html, $title, $link, $post );
 
 		return $html;

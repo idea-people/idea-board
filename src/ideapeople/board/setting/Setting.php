@@ -56,6 +56,9 @@ class Setting {
 	}
 
 	public static function get_custom_fields( $board = null, $post = null ) {
+		$board = self::get_board( $board );
+		$post  = Post::get_post( $post );
+
 		$meta_fields = apply_filters( 'idea_board_custom_fields', array(), $board, $post );
 
 		return $meta_fields;
@@ -265,6 +268,8 @@ class Setting {
 		}
 		$result = ob_get_contents();
 		ob_end_clean();
+
+//		$result = apply_filters( 'idea_board_custom_fields', $result );
 
 		return apply_filters( "idea_board_get_the_{$type}_custom_field", $result, $custom_fields, $board, $post );
 	}

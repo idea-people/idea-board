@@ -22,7 +22,7 @@ class Activator {
 	public function register_activation_hook() {
 		$this->version_check();
 
-		$this->notification( '플러그인이 활성화 되었습니다.' );
+		$this->notification( __idea_board( '플러그인이 활성화 되었습니다' ) );
 
 		$this->post_type->flush();
 		$this->roles->add_roles();
@@ -30,7 +30,7 @@ class Activator {
 	}
 
 	public function register_deactivation_hook() {
-		$this->notification( '플러그인이 비활성화 되었습니다.' );
+		$this->notification( __idea_board( '플러그인이 비활성화 되었습니다' ) );
 
 		$this->roles->remove_roles();
 	}

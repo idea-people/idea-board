@@ -181,7 +181,8 @@ class Post {
 	public static function get_the_title( $post = null ) {
 		$post = self::get_post( $post );
 
-		$title     = get_the_title( $post );
+		$title = get_the_title( $post );
+
 		$is_secret = self::is_secret( $post );
 
 		if ( $is_secret ) {

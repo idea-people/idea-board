@@ -1,5 +1,5 @@
 <?php ?>
-<h2><?php echo bloginfo( 'name' ) . " 오류" ?></h2>
+<h2><?php echo bloginfo( 'name' ) . " ERROR" ?></h2>
 
 <hr/>
 
@@ -10,5 +10,7 @@
 </ul>
 
 <div class="idea-board-buttons">
-	<a href="javascript:history.back();" class="idea-board-button">목록</a>
+	<a href="javascript:history.back();" class="idea-board-button">
+		<?php _e_idea_board( '목록' ); ?>
+	</a>
 </div>

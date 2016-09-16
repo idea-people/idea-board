@@ -48,7 +48,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		<?php if ( ! empty( $categories ) ) : ?>
 			<tr class="idea-board-row-category">
 				<th scope="col">
-					<label for="meta_input[idea_board_category]">카테고리</label>
+					<label for="meta_input[idea_board_category]"><?php _e_idea_board( '카테고리' ); ?></label>
 				</th>
 				<td>
 					<select name="meta_input[idea_board_category]" id="meta_input[idea_board_category]">
@@ -63,7 +63,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 
 		<?php if ( $use_secret ): ?>
 			<tr class="idea-board-row-secret">
-				<th><label for="meta_input[idea_board_is_secret]">비밀글</label></th>
+				<th><label for="meta_input[idea_board_is_secret]"><?php _e_idea_board( '비밀글' ); ?></label></th>
 				<td>
 					<label for="meta_input[idea_board_is_secret]">
 						<input
@@ -72,21 +72,21 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 							id="meta_input[idea_board_is_secret]"
 							value="1"
 							<?php echo $is_secret ? 'checked' : '' ?> />
-						이 글을 비밀글로 사용하겠습니다.</label>
+						<?php _e_idea_board( '이 글을 비밀글로 사용하겠습니다' ); ?>.</label>
 				</td>
 			</tr>
 		<?php endif; ?>
 
 		<?php if ( Capability::current_user_can( 'notice_edit' ) ) { ?>
 			<tr class="idea-board-row-notice">
-				<th><label for="meta_input[idea_board_is_notice]">공지사항</label></th>
+				<th><label for="meta_input[idea_board_is_notice]"><?php _e_idea_board( '공지사항' ); ?></label></th>
 				<td>
 					<label for="meta_input[idea_board_is_notice]">
 						<input type="checkbox" name="meta_input[idea_board_is_notice]"
 						       id="meta_input[idea_board_is_notice]"
 						       value="-1"
 							<?php echo $is_notice ? 'checked' : '' ?> />
-						이 글을 공지사항으로 사용하겠습니다.
+						<?php _e_idea_board( '이 글을 공지사항으로 사용하겠습니다' ); ?>.
 					</label>
 				</td>
 			</tr>
@@ -94,7 +94,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 
 		<tr class="idea-board-row-title">
 			<th scope="col">
-				<label for="post_title">제목</label>
+				<label for="post_title"><?php _e_idea_board( '제목' ); ?></label>
 			</th>
 			<td>
 				<input type="text"
@@ -105,7 +105,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		</tr>
 		<?php if ( ! is_user_logged_in() ) : ?>
 			<tr class="idea-board-row-email">
-				<th scope="col"><label for="meta_input[idea_board_email]"><?php _e( '이메일' ); ?></label></th>
+				<th scope="col"><label for="meta_input[idea_board_email]"><?php _e_idea_board( '이메일' ); ?></label></th>
 				<td>
 					<input type="email" name="meta_input[idea_board_email]" id="meta_input[idea_board_email]"
 					       class="idea-block idea-block-middle"
@@ -114,7 +114,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 				</td>
 			</tr>
 			<tr class="idea-board-row-author">
-				<th><label for="meta_input[idea_board_user_name]">작성자</label></th>
+				<th><label for="meta_input[idea_board_user_name]"><?php _e_idea_board( '작성자' ); ?></label></th>
 				<td>
 					<input type="text" name="meta_input[idea_board_user_name]" id="meta_input[idea_board_user_name]"
 					       class="idea-block idea-block-middle"
@@ -123,7 +123,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 				</td>
 			</tr>
 			<tr class="idea-board-row-password">
-				<th><label for="post_password">패스워드</label></th>
+				<th><label for="post_password"><?php _e_idea_board( '패스워드' ); ?></label></th>
 				<td>
 					<input type="password" name="post_password" id="post_password" class="idea-block idea-block-middle"
 					       value="<?php echo $post_password ?>"
@@ -135,7 +135,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		<?php echo $custom_fields_html; ?>
 
 		<tr class="idea-board-row-title ">
-			<th class="idea-vertical-top">내용</th>
+			<th class="idea-vertical-top"><?php _e_idea_board( '내용' ); ?></th>
 			<td>
 				<?php
 				echo Editor::get_the_editor( array(
@@ -147,12 +147,13 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		</tr>
 
 		<tr class="idea-board-row-files">
-			<th>파일첨부</th>
+			<th><?php _e_idea_board( '파일첨부' ); ?></th>
 			<td>
 				<div class="idea-board-file-help">
-					<span class="n1">파일첨부는 <?php echo $input_count; ?>개 까지 가능합니다.</span>
-					<span class="n2">파일당 업로드 가능한 최대 용량은 <?php echo GlobalSetting::get_max_update_file_size() ?>
-						MB 입니다.</span>
+					<span class="n1"><?php printf( __idea_board( '파일첨부는 %d개 까지 가능합니다' ), $input_count ); ?>.</span>
+					<span class="n2">
+						<?php printf( __idea_board( '파일당 업로드 가능한 최대 용량은 %sMB 입니다' ), GlobalSetting::get_max_update_file_size() ); ?>
+					</span>
 				</div>
 
 				<?php echo Post::the_file_list( true ); ?>
@@ -172,7 +173,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 
 	<div class="idea-board-buttons">
 		<?php echo Button::prev_button(); ?>
-		<input type="submit" value="저장">
+		<input type="submit" value="<?php _e_idea_board( '저장' ); ?>">
 	</div>
 
 	<input type="hidden" name="parent" value="<?php echo $parent ?>"/>

@@ -18,6 +18,7 @@ use ideapeople\board\helper\BwsCaptchaHelper;
 use ideapeople\board\helper\core\HelperLoader;
 use ideapeople\board\helper\WordpressPopularPostsHelper;
 use ideapeople\board\validator\ViewValidator;
+use ideapeople\util\http\Request;
 use ideapeople\util\wp\PluginLoader;
 use ideapeople\util\wp\PostOrderGenerator;
 use ideapeople\util\wp\WpNoprivUploader;
@@ -77,6 +78,8 @@ class Plugin {
 
 	public function plugin_hooks() {
 		WP_Session::get_instance();
+
+		$this->loader->add_action( 'wp', $this, 'register_global_vars', 1 );
 
 		$this->nopriv_uploader->ajax_action();
 
@@ -150,10 +153,21 @@ class Plugin {
 		$this->loader->add_action( 'idea_board_action_post_edit_after', $die_handler, 'end_die_handler' );
 
 		$globalSetting = new AdminGlobalAction();
+		$this->loader->add_action( 'admin_init', $globalSetting, 'admin_init' );
+		$this->loader->add_action( 'admin_menu', $globalSetting, 'add_page' );
+
+		$seo = new Seo();
+		$this->loader->add_action( 'wp', $seo, 'active_seo' );
 	}
 
 	public function run() {
 		$this->loader->run();
 		$this->custom_loader->run();
+	}
+
+	public function register_global_vars() {
+		$GLOBALS[ 'idea_board_page_mode' ] = get_query_var( 'page_mode' );
+
+		$GLOBALS[ 'idea_board_pid' ] = get_query_var( 'pid' );
 	}
 }

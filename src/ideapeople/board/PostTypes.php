@@ -29,15 +29,15 @@ class PostTypes {
 
 	public function register_board() {
 		$labels = array(
-			'name'          => __( PluginConfig::$plugin_name ),
-			'singular_name' => __( '게시판 관리' ),
-			'menu_name'     => __( '게시판 관리' ),
-			'all_items'     => __( '모든 게시판' ),
-			'add_new_item'  => __( '게시판 추가' ),
-			'edit_item'     => __( '게시판 수정' ),
-			'update_item'   => __( '게시판 수정' ),
-			'search_items'  => __( '게시판 검색' ),
-			'popular_items' => __( '게시판' ),
+			'name'          => __idea_board( '아이디어 보드' ),
+			'singular_name' => __idea_board( '게시판 관리' ),
+			'menu_name'     => __idea_board( '게시판 관리' ),
+			'all_items'     => __idea_board( '모든 게시판' ),
+			'add_new_item'  => __idea_board( '게시판 추가' ),
+			'edit_item'     => __idea_board( '게시판 수정' ),
+			'update_item'   => __idea_board( '게시판 수정' ),
+			'search_items'  => __idea_board( '게시판 검색' ),
+			'popular_items' => __idea_board( '게시판' ),
 		);
 
 		$taxonomy_optional = array(
@@ -60,17 +60,17 @@ class PostTypes {
 
 	public function register_board_item() {
 		$labels = array(
-			'name'          => __( '아이디어 글' ),
-			'singular_name' => __( '아이디어 글' ),
-			'menu_name'     => PluginConfig::$plugin_name,
-			'add_new'       => __( '게시글 쓰기' ),
-			'add_new_item'  => __( '게시글 쓰기' ),
-			'edit'          => __( '게시글 수정' ),
-			'edit_item'     => __( '게시글 수정' ),
-			'view'          => __( '게시글 확인' ),
-			'view_item'     => __( '게시글 확인' ),
-			'search_items'  => __( '검색' ),
-			'all_items'     => __( '게시글 관리' )
+			'name'          => __idea_board( '아이디어 글' ),
+			'singular_name' => __idea_board( '아이디어 글' ),
+			'menu_name'     => __idea_board( '아이디어 보드' ),
+			'add_new'       => __idea_board( '게시글 쓰기' ),
+			'add_new_item'  => __idea_board( '게시글 쓰기' ),
+			'edit'          => __idea_board( '게시글 수정' ),
+			'edit_item'     => __idea_board( '게시글 수정' ),
+			'view'          => __idea_board( '게시글 확인' ),
+			'view_item'     => __idea_board( '게시글 확인' ),
+			'search_items'  => __idea_board( '검색' ),
+			'all_items'     => __idea_board( '게시글 관리' )
 		);
 
 		$args = array(

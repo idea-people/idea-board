@@ -39,45 +39,6 @@ class CommonUtils {
 		return $wp_query->start_no;
 	}
 
-	public static function get_search_form() {
-		$search_types = apply_filters( 'idea_board_search_types', array(
-			'post_title'         => __( '제목' ),
-			'post_content'       => __( '내용' ),
-			'post_title_content' => __( '제목+내용' )
-		) );
-
-		$search_type    = get_query_var( 'searchType' );
-		$search_value   = get_query_var( 'searchValue' );
-		$query_category = get_query_var( 'idea_board_category' );
-		?>
-		<div class="idea-search-form idea-board-reset">
-			<form method="get">
-				<label for="searchType" class="idea-board-hidden">종류</label>
-				<select name="searchType" id="searchType">
-					<?php foreach ( $search_types as $key => $value ) : ?>
-						<option value="<?php echo $key; ?>"
-							<?php echo $key == $search_type ? 'selected' : '' ?>>
-							<?php echo $value ?>
-						</option>
-					<?php endforeach ?>
-				</select>
-				<input type="text" id="searchValue" name="searchValue"
-				       placeholder="검색어"
-				       value="<?php echo esc_html( $search_value ) ?>">
-				<input type="submit" value="검색">
-
-				<input type="hidden" name="idea_board_category"
-				       value="<?php echo $query_category; ?>">
-				<input type="hidden" name="paged" value="0">
-
-				<?php if ( ! PluginConfig::$permalink_structure ) { ?>
-					<input type="hidden" name="page_id" value="<?php echo get_the_ID() ?>">
-				<?php } ?>
-			</form>
-		</div>
-		<?php
-	}
-
 	public static function get_category_form( $board_term, $page_permalink = false ) {
 		$categories     = Setting::get_categories_array( $board_term );
 		$query_category = get_query_var( 'idea_board_category' );
@@ -87,10 +48,10 @@ class CommonUtils {
 		}
 		?>
 		<div class="idea-board-category idea-board-reset">
-			<label for="idea-board-category" class="idea-board-hidden">카테고리</label>
+			<label for="idea-board-category" class="idea-board-hidden"><?php _e_idea_board( '카테고리' ) ?></label>
 			<ul id="idea-board-category">
 				<li <?php echo $query_category == 'all' || empty( $query_category ) ? 'class="active"' : '' ?>>
-					<a href="<?php echo add_query_arg( array( 'idea_board_category' => null ), $page_permalink ); ?>">전체</a>
+					<a href="<?php echo add_query_arg( array( 'idea_board_category' => null ), $page_permalink ); ?>"><?php _e_idea_board( '전체' ) ?></a>
 				</li>
 				<?php foreach ( $categories as $value ) : ?>
 					<li <?php echo $value == $query_category ? 'class="active"' : '' ?>>

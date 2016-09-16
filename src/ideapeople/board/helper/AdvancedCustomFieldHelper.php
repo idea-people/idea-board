@@ -17,14 +17,14 @@ use ideapeople\util\wp\CustomField;
 class AdvancedCustomFieldHelper extends AbstractHelper {
 	public function run() {
 		add_action( 'idea_board_nonce', array( $this, 'add_nonce' ) );
-		add_filter( 'idea_board_custom_fields', array( $this, 'get_edit_page_meta_fields' ), 10, 2 );
+		add_filter( 'idea_board_custom_fields', array( $this, 'get_edit_page_meta_fields' ), 10, 3 );
 	}
 
 	public function add_nonce() {
 		wp_nonce_field( 'input', 'acf_nonce' );
 	}
 
-	public function get_edit_page_meta_fields( $board, $post ) {
+	public function get_edit_page_meta_fields( $meta, $board, $post ) {
 		$field_groups = $this->get_board_field_groups( $board );
 		$rows         = array();
 
@@ -36,14 +36,13 @@ class AdvancedCustomFieldHelper extends AbstractHelper {
 			}
 		}
 
-		$results = array();
-
 		foreach ( $rows as $row ) {
 			$value = null;
 
 			if ( $post ) {
 				$value = get_field( $row[ 'name' ], $post->ID );
 			}
+
 			$f = new CustomField( array(
 				'name'       => 'fields[' . $row[ 'key' ] . ']',
 				'label'      => $row[ 'label' ],
@@ -58,10 +57,10 @@ class AdvancedCustomFieldHelper extends AbstractHelper {
 					break;
 			}
 
-			$results[] = $f;
+			$meta[] = $f;
 		}
 
-		return $results;
+		return $meta;
 	}
 
 	public function get_board_field_groups( $board ) {
