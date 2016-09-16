@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: idea-board v1.0\n"
 "Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
 "POT-Creation-Date: 2016-08-12 22:51+0900\n"
-"PO-Revision-Date: 2016-09-16 19:59+0900\n"
+"PO-Revision-Date: 2016-09-16 20:37+0900\n"
 "Last-Translator: IdeaPeople<>\n"
 "Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
 "MIME-Version: 1.0\n"
@@ -20,25 +20,25 @@ msgstr "제목"
 msgid "Date"
 msgstr "작성일"
 
-msgid "author"
+msgid "Author"
 msgstr "작성자"
 
-msgid "hit"
+msgid "Hit"
 msgstr "조회수"
 
-msgid "no"
+msgid "No"
 msgstr "순번"
 
-msgid "secret"
+msgid "Secret"
 msgstr "비밀글"
 
-msgid "category"
+msgid "Category"
 msgstr "카테고리"
 
-msgid "email"
+msgid "Email"
 msgstr "이메일"
 
-msgid "notice"
+msgid "Notice"
 msgstr "공지사항"
 
 msgid "I will use this article to Notice"
@@ -62,10 +62,10 @@ msgstr "파일첨부는 %d개 까지 가능합니다"
 msgid "Maximum capacity per file possible to upload is %sMB"
 msgstr "파일당 업로드 가능한 최대 용량은 %sMB 입니다"
 
-msgid "save"
+msgid "Save"
 msgstr "저장"
 
-msgid "list"
+msgid "List"
 msgstr "목록"
 
 msgid "I will use the Secret Writing"
@@ -103,9 +103,6 @@ msgstr "댓글은 수동으로 승인돼야 합니다"
 
 msgid "This person must have been written comments on the comments previously approved"
 msgstr "댓글을 쓴 사람이 예전에 댓글이 승인된 적이 있어야 합니다"
-
-msgid "List"
-msgstr "목록보기"
 
 msgid "Write Notice"
 msgstr "공지글쓰기"
@@ -235,3 +232,9 @@ msgstr "이 플러그인은 워드프레스에 포럼을 간단하게 추가할�
 
 msgid "Content"
 msgstr "내용"
+
+msgid "Password"
+msgstr "패스워드"
+
+msgid "Search Text"
+msgstr "검색어"

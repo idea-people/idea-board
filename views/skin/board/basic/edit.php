@@ -105,7 +105,8 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		</tr>
 		<?php if ( ! is_user_logged_in() ) : ?>
 			<tr class="idea-board-row-email">
-				<th scope="col"><label for="meta_input[idea_board_email]"><?php _e_idea_board( 'Email' ); ?></label></th>
+				<th scope="col"><label for="meta_input[idea_board_email]"><?php _e_idea_board( 'Email' ); ?></label>
+				</th>
 				<td>
 					<input type="email" name="meta_input[idea_board_email]" id="meta_input[idea_board_email]"
 					       class="idea-block idea-block-middle"
@@ -123,7 +124,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 				</td>
 			</tr>
 			<tr class="idea-board-row-password">
-				<th><label for="post_password"><?php _e_idea_board( '패스워드' ); ?></label></th>
+				<th><label for="post_password"><?php _e_idea_board( 'Password' ); ?></label></th>
 				<td>
 					<input type="password" name="post_password" id="post_password" class="idea-block idea-block-middle"
 					       value="<?php echo $post_password ?>"
@@ -150,7 +151,9 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 			<th><?php _e_idea_board( 'Attachments' ); ?></th>
 			<td>
 				<div class="idea-board-file-help">
-					<span class="n1"><?php printf( __idea_board( 'The attachment can be up to %d more' ), $input_count ); ?>.</span>
+					<span
+						class="n1"><?php printf( __idea_board( 'The attachment can be up to %d more' ), $input_count ); ?>
+						.</span>
 					<span class="n2">
 						<?php printf( __idea_board( 'Maximum capacity per file possible to upload is %sMB' ), GlobalSetting::get_max_update_file_size() ); ?>
 					</span>

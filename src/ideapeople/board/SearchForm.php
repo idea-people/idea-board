@@ -34,9 +34,9 @@ class SearchForm {
 					<?php endforeach ?>
 				</select>
 				<input type="text" id="searchValue" name="searchValue"
-				       placeholder="Search Text"
+				       placeholder="<?php _e_idea_board( 'Search Text' ) ?>"
 				       value="<?php echo esc_html( $search_value ) ?>">
-				<input type="submit" value="Search">
+				<input type="submit" value="<?php _e_idea_board( 'Search' ) ?>">
 				<input type="hidden" name="idea_board_category"
 				       value="<?php echo $query_category; ?>">
 				<input type="hidden" name="paged" value="0">

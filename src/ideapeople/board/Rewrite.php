@@ -66,7 +66,7 @@ class Rewrite {
 	public static function default_args( $post = null ) {
 		$post = get_post( $post );
 
-		$paged = get_query_var( 'paged' );
+		$paged       = get_query_var( 'paged' );
 		$searchType  = get_query_var( 'searchType', Request::getParameter( 'searchType', false ) );
 		$searchValue = get_query_var( 'searchValue', Request::getParameter( 'searchValue', false ) );
 		$category    = get_query_var( 'idea_board_category', Request::getParameter( 'idea_board_category', false ) );
