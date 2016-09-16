@@ -21,7 +21,11 @@ class Assets {
 			'nice-file-input'
 		), PluginConfig::$plugin_version );
 
-		wp_localize_script( PluginConfig::$plugin_name, PluginConfig::$plugin_name, array() );
+		wp_localize_script( PluginConfig::$plugin_name, PluginConfig::$plugin_name, array(
+			'lang' => array(
+				'File' => __idea_board( 'File' )
+			)
+		) );
 
 		wp_register_script( 'jquery-validate',
 			'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js',

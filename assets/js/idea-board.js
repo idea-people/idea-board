@@ -7,7 +7,7 @@
             .css('visibility', 'visible')
             .find("input[type=file]")
             .nicefileinput({
-                label: 'FILE'
+                label: IDEA_BOARD.lang.File
             });
 
         $('.idea-board-validate').validate();

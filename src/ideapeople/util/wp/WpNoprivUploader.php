@@ -42,7 +42,7 @@ class WpNoprivUploader {
 		wp_enqueue_style( 'idea-nopriv-upload', $this->plugin_url . '/src/ideapeople/util/wp/WpNoprivUploader.css' );
 		?>
 		<div class="idea-nopriv-upload-btn-wrap">
-			<span class="idea-nopriv-upload-btn"><?php __( 'Add Media' ) ?></span>
+			<span class="idea-nopriv-upload-btn"><?php _e( 'Add Media' ) ?></span>
 			<input style="display: none;" type="file"
 			       name="<?php echo $this->file_param ?>"
 			       multiple="multiple"
