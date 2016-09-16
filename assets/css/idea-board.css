@@ -1,7 +1,5 @@
 #idea-board {
     width: 100%;
-    clear: both;
-    content: '';
     display: block;
     font-size: .9rem;
     overflow: hidden;

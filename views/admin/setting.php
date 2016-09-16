@@ -75,14 +75,14 @@ $board_skins = Skins::get_board_skins();
 	<tbody>
 
 	<tr>
-		<th>게시판 설정</th>
+		<th><?php _e_idea_board( '게시판 설정' ) ?></th>
 		<td>
 			<p>
 				<label for="board_categories" class="block">
 					<?php _e_idea_board( '카테고리' ); ?>
 					<input type="text" name="board_categories" id="board_categories" class="block"
 					       value="<?php echo Setting::get_categories( $board->term_id, '' ); ?>"/>
-					<em>,로 구분하여 입력해 주세요.</em>
+					<em><?php _e_idea_board( ',로 구분하여 입력해 주세요' ) ?></em>
 				</label>
 			</p>
 
@@ -115,7 +115,7 @@ $board_skins = Skins::get_board_skins();
 		</td>
 	</tr>
 	<tr>
-		<th>스킨</th>
+		<th><?php _e_idea_board( '스킨' ) ?></th>
 		<td>
 			<p>
 				<select name="board_skin" id="board_skin">
@@ -141,7 +141,7 @@ $board_skins = Skins::get_board_skins();
 	</tr>
 
 	<tr>
-		<th>게시글</th>
+		<th><?php _e_idea_board( '게시글' ) ?></th>
 		<td>
 			<p class="form-required">
 				<label for="board_post_per_page">
@@ -173,7 +173,7 @@ $board_skins = Skins::get_board_skins();
 		</td>
 	</tr>
 	<tr>
-		<th>토론</th>
+		<th><?php _e_idea_board( '토론' ) ?></th>
 		<td>
 			<p>
 				<input type="checkbox" name="board_use_comment" id="board_use_comment" value="1"
@@ -197,7 +197,7 @@ $board_skins = Skins::get_board_skins();
 	</tr>
 
 	<tr>
-		<th>권한</th>
+		<th><?php _e_idea_board( '권한' ) ?></th>
 		<td class="role_row">
 			<p>
 				<label for="roles[list][]"><?php _e_idea_board( '목록보기' ); ?></label>
@@ -236,7 +236,7 @@ $board_skins = Skins::get_board_skins();
 		</td>
 	</tr>
 	<tr>
-		<th>기본글</th>
+		<th><?php _e_idea_board( '기본글' ) ?></th>
 		<td>
 			<?php wp_editor( Setting::get_basic_content(), 'board_basic_content' ); ?>
 		</td>
