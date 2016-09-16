@@ -37,10 +37,12 @@ If you have any concerns, please contact your questions [IDEA-PEOPLE](http://www
 
 == Screenshots ==
 
-1. Management Forum
-2. Forum Create
-3. Posts List
-4. Write Post
+1. Posts List
+2. Write Mode
+3. Read Mode
+4. Comment
+5. Using Disqus
+6. Admin Screen
 
 == Changelog ==
 

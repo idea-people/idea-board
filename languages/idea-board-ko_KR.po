@@ -232,3 +232,6 @@ msgstr "다운로드 권한이 없습니다"
 
 msgid "This plugin helps you to add simply a forum for WordPress"
 msgstr "이 플러그인은 워드프레스에 포럼을 간단하게 추가할수 있도록 도와준다."
+
+msgid "Content"
+msgstr "내용"

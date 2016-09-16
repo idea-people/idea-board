@@ -229,3 +229,6 @@ msgstr ""
 
 msgid "This plugin helps you to add simply a forum for WordPress"
 msgstr ""
+
+msgid "Content"
+msgstr ""

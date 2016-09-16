@@ -135,7 +135,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		<?php echo $custom_fields_html; ?>
 
 		<tr class="idea-board-row-title ">
-			<th class="idea-vertical-top"><?php _e_idea_board( '내용' ); ?></th>
+			<th class="idea-vertical-top"><?php _e_idea_board( 'Content' ); ?></th>
 			<td>
 				<?php
 				echo Editor::get_the_editor( array(

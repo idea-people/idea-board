@@ -13,9 +13,9 @@ class SearchForm {
 
 	public static function get_search_form() {
 		$search_types = apply_filters( 'idea_board_search_types', array(
-			'post_title'         => __( 'title' ),
-			'post_content'       => __( '내용' ),
-			'post_title_content' => __( '제목+내용' )
+			'post_title'         => __idea_board( 'Title' ),
+			'post_content'       => __idea_board( 'Content' ),
+			'post_title_content' => __idea_board( 'Title' ) . '+' . __idea_board( 'Content' )
 		) );
 
 		$search_type    = get_query_var( 'searchType' );

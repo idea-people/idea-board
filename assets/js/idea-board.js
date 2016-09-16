@@ -7,7 +7,7 @@
             .css('visibility', 'visible')
             .find("input[type=file]")
             .nicefileinput({
-                label: '파일선택'
+                label: 'FILE'
             });
 
         $('.idea-board-validate').validate();
