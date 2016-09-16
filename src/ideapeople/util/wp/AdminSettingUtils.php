@@ -53,7 +53,10 @@ class AdminSettingUtils {
 	public function view() { ?>
 		<div class="wrap">
 			<h2><?php _e( '' ) ?></h2>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7182463b56e448a16fdaf4ad5d4626e26d6f9dc8
 			<form action="options.php" method="POST">
 				<?php
 				settings_fields( $this->option_group );
@@ -83,6 +86,7 @@ class AdminSettingUtils {
 			'section'       => '',
 			'callback'      => '',
 			'type'          => 'text',
+<<<<<<< HEAD
 			'value'         => $this->get_option( $args[ 'name' ] ),
 			'default_value' => '',
 			'required'      => false,
@@ -103,26 +107,58 @@ class AdminSettingUtils {
 			, $callback
 			, $this->slug
 			, $args[ 'section' ]
+=======
+			'value'         => $this->get_option( $args['name'] ),
+			'default_value' => '',
+			'required'      => false
+		) );
+
+		if ( empty( $args['callback'] ) ) {
+			$callback = array( $this, 'render_field' );
+		} else {
+			$callback = $args['callback'];
+		}
+
+		$this->options[ $args['name'] ] = '';
+
+		add_settings_field( $args['id']
+			, $args['label']
+			, $callback
+			, $this->slug
+			, $args['section']
+>>>>>>> 7182463b56e448a16fdaf4ad5d4626e26d6f9dc8
 			, $args
 		);
 	}
 
 	public function render_field( $args ) {
 		$args = wp_parse_args( array(
+<<<<<<< HEAD
 			'name'       => sprintf( '%s[%s]', $this->option_name, $args[ 'name' ] ),
 			'label'      => $args[ 'label' ],
 			'field_type' => $args[ 'type' ],
 			'require'    => $args[ 'required' ],
 			'value'      => $args[ 'value' ]
+=======
+			'name'       => sprintf( '%s[%s]', $this->option_name, $args['name'] ),
+			'label'      => $args['label'],
+			'field_type' => $args['type'],
+			'require'    => $args['required'],
+			'value'      => $args['value']
+>>>>>>> 7182463b56e448a16fdaf4ad5d4626e26d6f9dc8
 		), $args );
 
 		$f = new CustomField( $args );
 
+<<<<<<< HEAD
 		echo $args['before'];
 
 		echo $f->renderField();
 
 		echo $args['after'];
+=======
+		echo $f->renderField();
+>>>>>>> 7182463b56e448a16fdaf4ad5d4626e26d6f9dc8
 	}
 
 	public function register_settings() {
