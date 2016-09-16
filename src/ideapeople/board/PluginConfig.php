@@ -10,6 +10,7 @@ namespace ideapeople\board;
 
 class PluginConfig {
 	static $support_php_version = 5.3;
+	static $support_wp_version = 4.4;
 
 	static $plugin_name = 'IDEA_BOARD';
 	static $plugin_author_email = 'ideapeople@ideapeople.co.kr';

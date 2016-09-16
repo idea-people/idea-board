@@ -7,13 +7,14 @@
 
 namespace ideapeople\board;
 
-
 use ideapeople\board\action\FileAction;
 
 class Activator {
 	public $roles, $post_type, $file_action;
 
 	public function __construct() {
+		global $wp_version;
+
 		$this->post_type   = new PostTypes();
 		$this->roles       = new Roles();
 		$this->file_action = new FileAction();
@@ -36,10 +37,20 @@ class Activator {
 	}
 
 	public function version_check() {
+		global $wp_version;
+
 		if ( phpversion() < PluginConfig::$support_php_version ) {
 			deactivate_plugins( plugin_basename( PluginConfig::$__FILE__ ) );
 
 			wp_die( sprintf( 'This plugin requires PHP Version %s.  Sorry about that.', PluginConfig::$support_php_version ) );
+
+			return false;
+		}
+
+		if ( $wp_version * 1 < PluginConfig::$support_wp_version ) {
+			deactivate_plugins( plugin_basename( PluginConfig::$__FILE__ ) );
+
+			wp_die( sprintf( 'This plugin requires WP Version %s.  Sorry about that.', PluginConfig::$support_wp_version ) );
 
 			return false;
 		}

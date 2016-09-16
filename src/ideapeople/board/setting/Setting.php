@@ -83,7 +83,7 @@ class Setting {
 			}
 
 			if ( ! $board_term ) {
-				$board_term = get_term_by( 'term_taxonomy_id', $value );
+				$board_term = get_term_by( 'term_taxonomy_id', $value, PluginConfig::$board_tax );
 
 				if ( ! $board_term ) {
 					$board_term = get_term_by( 'name', $value, PluginConfig::$board_tax );
