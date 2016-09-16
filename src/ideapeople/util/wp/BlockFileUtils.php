@@ -113,7 +113,7 @@ NOTICE;
 		$is_pass_auth_check = apply_filters( 'bfu_auth_check_' . $this->name, true, $post, $file, $filename );
 
 		if ( ! $is_pass_auth_check ) {
-			$error->add( 'auth_check_fail', '권한 체크 실패' );
+			$error->add( 'auth_check_fail', 'Authorization check fails' );
 
 			return $error;
 		}
@@ -122,7 +122,7 @@ NOTICE;
 			$file_size = filesize( $file );
 		} else {
 			$file_size = 0;
-			$error->add( 'not_found_file', '파일을 찾을수 없습니다.' );
+			$error->add( 'not_found_file', 'You can not find the file.' );
 		}
 
 		if ( $error->get_error_code() ) {

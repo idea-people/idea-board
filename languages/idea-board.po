@@ -220,3 +220,10 @@ msgstr ""
 
 msgid "Only Author"
 msgstr ""
+
+msgid "Attachments"
+msgstr ""
+
+msgid "You do not have permission to download"
+msgstr ""
+

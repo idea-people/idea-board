@@ -147,7 +147,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 		</tr>
 
 		<tr class="idea-board-row-files">
-			<th><?php _e_idea_board( '파일첨부' ); ?></th>
+			<th><?php _e_idea_board( 'Attachments' ); ?></th>
 			<td>
 				<div class="idea-board-file-help">
 					<span class="n1"><?php printf( __idea_board( 'The attachment can be up to %d more' ), $input_count ); ?>.</span>

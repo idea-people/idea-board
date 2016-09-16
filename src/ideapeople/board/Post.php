@@ -365,19 +365,19 @@ class Post {
 		ob_start();
 		?>
 		<div class="idea-board-file-list">
-			<h5>파일 다운로드</h5>
+			<h5><?php _e_idea_board( 'FileDown' ); ?></h5>
 			<ul>
 				<?php
 				foreach ( $attah_files as &$attah_file ) {
 					?>
 					<li>
 						<a href="<?php echo $attah_file->guid ? $attah_file->guid : '#'; ?>"
-							<?php echo ! $attah_file->guid ? "onClick=\"alert('다운로드 권한이 없습니다.');\"" : ''; ?>>
+							<?php echo ! $attah_file->guid ? "onClick=\"alert('" . __idea_board( 'You do not have permission to download' ) . ".');\"" : ''; ?>>
 							<span class="fa <?php echo $attah_file->fa ?>"></span>
 							<?php echo $attah_file->post_title ?>
 						</a>
 						<?php if ( $delete ) { ?>
-							<a href="<?php echo $attah_file->delete_url ?>">삭제</a>
+							<a href="<?php echo $attah_file->delete_url ?>"><?php _e_idea_board( 'Delete' ); ?></a>
 						<?php } ?>
 					</li>
 				<?php } ?>

@@ -223,3 +223,10 @@ msgstr "로그인 사용자"
 
 msgid "Only Author"
 msgstr "본인만"
+
+msgid "Attachments"
+msgstr "파일첨부"
+
+msgid "You do not have permission to download"
+msgstr "다운로드 권한이 없습니다"
+
