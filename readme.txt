@@ -14,6 +14,8 @@ This plugin helps you to add a simple forum to WordPress.
 It is currently in beta deployment progress.
 Using the WordPress custom post type designed to enable a variety of plug-compatible.
 
+- [DEMO PREVIEW](http://idea-board.ideapeople.co.kr/demo/)
+
 * [Disqus Comment System](https://wordpress.org/plugins/disqus-comment-system) You can comment on it using.
 * [WordPress Popular Posts](https://ko.wordpress.org/plugins/wordpress-popular-posts) , [Recent Posts Widget Extended](https://wordpress.org/plugins/recent-posts-widget-extended/) You can make use of the latest articles widget
 * [Captcha by BestWebSoft](https://wordpress.org/plugins/captcha/) Using the plug-in can be connected to the CAPTCHA feature.
