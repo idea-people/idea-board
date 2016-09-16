@@ -238,3 +238,12 @@ msgstr ""
 
 msgid "Search Text"
 msgstr ""
+
+msgid "Add Media"
+msgstr ""
+
+msgid "<a href='%s'> %s IDEA-BOARD %s Post on %s</a>"
+msgstr ""
+
+msgid "<a href='%s'> %s IDEA-BOARD %s Comment on %s</a>"
+msgstr ""

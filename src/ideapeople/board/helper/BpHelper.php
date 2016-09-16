@@ -36,7 +36,7 @@ class BpHelper extends AbstractHelper {
 				'content'      => $comment->comment_content,
 				'primary_link' => get_permalink( $post->ID ) . '#comment-' . $comment_id,
 				'type'         => 'idea_board_comment_' . $mode,
-				'action'       => sprintf( '<a href="%s"> %s이 IDEA-BOARD %s에서 게시글 %s에 댓글을 편집했습니다.</a>'
+				'action'       => sprintf( "<a href='%s'> %s IDEA-BOARD %s Comment on %s</a>"
 					, get_permalink( $post->ID ) . '#comment-' . $comment_id
 					, _wp_get_current_user()->display_name
 					, $board->name
@@ -62,7 +62,7 @@ class BpHelper extends AbstractHelper {
 				'primary_link' => get_permalink( $post->ID ),
 				'type'         => 'idea_board_' . $mode,
 				'action'       =>
-					sprintf( '<a href="%s"> %s이 IDEA-BOARD %s에서 글을 %s 하였습니다</a>'
+					sprintf( __idea_board( "<a href='%s'> %s IDEA-BOARD %s Post on %s</a>" )
 						, get_permalink( $post->ID )
 						, _wp_get_current_user()->display_name
 						, $board->name

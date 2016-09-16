@@ -238,3 +238,12 @@ msgstr "패스워드"
 
 msgid "Search Text"
 msgstr "검색어"
+
+msgid "Add Media"
+msgstr "미디어추가"
+
+msgid "<a href='%s'> %s IDEA-BOARD %s Post on %s</a>"
+msgstr "<a href='%s'> %s이 IDEA-BOARD %s에서 글을 %s 하였습니다</a>"
+
+msgid "<a href='%s'> %s IDEA-BOARD %s Comment on %s</a>"
+msgstr "<a href='%s'> %s이 IDEA-BOARD %s에서 댓글을 %s 하였습니다</a>"

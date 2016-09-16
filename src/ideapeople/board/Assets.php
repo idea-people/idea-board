@@ -30,7 +30,11 @@ class Assets {
 				'jquery-form'
 			) );
 
-		wp_register_script( 'jquery-validate-ko', PluginConfig::$plugin_url . 'assets/js/lib/jquery-validate/localization/messages_ko.js', array( 'jquery-validate' ) );
+		switch ( get_locale() ) {
+			case 'ko_KR':
+				wp_register_script( 'jquery-validate-ko', PluginConfig::$plugin_url . 'assets/js/lib/jquery-validate/localization/messages_ko.js', array( 'jquery-validate' ) );
+				break;
+		}
 
 		wp_enqueue_script( 'jquery-validate' );
 		wp_enqueue_script( 'jquery-validate-ko' );

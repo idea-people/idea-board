@@ -228,7 +228,7 @@ class CustomField {
 		) );
 
 		if ( is_null( $args[ 'id' ] ) ) {
-			return ' 존재하지않는 필드입니다.';
+			return ' A field that does not exist.';
 		}
 
 		$output = '';

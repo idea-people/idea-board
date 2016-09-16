@@ -42,7 +42,7 @@ class WpNoprivUploader {
 		wp_enqueue_style( 'idea-nopriv-upload', $this->plugin_url . '/src/ideapeople/util/wp/WpNoprivUploader.css' );
 		?>
 		<div class="idea-nopriv-upload-btn-wrap">
-			<span class="idea-nopriv-upload-btn">미디어추가</span>
+			<span class="idea-nopriv-upload-btn"><?php __( 'Add Media' ) ?></span>
 			<input style="display: none;" type="file"
 			       name="<?php echo $this->file_param ?>"
 			       multiple="multiple"
@@ -63,7 +63,7 @@ class WpNoprivUploader {
 			$n = apply_filters( 'sanitize_file_name', $file[ 'tmp_name' ] );
 
 			if ( ! file_is_valid_image( $n ) ) {
-				$error->add( 'is_not_image', '이미지만 업로드할수 있습니다.' );
+				$error->add( 'is_not_image', 'Only images can be uploaded.' );
 				$error->add( 'image_name', $n );
 			}
 		}
