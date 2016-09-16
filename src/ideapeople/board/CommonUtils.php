@@ -48,10 +48,10 @@ class CommonUtils {
 		}
 		?>
 		<div class="idea-board-category idea-board-reset">
-			<label for="idea-board-category" class="idea-board-hidden"><?php _e_idea_board( '카테고리' ) ?></label>
+			<label for="idea-board-category" class="idea-board-hidden"><?php _e_idea_board( 'Category' ) ?></label>
 			<ul id="idea-board-category">
 				<li <?php echo $query_category == 'all' || empty( $query_category ) ? 'class="active"' : '' ?>>
-					<a href="<?php echo add_query_arg( array( 'idea_board_category' => null ), $page_permalink ); ?>"><?php _e_idea_board( '전체' ) ?></a>
+					<a href="<?php echo add_query_arg( array( 'idea_board_category' => null ), $page_permalink ); ?>"><?php _e_idea_board( 'All' ) ?></a>
 				</li>
 				<?php foreach ( $categories as $value ) : ?>
 					<li <?php echo $value == $query_category ? 'class="active"' : '' ?>>

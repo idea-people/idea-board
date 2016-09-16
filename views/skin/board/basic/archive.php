@@ -16,11 +16,11 @@ CommonUtils::get_category_form( $board_term->term_id, $page_permalink );
 <table class="idea-board-reset2 idea-board-table">
 	<thead>
 	<tr>
-		<th class="idea-col-no"><?php _e_idea_board( '순번' ); ?></th>
-		<th class="idea-col-title"><?php _e_idea_board( '제목' ); ?></th>
-		<th class="idea-col-date"><?php _e_idea_board( '작성일' ); ?></th>
-		<th class="idea-col-author "><?php _e_idea_board( '작성자' ); ?></th>
-		<th class="idea-col-hit"><?php _e_idea_board( '조회수' ); ?></th>
+		<th class="idea-col-no"><?php _e_idea_board( 'No' ); ?></th>
+		<th class="idea-col-title"><?php _e_idea_board( 'Title' ); ?></th>
+		<th class="idea-col-date"><?php _e_idea_board( 'Date' ); ?></th>
+		<th class="idea-col-author "><?php _e_idea_board( 'Author' ); ?></th>
+		<th class="idea-col-hit"><?php _e_idea_board( 'Hit' ); ?></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -54,7 +54,7 @@ CommonUtils::get_category_form( $board_term->term_id, $page_permalink );
 			<?php
 		}
 	} else {
-		echo sprintf( '<tr><td colspan="5">%s.</td></tr>', __idea_board( '등록된 내역이 없습니다' ) );
+		echo sprintf( '<tr><td colspan="5">%s.</td></tr>', __idea_board( 'There is no registered History' ) );
 	}
 	?>
 	</tbody>

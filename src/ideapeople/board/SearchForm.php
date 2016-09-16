@@ -13,7 +13,7 @@ class SearchForm {
 
 	public static function get_search_form() {
 		$search_types = apply_filters( 'idea_board_search_types', array(
-			'post_title'         => __( '제목' ),
+			'post_title'         => __( 'title' ),
 			'post_content'       => __( '내용' ),
 			'post_title_content' => __( '제목+내용' )
 		) );
@@ -34,9 +34,9 @@ class SearchForm {
 					<?php endforeach ?>
 				</select>
 				<input type="text" id="searchValue" name="searchValue"
-				       placeholder="검색어"
+				       placeholder="Search Text"
 				       value="<?php echo esc_html( $search_value ) ?>">
-				<input type="submit" value="검색">
+				<input type="submit" value="Search">
 				<input type="hidden" name="idea_board_category"
 				       value="<?php echo $query_category; ?>">
 				<input type="hidden" name="paged" value="0">

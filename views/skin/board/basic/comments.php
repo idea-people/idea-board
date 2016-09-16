@@ -11,7 +11,7 @@ function idea_board_comment_list( $comment, $args, $depth ) {
 	$comment_ID = $comment->comment_ID; ?>
 	<li class="idea-board-comment-body" id="comment-<?php comment_ID() ?>">
 		<?php if ( '0' == $comment->comment_approved ) : ?>
-			<p class="idea-board-comment-awaiting-moderation"><?php _e_idea_board( '댓글이 승인을 기다리고 있습니다.' ); ?></p>
+			<p class="idea-board-comment-awaiting-moderation"><?php _e_idea_board( 'Comments awaiting approval' ); ?></p>
 		<?php endif; ?>
 		<div class="idea-board-comment-user-avatar">
 			<?php echo get_avatar( $comment->comment_author_email, 30 ); ?>

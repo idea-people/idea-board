@@ -20,9 +20,9 @@ class Roles {
 		global $wp_roles;
 
 		$roles                 = array();
-		$roles[ 'all' ]        = __idea_board( '전체공개' );
-		$roles[ 'isLogin' ]    = __idea_board( '로그인 사용자' );
-		$roles[ 'onlyAuthor' ] = __idea_board( '본인만' );
+		$roles[ 'all' ]        = __idea_board( 'All Open' );
+		$roles[ 'isLogin' ]    = __idea_board( 'Login Users' );
+		$roles[ 'onlyAuthor' ] = __idea_board( 'Only Author' );
 
 		$roles = array_merge( $roles, $wp_roles->get_names() );
 

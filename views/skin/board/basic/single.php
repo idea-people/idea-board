@@ -25,15 +25,15 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'single' );
 		<div class="idea-board-meta">
 			<ul>
 				<li class="user_nm">
-					<span class="t1"><?php _e_idea_board( '작성자' ); ?></span>
+					<span class="t1"><?php _e_idea_board( 'Author' ); ?></span>
 					<span class="t2"><?php echo $author_name; ?></span>
 				</li>
 				<li class="reg_date">
-					<span class="t1"><?php _e_idea_board( '작성일' ); ?></span>
+					<span class="t1"><?php _e_idea_board( 'Date' ); ?></span>
 					<span class="t2"><?php echo $reg_date; ?></span>
 				</li>
 				<li class="read_cnt">
-					<span class="t1"><?php _e_idea_board( '조회수' ); ?></span>
+					<span class="t1"><?php _e_idea_board( 'Hit' ); ?></span>
 					<span class="t2"><?php echo $read_cnt; ?></span>
 				</li>
 			</ul>

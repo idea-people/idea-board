@@ -60,7 +60,7 @@ class FileAction {
 			$max_byte = GlobalSetting::get_max_update_file_size_byte();
 
 			if ( $file[ 'size' ] > $max_byte ) {
-				wp_die( __idea_board( '파일 용량 한도초과' ) );
+				wp_die( __idea_board( 'Exceeding file size limit' ) );
 			}
 		}
 

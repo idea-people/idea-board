@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: idea-board v1.0\n"
 "Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
 "POT-Creation-Date: 2016-08-12 22:51+0900\n"
-"PO-Revision-Date: 2016-09-16 19:02+0900\n"
+"PO-Revision-Date: 2016-09-16 19:48+0900\n"
 "Last-Translator: IdeaPeople<>\n"
 "Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
 "MIME-Version: 1.0\n"
@@ -14,221 +14,212 @@ msgstr ""
 "X-Generator: Poedit 1.8.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "제목"
+msgid "Title"
 msgstr "제목"
 
-msgid "작성일"
+msgid "Date"
 msgstr "작성일"
 
-msgid "작성자"
+msgid "author"
 msgstr "작성자"
 
-msgid "조회수"
+msgid "hit"
 msgstr "조회수"
 
-msgid "순번"
+msgid "no"
 msgstr "순번"
 
-msgid "비밀글"
+msgid "secret"
 msgstr "비밀글"
 
-msgid "카테고리"
+msgid "category"
 msgstr "카테고리"
 
-msgid "이메일"
+msgid "email"
 msgstr "이메일"
 
-msgid "공지사항"
+msgid "notice"
 msgstr "공지사항"
 
-msgid "이 글을 공지사항으로 사용하겠습니다"
+msgid "I will use this article to Notice"
 msgstr "이 글을 공지사항으로 사용하겠습니다"
 
-msgid "이 글을 비밀글로 사용하겠습니다"
+msgid "I want to use this article in Secret"
 msgstr "이 글을 비밀글로 사용하겠습니다"
 
-msgid "댓글이 승인을 기다리고 있습니다"
+msgid "Comments awaiting approval"
 msgstr "댓글이 승인을 기다리고 있습니다"
 
-msgid "권한이 없습니다"
+msgid "You do not have permission"
 msgstr "권한이 없습니다"
 
-msgid "등록된 내역이 없습니다"
+msgid "There is no registered History"
 msgstr "등록된 내역이 없습니다"
 
-msgid "파일첨부는 %d개 까지 가능합니다"
+msgid "The attachment can be up to %d more"
 msgstr "파일첨부는 %d개 까지 가능합니다"
 
-msgid "파일당 업로드 가능한 최대 용량은 %sMB 입니다"
+msgid "Maximum capacity per file possible to upload is %sMB"
 msgstr "파일당 업로드 가능한 최대 용량은 %sMB 입니다"
 
-msgid "저장"
+msgid "save"
 msgstr "저장"
 
-msgid "목록"
+msgid "list"
 msgstr "목록"
 
-msgid "비밀글 쓰기를 사용하겠습니다"
+msgid "I will use the Secret Writing"
 msgstr "비밀글 쓰기를 사용하겠습니다"
 
-msgid "개의 파일을 업로드할수 있습니다"
+msgid "You can upload files"
 msgstr "개의 파일을 업로드할수 있습니다"
 
-msgid "개씩 목록에 표시합니다"
+msgid "Display the list"
 msgstr "개씩 목록에 표시합니다"
 
-msgid "기타 워드프레스 댓글 플러그인이나 테마 댓글폼을 이용할경우 체크 해제해주세요"
+msgid "If you use other WordPress plugin or theme Comments Comments Form Please check off"
 msgstr "기타 워드프레스 댓글 플러그인이나 테마 댓글폼을 이용할경우 체크 해제해주세요"
 
-msgid "아이디어보드 게시판 댓글 스킨 사용여부"
+msgid "Whether to use bulletin board comments skins"
 msgstr "아이디어보드 게시판 댓글 스킨 사용여부"
 
-msgid "게시판 스킨을 사용하겠습니다"
+msgid "We will use skins Board"
 msgstr "게시판 스킨을 사용하겠습니다"
 
-msgid "페이지에 자동 추가"
+msgid "Automatically added to the page"
 msgstr "페이지에 자동 추가"
 
-msgid "에디터"
+msgid "Editor"
 msgstr "에디터"
 
-msgid "무조건 비밀글 쓰기로 사용하겠습니다"
+msgid "Only secret write mode"
 msgstr "무조건 비밀글 쓰기로 사용하겠습니다"
 
-msgid "댓글을 쓸 수 있게 합니다"
+msgid "It allows you to write a comment"
 msgstr "댓글을 쓸 수 있게 합니다"
 
-msgid "댓글은 수동으로 승인돼야 합니다"
+msgid "Comments should be approved must be manually"
 msgstr "댓글은 수동으로 승인돼야 합니다"
 
-msgid "댓글을 쓴 사람이 예전에 댓글이 승인된 적이 있어야 합니다"
+msgid "This person must have been written comments on the comments previously approved"
 msgstr "댓글을 쓴 사람이 예전에 댓글이 승인된 적이 있어야 합니다"
 
-msgid "목록보기"
+msgid "List"
 msgstr "목록보기"
 
-msgid "공지글쓰기"
+msgid "Write Notice"
 msgstr "공지글쓰기"
 
-msgid "파일다운"
+msgid "FileDown"
 msgstr "파일다운"
 
-msgid "답글"
+msgid "Reply"
 msgstr "답글"
 
-msgid "쓰기"
-msgstr "쓰기"
-
-msgid "읽기"
-msgstr "읽기"
-
-msgid "삭제"
+msgid "Delete"
 msgstr "삭제"
 
-msgid "수정"
+msgid "Edit"
 msgstr "수정"
 
-msgid "글쓰기"
+msgid "Write"
 msgstr "글쓰기"
 
-msgid "글읽기"
+msgid "Read"
 msgstr "글읽기"
 
-msgid "이전"
+msgid "Previous"
 msgstr "이전"
 
-msgid "전체"
+msgid "All"
 msgstr "전체"
 
-msgid "플러그인이 활성화 되었습니다"
+msgid "Plugin has been activated"
 msgstr "플러그인이 활성화 되었습니다"
 
-msgid "플러그인이 비활성화 되었습니다"
+msgid "Plugin has been deactivated"
 msgstr "플러그인이 비활성화 되었습니다"
 
-msgid "게시판 수정"
+msgid "Forum modifications"
 msgstr "게시판 수정"
 
-msgid "게시판 추가"
+msgid "Add Forum"
 msgstr "게시판 추가"
 
-msgid "모든 게시판"
+msgid "All Forums"
 msgstr "모든 게시판"
 
-msgid "게시판 관리"
+msgid "Management Forum"
 msgstr "게시판 관리"
 
-msgid "아이디어 보드"
+msgid "IDEA BOARD"
 msgstr "아이디어 보드"
 
-msgid "게시판 검색"
+msgid "Forum Search"
 msgstr "게시판 검색"
 
-msgid "게시판"
+msgid "Forum"
 msgstr "게시판"
 
-msgid "아이디어 글"
+msgid "IDEA POST"
 msgstr "아이디어 글"
 
-msgid "게시글 쓰기"
+msgid "Write posts"
 msgstr "게시글 쓰기"
 
-msgid "게시글 수정"
+msgid "Edit posts"
 msgstr "게시글 수정"
 
-msgid "게시글 확인"
+msgid "Check posts"
 msgstr "게시글 확인"
 
-msgid "검색"
+msgid "Search"
 msgstr "검색"
 
-msgid "게시글 관리"
+msgid "Management posts"
 msgstr "게시글 관리"
 
-msgid "게시판 환경설정"
+msgid "Forum Setting"
 msgstr "게시판 환경설정"
 
-msgid "업로드 허용할 파일타입"
+msgid "Upload file types to allow"
 msgstr "업로드 허용할 파일타입"
 
-msgid "MB <p>현재 설정상 최대 업로드 가능한 사이즈는 <strong>%s</strong> 입니다.</p>"
+msgid "MB <p>The maximum upload size is <strong>%s</strong> available</p>"
 msgstr "MB <p>현재 설정상 최대 업로드 가능한 사이즈는 <strong>%s</strong> 입니다.</p>"
 
-msgid "업로드 가능한 파일 사이즈(MB)"
+msgid "Possible file upload size (MB)"
 msgstr "업로드 가능한 파일 사이즈(MB)"
 
-msgid "파일 용량 한도초과"
+msgid "Exceeding file size limit"
 msgstr "파일 용량 한도초과"
 
-msgid "설정"
+msgid "Settings"
 msgstr "설정"
 
-msgid "토론"
+msgid "discussion"
 msgstr "토론"
 
-msgid "게시판 설정"
-msgstr "게시판 설정"
-
-msgid ",로 구분하여 입력해 주세요"
+msgid "Please enter separated by ,"
 msgstr ",로 구분하여 입력해 주세요"
 
-msgid "스킨"
+msgid "Theme"
 msgstr "스킨"
 
-msgid "게시글"
+msgid "Posts"
 msgstr "게시글"
 
-msgid "권한"
+msgid "Authority"
 msgstr "권한"
 
-msgid "기본글"
+msgid "Post Base Content"
 msgstr "기본글"
 
-msgid "전체공개"
+msgid "All open"
 msgstr "전체공개"
 
-msgid "로그인 사용자"
+msgid "Login Users"
 msgstr "로그인 사용자"
 
-msgid "본인만"
+msgid "Only Author"
 msgstr "본인만"

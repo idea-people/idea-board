@@ -11,6 +11,6 @@
 
 <div class="idea-board-buttons">
 	<a href="javascript:history.back();" class="idea-board-button">
-		<?php _e_idea_board( '목록' ); ?>
+		<?php _e_idea_board( 'List' ); ?>
 	</a>
 </div>

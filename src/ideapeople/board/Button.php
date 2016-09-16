@@ -10,7 +10,7 @@ namespace ideapeople\board;
 
 class Button {
 	public static function reply_button( $post = null ) {
-		return self::button( 'reply', 'reply', '답글', Rewrite::reply_link( $post ), $post );
+		return self::button( 'reply', 'reply', 'Reply', Rewrite::reply_link( $post ), $post );
 	}
 
 	public static function edit_button( $post = null ) {
@@ -20,23 +20,23 @@ class Button {
 			return null;
 		}
 
-		return self::button( 'edit', 'edit', '수정', Rewrite::edit_link( $post ), $post );
+		return self::button( 'edit', 'edit', 'Edit', Rewrite::edit_link( $post ), $post );
 	}
 
 	public static function write_button( $post = null ) {
-		return self::button( 'write', 'edit', '글쓰기', Rewrite::write_link( $post ), $post );
+		return self::button( 'write', 'edit', 'Write', Rewrite::write_link( $post ), $post );
 	}
 
 	public static function list_button( $post = null ) {
-		return self::button( 'list', 'list', '목록', Rewrite::list_link( $post ), $post );
+		return self::button( 'list', 'list', 'List', Rewrite::list_link( $post ), $post );
 	}
 
 	public static function read_button( $post = null ) {
-		return self::button( 'read', 'read', '글읽기', get_permalink( $post->ID ), $post );
+		return self::button( 'read', 'read', 'Read', get_permalink( $post->ID ), $post );
 	}
 
 	public static function prev_button() {
-		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', 'javascript:history.back();', __idea_board( '이전' ) );
+		$html = sprintf( '<a href="%s" class="idea-board-button">%s</a>', 'javascript:history.back();', __idea_board( 'Previous' ) );
 
 		return $html;
 	}
@@ -48,7 +48,7 @@ class Button {
 			return null;
 		}
 
-		return self::button( 'delete', 'delete', '삭제', Rewrite::delete_link( $post ), $post );
+		return self::button( 'delete', 'delete', 'Delete', Rewrite::delete_link( $post ), $post );
 	}
 
 	public static function comment_edit_button( $comment_ID, $post = null ) {
@@ -58,7 +58,7 @@ class Button {
 			return null;
 		}
 
-		$html = sprintf( '<a href="%s">%s</a>', Rewrite::comment_edit_link( $comment_ID, $post->ID ), __idea_board( '수정' ) );
+		$html = sprintf( '<a href="%s">%s</a>', Rewrite::comment_edit_link( $comment_ID, $post->ID ), __idea_board( 'Edit' ) );
 
 		return $html;
 	}
@@ -70,7 +70,7 @@ class Button {
 			return null;
 		}
 
-		$html = sprintf( '<a href="%s">%s</a>', Rewrite::comment_delete_link( $comment_ID, $post->ID ), __idea_board( '삭제' ) );
+		$html = sprintf( '<a href="%s">%s</a>', Rewrite::comment_delete_link( $comment_ID, $post->ID ), __idea_board( 'Delete' ) );
 
 		return $html;
 	}

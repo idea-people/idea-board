@@ -29,15 +29,15 @@ class PostTypes {
 
 	public function register_board() {
 		$labels = array(
-			'name'          => __idea_board( '아이디어 보드' ),
-			'singular_name' => __idea_board( '게시판 관리' ),
-			'menu_name'     => __idea_board( '게시판 관리' ),
-			'all_items'     => __idea_board( '모든 게시판' ),
-			'add_new_item'  => __idea_board( '게시판 추가' ),
-			'edit_item'     => __idea_board( '게시판 수정' ),
-			'update_item'   => __idea_board( '게시판 수정' ),
-			'search_items'  => __idea_board( '게시판 검색' ),
-			'popular_items' => __idea_board( '게시판' ),
+			'name'          => __idea_board( 'IDEA BOARD' ),
+			'singular_name' => __idea_board( 'Management Forum' ),
+			'menu_name'     => __idea_board( 'Management Forum' ),
+			'all_items'     => __idea_board( 'All Forums' ),
+			'add_new_item'  => __idea_board( 'Add Forum' ),
+			'edit_item'     => __idea_board( 'Forum modifications' ),
+			'update_item'   => __idea_board( 'Forum modifications' ),
+			'search_items'  => __idea_board( 'Forum Search' ),
+			'popular_items' => __idea_board( 'Forum' ),
 		);
 
 		$taxonomy_optional = array(
@@ -60,17 +60,17 @@ class PostTypes {
 
 	public function register_board_item() {
 		$labels = array(
-			'name'          => __idea_board( '아이디어 글' ),
-			'singular_name' => __idea_board( '아이디어 글' ),
-			'menu_name'     => __idea_board( '아이디어 보드' ),
-			'add_new'       => __idea_board( '게시글 쓰기' ),
-			'add_new_item'  => __idea_board( '게시글 쓰기' ),
-			'edit'          => __idea_board( '게시글 수정' ),
-			'edit_item'     => __idea_board( '게시글 수정' ),
-			'view'          => __idea_board( '게시글 확인' ),
-			'view_item'     => __idea_board( '게시글 확인' ),
-			'search_items'  => __idea_board( '검색' ),
-			'all_items'     => __idea_board( '게시글 관리' )
+			'name'          => __idea_board( 'IDEA POST' ),
+			'singular_name' => __idea_board( 'IDEA POST' ),
+			'menu_name'     => __idea_board( 'IDEA BOARD' ),
+			'add_new'       => __idea_board( 'Write posts' ),
+			'add_new_item'  => __idea_board( 'Write posts' ),
+			'edit'          => __idea_board( 'Edit posts' ),
+			'edit_item'     => __idea_board( 'Edit posts' ),
+			'view'          => __idea_board( 'Check posts' ),
+			'view_item'     => __idea_board( 'Check posts' ),
+			'search_items'  => __idea_board( 'Search' ),
+			'all_items'     => __idea_board( 'Management posts' )
 		);
 
 		$args = array(
