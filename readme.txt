@@ -1,4 +1,4 @@
-﻿=== IBoard ===
+﻿=== IDEA-BOARD ===
 Contributors: ideapeople
 Donate link: http://www.ideapeople.co.kr
 Tags: idea-board,board,게시판,forum

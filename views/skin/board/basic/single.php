@@ -38,6 +38,8 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'single' );
 				</li>
 			</ul>
 		</div>
+
+		<?php echo Post::the_file_list(); ?>
 	</header>
 
 	<div class="idea-board-entry-content">
@@ -45,8 +47,6 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'single' );
 
 		<?php echo $content; ?>
 	</div>
-
-	<?php Post::the_file_list(); ?>
 
 	<div class="idea-board-buttons">
 		<?php echo Button::list_button(); ?>

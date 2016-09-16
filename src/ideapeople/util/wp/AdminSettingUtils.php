@@ -118,11 +118,11 @@ class AdminSettingUtils {
 
 		$f = new CustomField( $args );
 
-		echo $args['before'];
+		echo $args[ 'before' ];
 
 		echo $f->renderField();
 
-		echo $args['after'];
+		echo $args[ 'after' ];
 	}
 
 	public function register_settings() {

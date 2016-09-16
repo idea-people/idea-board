@@ -741,3 +741,12 @@ reset
 #idea-board-comment-form .form-submit {
     text-align: right;
 }
+
+#idea-board .idea-board-file-list h5 {
+    margin: 0;
+    display: none;
+}
+
+#idea-board .idea-board-file-list {
+    margin: 10px 0;
+}

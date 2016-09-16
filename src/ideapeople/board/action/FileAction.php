@@ -8,9 +8,11 @@
 
 namespace ideapeople\board\action;
 
+use ideapeople\board\setting\GlobalSetting;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Capability;
 use ideapeople\board\PluginConfig;
+use ideapeople\util\common\Utils;
 use ideapeople\util\http\Request;
 use ideapeople\util\wp\BlockFileUtils;
 
@@ -38,31 +40,35 @@ class FileAction {
 		return $c;
 	}
 
-	public function handle_upload( $post, $post_data = null ) {
-		$post = get_post( $post );
-
-		if ( is_array( $post_data ) && isset( $post_data[ 'tax_input' ] ) && @$post_data[ 'tax_input' ][ PluginConfig::$board_tax ][ 0 ] ) {
-			$board = get_term_by( 'term_taxonomy_id', @$post_data[ 'tax_input' ][ PluginConfig::$board_tax ][ 0 ] );
-		} else {
-			$board = get_term_by( 'term_taxonomy_id', get_post_meta( $post->ID, 'idea_board_term', true ) );
-		}
+	public function handle_upload( $post_data = null, $post_id = null, $board ) {
+		$post = get_post( $post_id );
 
 		$idea_upload_attach = get_post_meta( $post->ID, 'idea_upload_attach' );
 
-		$max_upload_cnt = Setting::get_max_upload_cnt( $board );
+		$max_upload_cnt = Setting::get_max_upload_cnt( $board->term_id );
 		$count          = count( $idea_upload_attach ) + count( Request::getFiles( 'files', false, false ) );
 
 		if ( $max_upload_cnt ) {
 			if ( $count > $max_upload_cnt ) {
 				wp_die( '업로드 한도초과' );
 			}
+		}
 
-			$attach_ids = $this->board_file_uils->request_upload( 'files', true );
+		$files = Request::getFiles( 'files' );
 
-			foreach ( $attach_ids as $attach_id ) {
-				add_post_meta( $post->ID, 'idea_upload_attach', $attach_id );
-				add_post_meta( $attach_id, 'idea_upload_post', $post->ID );
+		foreach ( $files as $file ) {
+			$max_byte = GlobalSetting::get_max_update_file_size_byte();
+
+			if ( $file[ 'size' ] > $max_byte ) {
+				wp_die( '파일 용량 한도초과' );
 			}
+		}
+
+		$attach_ids = $this->board_file_uils->request_upload( 'files', true );
+
+		foreach ( $attach_ids as $attach_id ) {
+			add_post_meta( $post->ID, 'idea_upload_attach', $attach_id );
+			add_post_meta( $attach_id, 'idea_upload_post', $post->ID );
 		}
 	}
 

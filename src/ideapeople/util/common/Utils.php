@@ -10,6 +10,33 @@ namespace ideapeople\util\common;
 
 
 class Utils {
+	static function to_bytes( $p_sFormatted ) {
+		$aUnits = array(
+			'B'  => 0,
+			'KB' => 1,
+			'MB' => 2,
+			'GB' => 3,
+			'TB' => 4,
+			'PB' => 5,
+			'EB' => 6,
+			'ZB' => 7,
+			'YB' => 8
+		);
+		$sUnit  = strtoupper( trim( substr( $p_sFormatted, - 2 ) ) );
+		if ( intval( $sUnit ) !== 0 ) {
+			$sUnit = 'B';
+		}
+		if ( ! in_array( $sUnit, array_keys( $aUnits ) ) ) {
+			return false;
+		}
+		$iUnits = trim( substr( $p_sFormatted, 0, strlen( $p_sFormatted ) - 2 ) );
+		if ( ! intval( $iUnits ) == $iUnits ) {
+			return false;
+		}
+
+		return $iUnits * pow( 1024, $aUnits[ $sUnit ] );
+	}
+
 	public static function bytes( $bytes, $force_unit = null, $format = null, $si = true ) {
 		$format = ( $format === null ) ? '%01.2f %s' : (string) $format;
 

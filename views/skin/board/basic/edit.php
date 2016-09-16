@@ -1,5 +1,7 @@
 <?php
+use ideapeople\board\action\AdminGlobalAction;
 use ideapeople\board\Button;
+use ideapeople\board\setting\GlobalSetting;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Capability;
 use ideapeople\board\Editor;
@@ -149,6 +151,8 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'edit' );
 			<td>
 				<div class="idea-board-file-help">
 					<span class="n1">파일첨부는 <?php echo $input_count; ?>개 까지 가능합니다.</span>
+					<span class="n2">파일당 업로드 가능한 최대 용량은 <?php echo GlobalSetting::get_max_update_file_size() ?>
+						MB 입니다.</span>
 				</div>
 
 				<?php echo Post::the_file_list( true ); ?>

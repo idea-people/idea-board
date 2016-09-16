@@ -138,7 +138,8 @@ class Plugin {
 		$file_action->add_ajax_action();
 		$this->loader->add_action( 'wp_ajax_idea_board_delete_attach', $file_action, 'delete_attach_redirect' );
 		$this->loader->add_action( 'wp_ajax_nopriv_idea_board_delete_attach', $file_action, 'delete_attach_redirect' );
-		$this->custom_loader->add_action( 'idea_board_edited_post', $file_action, 'handle_upload', 10, 2 );
+
+		$this->custom_loader->add_action( 'idea_board_action_post_edit_after', $file_action, 'handle_upload', 10, 3 );
 
 		$die_handler = new AjaxDieHandler();
 		$this->loader->add_action( 'idea_board_action_comment_edit_pre', $die_handler, 'start_die_handler' );

@@ -31,15 +31,14 @@ class AdminGlobalAction {
 	public $setting;
 
 	public function __construct() {
+
 		$this->setting = new AdminSettingUtils( 'idea_board_global', 'idea_board_global_option', 'idea_board_global_options' );
 
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_page' ) );
 	}
 
-	public function view_section_1() {
-	}
-
-	public function add_page() {
+	public function admin_init() {
 		add_settings_section(
 			'section_1',
 			'게시판 환경설정',
@@ -67,7 +66,12 @@ class AdminGlobalAction {
 			'default_value' => wp_get_mime_types(),
 			'cssClass'      => 'chosen-select'
 		) );
+	}
 
+	public function view_section_1() {
+	}
+
+	public function add_page() {
 		$this->setting->add_submenu_page(
 			'edit.php?post_type=' . PluginConfig::$board_post_type,
 			'설정',

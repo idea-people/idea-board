@@ -360,24 +360,28 @@ class Post {
 		if ( empty( $attah_files ) ) {
 			return null;
 		}
+
 		ob_start();
 		?>
-		<ul class="idea-board-file-list">
-			<?php
-			foreach ( $attah_files as &$attah_file ) {
-				?>
-				<li>
-					<a href="<?php echo $attah_file->guid ? $attah_file->guid : '#'; ?>"
-						<?php echo ! $attah_file->guid ? "onClick=\"alert('다운로드 권한이 없습니다.');\"" : ''; ?>>
-						<span class="fa <?php echo $attah_file->fa ?>"></span>
-						<?php echo $attah_file->post_title ?>
-					</a>
-					<?php if ( $delete ) { ?>
-						<a href="<?php echo $attah_file->delete_url ?>">삭제</a>
-					<?php } ?>
-				</li>
-			<?php } ?>
-		</ul>
+		<div class="idea-board-file-list">
+			<h5>파일 다운로드</h5>
+			<ul>
+				<?php
+				foreach ( $attah_files as &$attah_file ) {
+					?>
+					<li>
+						<a href="<?php echo $attah_file->guid ? $attah_file->guid : '#'; ?>"
+							<?php echo ! $attah_file->guid ? "onClick=\"alert('다운로드 권한이 없습니다.');\"" : ''; ?>>
+							<span class="fa <?php echo $attah_file->fa ?>"></span>
+							<?php echo $attah_file->post_title ?>
+						</a>
+						<?php if ( $delete ) { ?>
+							<a href="<?php echo $attah_file->delete_url ?>">삭제</a>
+						<?php } ?>
+					</li>
+				<?php } ?>
+			</ul>
+		</div>
 		<?php
 		$result = ob_get_contents();
 		ob_end_clean();

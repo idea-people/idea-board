@@ -167,6 +167,7 @@ NOTICE;
 		$files = Request::getFiles( $param_name );
 
 		$results = array();
+
 		foreach ( $files as $file ) {
 			if ( $convert_attached ) {
 				$result_file = $this->upload_file( $file );;
