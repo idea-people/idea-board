@@ -14,7 +14,9 @@ class Comment {
 	public static function is_logged_in_comment( $comment_ID ) {
 		$comment = get_comment( $comment_ID );
 
-		return $comment->user_id && empty( self::get_comment_password( $comment_ID ) );
+		$comment_password = self::get_comment_password( $comment_ID );
+
+		return $comment->user_id && empty( $comment_password );
 	}
 
 	public static function is_author( $comment_ID ) {

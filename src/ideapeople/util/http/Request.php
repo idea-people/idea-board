@@ -57,7 +57,7 @@ class Request {
 				$v[ $key ] = @$_FILES[ $name ][ $key ];
 			}
 
-			if ( empty( @$v['name'] ) && ! $include_empty ) {
+			if ( empty( $v['name'] ) && ! $include_empty ) {
 
 			} else {
 				$result[] = $v;
@@ -72,7 +72,7 @@ class Request {
 					$v[ $key ] = $_FILES[ $name ][ $key ][ $i ];
 				}
 
-				if ( empty( @$v['name'] ) && ! $include_empty ) {
+				if ( empty( $v['name'] ) && ! $include_empty ) {
 
 				} else {
 					$result[] = $v;
@@ -169,9 +169,5 @@ class Request {
 		}
 
 		return $url;
-	}
-
-	static function getCurrentHost() {
-		return self::parse_host( self::getCurrentUrl() );
 	}
 }

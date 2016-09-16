@@ -42,18 +42,18 @@ class PostAction {
 			'post_parent'  => Request::getParameter( 'parent', 0 )
 		) );
 
-		$post_data[ 'post_type' ]   = PluginConfig::$board_post_type;
-		$post_data[ 'post_status' ] = 'publish';
-		$post_data[ 'post_author' ] = ! is_user_logged_in() ? - 1 : null;
+		$post_data['post_type']   = PluginConfig::$board_post_type;
+		$post_data['post_status'] = 'publish';
+		$post_data['post_author'] = ! is_user_logged_in() ? - 1 : null;
 
 		if ( ! Capability::is_board_admin() ) {
-			$post_data[ 'post_content' ] = strip_shortcodes( $post_data[ 'post_content' ] );
+			$post_data['post_content'] = strip_shortcodes( $post_data['post_content'] );
 		}
 
 		do_action( 'idea_board_action_post_edit_pre', $post_data );
 
 		$error      = new \WP_Error();
-		$post_id    = ! empty( $post_data[ 'ID' ] ) ? $post_data[ 'ID' ] : $post_data[ 'pid' ];
+		$post_id    = ! empty( $post_data['ID'] ) ? $post_data['ID'] : $post_data['pid'];
 		$return_url = Request::getParameter( 'return_url', null );
 		$nonce      = $post_data[ PluginConfig::$idea_board_edit_nonce_name ];
 
@@ -62,13 +62,13 @@ class PostAction {
 		}
 
 		if ( ! is_user_logged_in() ) {
-			if ( ! isset( $post_data[ 'post_password' ] ) && empty( $post_data[ 'post_password' ] ) ) {
+			if ( ! isset( $post_data['post_password'] ) && empty( $post_data['post_password'] ) ) {
 				wp_die();
 			}
 		}
 
-		if ( isset( $post_data[ 'mode' ] ) ) {
-			$mode = $post_data[ 'mode' ];
+		if ( isset( $post_data['mode'] ) ) {
+			$mode = $post_data['mode'];
 		} else {
 			if ( empty( $post_id ) || $post_id == - 1 ) {
 				$mode = 'insert';
@@ -91,10 +91,10 @@ class PostAction {
 
 		switch ( $mode ) {
 			case 'insert':
-				unset( $post_data[ 'ID' ] );
+				unset( $post_data['ID'] );
 
-				if ( empty( $post_data[ 'comment_status' ] ) ) {
-					$post_data[ 'comment_status' ] = Setting::get_default_comment_status( $board->term_id );
+				if ( empty( $post_data['comment_status'] ) ) {
+					$post_data['comment_status'] = Setting::get_default_comment_status( $board->term_id );
 				}
 
 				$post_id = wp_insert_post( $post_data, $error );
@@ -102,7 +102,7 @@ class PostAction {
 				break;
 			case 'update':
 				if ( Capability::is_board_admin() ) {
-					unset( $post_data[ 'post_author' ] );
+					unset( $post_data['post_author'] );
 				}
 
 				$post_id = wp_update_post( $post_data, $error );
@@ -125,7 +125,7 @@ class PostAction {
 			}
 		}
 
-		do_action( 'idea_board_action_post_edit_after', $post_data, $post_id );
+		do_action( 'idea_board_action_post_edit_after', $post_data, $post_id, $board, $mode );
 
 		if ( $return_url ) {
 			wp_redirect( $return_url );
@@ -136,7 +136,7 @@ class PostAction {
 
 	public function post_update_private_meta( $board_term, $post_id ) {
 		if ( $post_id ) {
-			PostUtils::insert_or_update_meta( $post_id, 'idea_board_remote_ip', $_SERVER[ 'REMOTE_ADDR' ] );
+			PostUtils::insert_or_update_meta( $post_id, 'idea_board_remote_ip', $_SERVER['REMOTE_ADDR'] );
 			PostUtils::insert_or_update_meta( $post_id, 'idea_board_term', $board_term );
 		}
 	}
@@ -213,13 +213,13 @@ class PostAction {
 	public function get_board_term( $post_data = array() ) {
 		$board_term = false;
 
-		if ( is_array( $post_data[ 'tax_input' ] ) && $post_data[ 'tax_input' ][ PluginConfig::$board_tax ][ 0 ] ) {
-			$board_term = get_term_by( 'term_taxonomy_id', $post_data[ 'tax_input' ][ PluginConfig::$board_tax ][ 0 ], PluginConfig::$board_tax );
+		if ( is_array( $post_data['tax_input'] ) && $post_data['tax_input'][ PluginConfig::$board_tax ][0] ) {
+			$board_term = get_term_by( 'term_taxonomy_id', $post_data['tax_input'][ PluginConfig::$board_tax ][0], PluginConfig::$board_tax );
 		} else {
-			if ( isset( $post_data[ 'pid' ] ) ) {
-				$board_term = Setting::get_board_from_post( $post_data[ 'pid' ] );
-			} else if ( isset( $post_data[ 'ID' ] ) ) {
-				$board_term = Setting::get_board_from_post( $post_data[ 'ID' ] );
+			if ( isset( $post_data['pid'] ) ) {
+				$board_term = Setting::get_board_from_post( $post_data['pid'] );
+			} else if ( isset( $post_data['ID'] ) ) {
+				$board_term = Setting::get_board_from_post( $post_data['ID'] );
 			}
 		}
 
@@ -233,12 +233,12 @@ class PostAction {
 			return false;
 		}
 
-		$this->post_update_tax( $post_id, @$this->post_data[ 'tax_input' ] );
+		$this->post_update_tax( $post_id, @$this->post_data['tax_input'] );
 
-		$this->post_update_public_meta( $post_id, @$this->post_data[ 'meta_input' ] );
+		$this->post_update_public_meta( $post_id, @$this->post_data['meta_input'] );
 
-		if ( is_array( $this->post_data ) && isset( $this->post_data[ 'tax_input' ] ) ) {
-			$tax = $this->post_data[ 'tax_input' ][ PluginConfig::$board_tax ];
+		if ( is_array( $this->post_data ) && isset( $this->post_data['tax_input'] ) ) {
+			$tax = $this->post_data['tax_input'][ PluginConfig::$board_tax ];
 			$this->post_update_private_meta( $tax[ count( $tax ) - 1 ], $post_id );
 		}
 

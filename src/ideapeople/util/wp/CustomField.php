@@ -176,14 +176,16 @@ class CustomField {
 
 		switch ( $this->getFieldType() ) {
 			case self::FIELD_TYPE_SELECT :
-				$output .= "<select name=\"{$this->getName()}\" id=\"{$args['id']}\" class=\"{$args['cssClass']}\" style=\"{$args['style']}\" {$args['tag_end']}>";
+				$multiple = $args[ 'multiple' ] ? 'multiple' : '';
+
+				$output .= "<select name=\"{$this->getName()}[]\" id=\"{$args['id']}\" class=\"{$args['cssClass']}\" $multiple style=\"{$args['style']}\" {$args['tag_end']}>";
 
 				$options = $this->convertValueToOption();
 
 				foreach ( $options as $option ) {
 					$selected = '';
 
-					if ( $option[ 'text' ] == $this->getValue() ) {
+					if ( in_array( $option[ 'text' ], $this->getValue() ) ) {
 						$selected = 'selected="selected"';
 					}
 
