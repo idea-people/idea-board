@@ -2,10 +2,11 @@
 /*
 Plugin Name: idea-board
 Plugin URI: http://www.ideapeople.co.kr
-Description: 아이디어 보드는 워드프레스 다양한 플러그인과 호환되는 한국형 게시판 플러그인 입니다.
-Version: 1.0
+Description: This plugin helps you to add simply a forum for WordPress
+Version: 0.1
 Author: ideapeople
 Author URI: http://www.ideapeople.co.kr
+Text Domain: idea-board
 */
 
 use ideapeople\board\Plugin;
