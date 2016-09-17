@@ -16,8 +16,9 @@ use ideapeople\board\action\PostAction;
 use ideapeople\board\helper\AdvancedCustomFieldHelper;
 use ideapeople\board\helper\BpHelper;
 use ideapeople\board\helper\BwsCaptchaHelper;
-use ideapeople\board\helper\core\HelperLoader;
+use ideapeople\board\helper\core\HelperHandler;
 use ideapeople\board\helper\WordpressPopularPostsHelper;
+use ideapeople\board\notification\core\NotificationHandler;
 use ideapeople\board\validator\ViewValidator;
 use ideapeople\util\wp\PluginLoader;
 use ideapeople\util\wp\PostOrderGenerator;
@@ -46,7 +47,7 @@ class Plugin {
 	public $nopriv_uploader;
 
 	/**
-	 * @var HelperLoader
+	 * @var HelperHandler
 	 */
 	public $helper_loader;
 
@@ -73,11 +74,6 @@ class Plugin {
 		$this->loader->add_action( 'wp', $this, 'register_global_vars', 1 );
 
 		$this->nopriv_uploader->ajax_action();
-
-		$this->helper_loader->add_helper( new WordpressPopularPostsHelper() );
-		$this->helper_loader->add_helper( new AdvancedCustomFieldHelper() );
-		$this->helper_loader->add_helper( new BwsCaptchaHelper() );
-		$this->helper_loader->add_helper( new BpHelper() );
 
 		$assets = new Assets();
 		$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'admin_enqueue_styles' );
@@ -169,6 +165,18 @@ class Plugin {
 		$comment = new Comment();
 		$this->loader->add_action( 'comment_form', $comment, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_form_default_fields', $comment, 'add_comment_default_fields' );
+
+		$search_form = new SearchForm();
+		$this->loader->add_action( 'idea_board_pre_get_posts', $search_form, '_search_query' );
+		$this->loader->add_action( 'idea_board_after_get_posts', $search_form, '_reset_search_query' );
+
+		$category_form = new CategoryForm();
+		$this->loader->add_action( 'idea_board_pre_get_posts', $category_form, '_search_query' );
+		$this->loader->add_action( 'idea_board_after_get_posts', $category_form, '_reset_search_query' );
+
+		$notification_handler = new NotificationHandler();
+		$this->loader->add_action( 'idea_board_action_post_edit_after', $notification_handler, 'handle_post_edited', 10, 4 );
+		$this->loader->add_action( 'idea_board_action_comment_edit_after', $notification_handler, 'handle_comment_edited', 10, 4 );
 	}
 
 	public function run() {
@@ -181,22 +189,22 @@ class Plugin {
 
 		$this->nopriv_uploader = new WpNoprivUploader( 'idea_board_upload', 'idea_upload_file', PluginConfig::$plugin_url );
 
-		$this->helper_loader = new HelperLoader();
+		$this->helper_loader = new HelperHandler();
 
-		$GLOBALS[ 'idea_board_session' ] = WP_Session::get_instance();
+		$GLOBALS['idea_board_session'] = WP_Session::get_instance();
 
-		$GLOBALS[ 'idea_board_post_order_generator' ] = $this->post_order_generator;
+		$GLOBALS['idea_board_post_order_generator'] = $this->post_order_generator;
 
-		$GLOBALS[ 'idea_board_nopriv_uploader' ] = $this->nopriv_uploader;
+		$GLOBALS['idea_board_nopriv_uploader'] = $this->nopriv_uploader;
 
-		$GLOBALS[ 'idea_board_loader' ] = $this->loader;
+		$GLOBALS['idea_board_loader'] = $this->loader;
 
-		$GLOBALS[ 'idea_board_helper_loader' ] = $this->helper_loader;
+		$GLOBALS['idea_board_helper_loader'] = $this->helper_loader;
 	}
 
 	public function register_global_vars() {
-		$GLOBALS[ 'idea_board_page_mode' ] = get_query_var( 'page_mode' );
+		$GLOBALS['idea_board_page_mode'] = get_query_var( 'page_mode' );
 
-		$GLOBALS[ 'idea_board_pid' ] = get_query_var( 'pid' );
+		$GLOBALS['idea_board_pid'] = get_query_var( 'pid' );
 	}
 }

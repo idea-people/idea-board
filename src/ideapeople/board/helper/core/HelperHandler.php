@@ -8,7 +8,7 @@
 
 namespace ideapeople\board\helper\core;
 
-class HelperLoader {
+class HelperHandler {
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'run' ), 200 );
 	}

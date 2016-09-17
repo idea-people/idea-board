@@ -23,20 +23,26 @@ class Query extends WP_Query {
 				'publish',
 				'private',
 			),
-			'posts_per_page' => ! empty( $query[ 'posts_per_page' ] ) ? $query[ 'posts_per_page' ] : 10,
+			'posts_per_page' => ! empty( $query['posts_per_page'] ) ? $query['posts_per_page'] : 10,
 			'tax_query'      => array(
 				'relation' => 'AND',
 				array(
 					'taxonomy' => PluginConfig::$board_tax,
 					'field'    => 'name',
-					'terms'    => @$query[ 'board' ]
+					'terms'    => @$query['board']
 				)
 			)
 		) );
 
 		parent::__construct( $query );
 
-		$this->start_no = $this->generateStartNo( $query[ 'paged' ], $query[ 'posts_per_page' ] );
+		$this->start_no = $this->generateStartNo( $query['paged'], $query['posts_per_page'] );
+	}
+
+	public static function start_no() {
+		global $wp_query;
+
+		return $wp_query->start_no;
 	}
 
 	public function parse_query( $query = '' ) {
@@ -53,14 +59,14 @@ class Query extends WP_Query {
 		$qv = &$query->query_vars;
 
 		if ( $pagenow == 'edit.php'
-		     && isset( $qv[ 'post_type' ] )
-		     && $qv[ 'post_type' ] == PluginConfig::$board_post_type
-		     && isset( $qv[ 'term' ] )
-		     && is_numeric( $qv[ 'term' ] )
-		     && $qv[ 'term' ] != 0
+		     && isset( $qv['post_type'] )
+		     && $qv['post_type'] == PluginConfig::$board_post_type
+		     && isset( $qv['term'] )
+		     && is_numeric( $qv['term'] )
+		     && $qv['term'] != 0
 		) {
-			$term              = get_term_by( 'id', $qv[ 'term' ], PluginConfig::$board_tax );
-			$qv[ 'tax_query' ] = array(
+			$term            = get_term_by( 'id', $qv['term'], PluginConfig::$board_tax );
+			$qv['tax_query'] = array(
 				'relation' => 'AND',
 				array(
 					'taxonomy' => PluginConfig::$board_tax,
@@ -72,34 +78,13 @@ class Query extends WP_Query {
 	}
 
 	public function get_posts() {
-		add_filter( 'posts_where', array( $this, 'posts_where' ) );
-
 		do_action( 'idea_board_pre_get_posts', $this );
 
 		$posts = parent::get_posts();
 
 		do_action( 'idea_board_after_get_posts', $this );
 
-		remove_filter( 'posts_where', array( $this, 'posts_where' ) );
-
 		return $posts;
-	}
-
-	public function posts_where( $where ) {
-		global $wpdb;
-
-		$query_search = new WpQuerySearch( $where );
-
-		$category = get_query_var( 'idea_board_category' );
-
-		if ( $category ) {
-			$query_search->queries[ 'q' ][] = "AND (SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = 'idea_board_category' AND {$wpdb->postmeta}.post_id={$wpdb->posts}.ID)=%s";
-			$query_search->queries[ 'p' ][] = $category;
-		}
-
-		$where = $query_search->where( $where );
-
-		return $where;
 	}
 
 	private function generateStartNo( $paged, $posts_per_page = 10 ) {
@@ -122,7 +107,7 @@ class Query extends WP_Query {
 
 		$query = new Query( $args );
 
-		$GLOBALS[ 'wp_query' ] = $query;
+		$GLOBALS['wp_query'] = $query;
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {

@@ -25,7 +25,7 @@ class Activator {
 
 		$this->post_type->flush();
 		$this->roles->add_roles();
-		$this->file_action->board_file_uils->create_block_http();
+		$this->file_action->board_file_utils->create_block_http();
 	}
 
 	public function register_deactivation_hook() {

@@ -20,16 +20,16 @@ class FileAction {
 	/**
 	 * @var BlockFileUtils
 	 */
-	public $board_file_uils;
+	public $board_file_utils;
 
 	public function __construct() {
 		add_filter( 'bfu_auth_check_idea_board_files', array( $this, 'bfu_auth_check_idea_board_files' ), 10, 2 );
 
-		$this->board_file_uils = new BlockFileUtils( 'idea_board_files' );
+		$this->board_file_utils = new BlockFileUtils( 'idea_board_files' );
 	}
 
 	public function add_ajax_action() {
-		$this->board_file_uils->add_ajax_action();
+		$this->board_file_utils->add_ajax_action();
 	}
 
 	public function bfu_auth_check_idea_board_files( $check, $post ) {
@@ -50,7 +50,7 @@ class FileAction {
 
 		if ( $max_upload_cnt ) {
 			if ( $count > $max_upload_cnt ) {
-				wp_die( '업로드 한도초과' );
+				wp_die( 'Upload limit exceeded' );
 			}
 		}
 
@@ -59,12 +59,12 @@ class FileAction {
 		foreach ( $files as $file ) {
 			$max_byte = GlobalSetting::get_max_update_file_size_byte();
 
-			if ( $file[ 'size' ] > $max_byte ) {
+			if ( $file['size'] > $max_byte ) {
 				wp_die( __idea_board( 'Exceeding file size limit' ) );
 			}
 		}
 
-		$attach_ids = $this->board_file_uils->request_upload( 'files', true );
+		$attach_ids = $this->board_file_utils->request_upload( 'files', true );
 
 		foreach ( $attach_ids as $attach_id ) {
 			add_post_meta( $post->ID, 'idea_upload_attach', $attach_id );

@@ -26,7 +26,7 @@ class SingleView extends AbstractView {
 			'p'     => get_query_var( 'pid' )
 		) );
 
-		$view = apply_filters_ref_array( 'pre_cap_check_read_view', array( null, $post ) );
+		$view = apply_filters( 'pre_cap_check_read_view', null, $post );
 
 		if ( $view instanceof View ) {
 			$output = $view->render( $this->model );

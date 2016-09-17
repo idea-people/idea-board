@@ -21,9 +21,9 @@ class ShortCode {
 			'page_mode' => ''
 		) );
 
-		$page_mode = $atts[ 'page_mode' ] ? $atts[ 'page_mode' ] : get_query_var( 'page_mode' );
+		$page_mode = $atts['page_mode'] ? $atts['page_mode'] : get_query_var( 'page_mode' );
 
-		$board = Setting::get_board( $atts[ 'name' ] );
+		$board = Setting::get_board( $atts['name'] );
 
 		$output = PostView::get_view( $board, $page_mode );
 
