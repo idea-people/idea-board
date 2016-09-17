@@ -1,5 +1,6 @@
 <?php
 use ideapeople\board\Button;
+use ideapeople\board\PostTable;
 use ideapeople\board\SearchForm;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Post;
@@ -12,6 +13,15 @@ $page_permalink = CommonUtils::get_post_page_link();
 SearchForm::get_search_form();
 CommonUtils::get_category_form( $board_term->term_id, $page_permalink );
 
+$columns = array(
+	'no'     => __idea_board( 'No' ),
+	'title'  => __idea_board( 'Title' ),
+	'date'   => __idea_board( 'Date' ),
+	'author' => __idea_board( 'Author' ),
+	'hit'    => __idea_board( 'Hit' )
+);
+
+$t = new PostTable();
 ?>
 <table class="idea-board-reset2 idea-board-table">
 	<thead>
@@ -37,13 +47,9 @@ CommonUtils::get_category_form( $board_term->term_id, $page_permalink );
 			$read_cnt    = Post::get_the_read_cnt();
 			?>
 			<tr>
-				<td class="idea-col-no">
-					<?php echo $start_no; ?>
-				</td>
+				<td class="idea-col-no"><?php echo $start_no; ?></td>
 				<td class="idea-col-title idea-text-over">
-					<a href="<?php echo $permalink; ?>">
-						<?php echo $title; ?>
-					</a>
+					<a href="<?php echo $permalink; ?>"><?php echo $title; ?></a>
 				</td>
 				<td class="idea-col-date"><?php echo $reg_date; ?></td>
 				<td class="idea-col-author idea-text-over">

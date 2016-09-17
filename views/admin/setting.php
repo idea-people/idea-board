@@ -4,14 +4,15 @@
  * Mail: ideapeople@ideapeople.co.kr
  * Homepage : ideapeople@ideapeople.co.kr
  */
-use ideapeople\board\setting\Setting;
-use ideapeople\board\Editor;
-use ideapeople\board\Skins;
-use ideapeople\board\CommonUtils;
-use ideapeople\board\Capability;
-use ideapeople\util\wp\TermUtils;
 
-$board       = Setting::get_board();
+use ideapeople\board\Capability;
+use ideapeople\board\CommonUtils;
+use ideapeople\board\Editor;
+use ideapeople\board\setting\Setting;
+use ideapeople\board\Skins;
+
+$board = Setting::get_board();
+
 $board_skins = Skins::get_board_skins();
 ?>
 <style>
@@ -99,7 +100,7 @@ $board_skins = Skins::get_board_skins();
 					<select name="board_editor" id="board_editor">
 						<?php foreach ( Editor::get_editors() as $key => $editor ) { ?>
 							<option value="<?php echo $key ?>"
-								<?php echo $key == Setting::get_editor( $board->term_id ) ? 'selected' : '' ?>><?php echo $editor['name'] ?></option>
+								<?php echo $key == Setting::get_editor( $board->term_id ) ? 'selected' : '' ?>><?php echo $editor[ 'name' ] ?></option>
 						<?php } ?>
 					</select>
 				</label>
@@ -126,11 +127,11 @@ $board_skins = Skins::get_board_skins();
 		<td>
 			<p>
 				<select name="board_skin" id="board_skin">
-					<?php foreach ( $board_skins['board'] as $skin ) : ?>
+					<?php foreach ( $board_skins[ 'board' ] as $skin ) : ?>
 						<option
-							value="<?php echo $skin['name']; ?>"
-							<?php echo $skin['name'] == Setting::get_skin( $board->term_id ) ? 'selected' : '' ?>>
-							<?php echo $skin['name']; ?>
+							value="<?php echo $skin[ 'name' ]; ?>"
+							<?php echo $skin[ 'name' ] == Setting::get_skin( $board->term_id ) ? 'selected' : '' ?>>
+							<?php echo $skin[ 'name' ]; ?>
 						</option>
 					<?php endforeach; ?>
 				</select>
