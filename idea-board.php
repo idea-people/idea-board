@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: idea-board
+Plugin Name: IDEA BOARD
 Plugin URI: http://www.ideapeople.co.kr
 Description: This plugin helps you to add simply a forum for WordPress
 Version: 0.2
