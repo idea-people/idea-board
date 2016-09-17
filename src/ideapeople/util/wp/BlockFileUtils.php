@@ -45,7 +45,7 @@ class BlockFileUtils {
 	}
 
 	public function ajax_action() {
-		$attach_id = Request::getParameter( 'attach_id' );
+		$attach_id = Request::get_parameter( 'attach_id' );
 
 		if ( ! $attach_id ) {
 			wp_die();
@@ -164,7 +164,7 @@ NOTICE;
 	}
 
 	public function request_upload( $param_name, $convert_attached = false ) {
-		$files = Request::getFiles( $param_name );
+		$files = Request::get_files( $param_name );
 
 		$results = array();
 

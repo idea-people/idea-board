@@ -67,9 +67,9 @@ class Rewrite {
 		$post = get_post( $post );
 
 		$paged       = get_query_var( 'paged' );
-		$searchType  = get_query_var( 'searchType', Request::getParameter( 'searchType', false ) );
-		$searchValue = get_query_var( 'searchValue', Request::getParameter( 'searchValue', false ) );
-		$category    = get_query_var( 'idea_board_category', Request::getParameter( 'idea_board_category', false ) );
+		$searchType  = get_query_var( 'searchType', Request::get_parameter( 'searchType', false ) );
+		$searchValue = get_query_var( 'searchValue', Request::get_parameter( 'searchValue', false ) );
+		$category    = get_query_var( 'idea_board_category', Request::get_parameter( 'idea_board_category', false ) );
 
 		$args = array(
 			'paged'               => $paged == 0 ? false : $paged,

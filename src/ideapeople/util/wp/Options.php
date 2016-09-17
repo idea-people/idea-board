@@ -39,7 +39,7 @@ abstract class Options {
 	public function get_option( $key, $defaultValue = null ) {
 		$options = $this->get_options();
 
-		return Utils::getVar( $options, $key, $defaultValue );
+		return Utils::get_value( $options, $key, $defaultValue );
 	}
 
 	public function update_option( $key, $value ) {

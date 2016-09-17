@@ -3,7 +3,7 @@
 Plugin Name: idea-board
 Plugin URI: http://www.ideapeople.co.kr
 Description: This plugin helps you to add simply a forum for WordPress
-Version: 0.1
+Version: 0.2
 Author: ideapeople
 Author URI: http://www.ideapeople.co.kr
 Text Domain: idea-board
@@ -18,14 +18,12 @@ function run_idea_board() {
 	$loader = require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 	$loader->add( 'ideapeople\\', dirname( __FILE__ ) . '/src/' );
 
-	require_once dirname( __FILE__ ) . '/idea-board-filter.php';
+	require_once dirname( __FILE__ ) . '/idea-board-functions.php';
 
 	PluginConfig::init( __FILE__ );
 
 	$plugin = new Plugin();
 	$plugin->run();
-
-	$GLOBALS[ 'idea_board_plugin' ] = $plugin;
 
 	do_action( 'idea_board_init' );
 
@@ -33,12 +31,3 @@ function run_idea_board() {
 }
 
 run_idea_board();
-
-/**
- * @return Plugin
- */
-function idea_board_plugin() {
-	global $idea_board_plugin;
-
-	return $idea_board_plugin;
-}

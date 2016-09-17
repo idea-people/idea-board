@@ -9,6 +9,7 @@ namespace ideapeople\board;
 
 use ideapeople\board\action\AdminAction;
 use ideapeople\board\action\AdminGlobalAction;
+use ideapeople\board\action\AdminPostAction;
 use ideapeople\board\action\CommentAction;
 use ideapeople\board\action\FileAction;
 use ideapeople\board\action\PostAction;
@@ -18,7 +19,6 @@ use ideapeople\board\helper\BwsCaptchaHelper;
 use ideapeople\board\helper\core\HelperLoader;
 use ideapeople\board\helper\WordpressPopularPostsHelper;
 use ideapeople\board\validator\ViewValidator;
-use ideapeople\util\http\Request;
 use ideapeople\util\wp\PluginLoader;
 use ideapeople\util\wp\PostOrderGenerator;
 use ideapeople\util\wp\WpNoprivUploader;
@@ -67,13 +67,6 @@ class Plugin {
 
 		register_activation_hook( PluginConfig::$__FILE__, array( $activator, 'register_activation_hook' ) );
 		register_deactivation_hook( PluginConfig::$__FILE__, array( $activator, 'register_deactivation_hook' ) );
-	}
-
-	public function register_global() {
-		$this->post_order_generator = new PostOrderGenerator( PluginConfig::$board_post_type, 'idea_board_grp', 'idea_board_ord', 'idea_board_depth' );
-		$this->nopriv_uploader      = new WpNoprivUploader( 'idea_board_upload', 'idea_upload_file', PluginConfig::$plugin_url );
-
-		$this->helper_loader = new HelperLoader();
 	}
 
 	public function plugin_hooks() {
@@ -156,6 +149,26 @@ class Plugin {
 
 		$seo = new Seo();
 		$this->loader->add_action( 'wp', $seo, 'active_seo' );
+
+		$admin_post_action = new AdminPostAction();
+		$this->loader->add_filter( 'wp_insert_post_data', $admin_post_action, 'restore_author', 10, 2 );
+		$this->loader->add_filter( "manage_edit-" . PluginConfig::$board_post_type . "_columns", $admin_post_action, 'edit_columns' );
+		$this->loader->add_filter( "manage_" . PluginConfig::$board_post_type . "_posts_custom_column", $admin_post_action, 'custom_columns' );
+		$this->loader->add_action( 'restrict_manage_posts', $admin_post_action, 'add_search_category' );
+
+		$auto_insert_page = new AutoInsertPage();
+		$this->loader->add_filter( 'the_content', $auto_insert_page, 'auto_insert' );
+
+		$sort = new PostSort();
+		$this->loader->add_filter( 'idea_post_order_pre', $sort, 'sort_notice' );
+
+		$post = new Post();
+		$this->loader->add_filter( 'the_author', $post, 'get_the_author_nicename' );
+		$this->loader->add_filter( 'protected_title_format', $post, 'remove_protected', 10, 2 );
+
+		$comment = new Comment();
+		$this->loader->add_action( 'comment_form', $comment, 'add_comment_fields' );
+		$this->loader->add_filter( 'comment_form_default_fields', $comment, 'add_comment_default_fields' );
 	}
 
 	public function run() {
@@ -163,11 +176,27 @@ class Plugin {
 		$this->custom_loader->run();
 	}
 
+	public function register_global() {
+		$this->post_order_generator = new PostOrderGenerator( PluginConfig::$board_post_type, 'idea_board_grp', 'idea_board_ord', 'idea_board_depth' );
+
+		$this->nopriv_uploader = new WpNoprivUploader( 'idea_board_upload', 'idea_upload_file', PluginConfig::$plugin_url );
+
+		$this->helper_loader = new HelperLoader();
+
+		$GLOBALS[ 'idea_board_session' ] = WP_Session::get_instance();
+
+		$GLOBALS[ 'idea_board_post_order_generator' ] = $this->post_order_generator;
+
+		$GLOBALS[ 'idea_board_nopriv_uploader' ] = $this->nopriv_uploader;
+
+		$GLOBALS[ 'idea_board_loader' ] = $this->loader;
+
+		$GLOBALS[ 'idea_board_helper_loader' ] = $this->helper_loader;
+	}
+
 	public function register_global_vars() {
-		$GLOBALS['idea_board_page_mode'] = get_query_var( 'page_mode' );
+		$GLOBALS[ 'idea_board_page_mode' ] = get_query_var( 'page_mode' );
 
-		$GLOBALS['idea_board_pid'] = get_query_var( 'pid' );
-
-		$GLOBALS['idea_board_session'] = WP_Session::get_instance();
+		$GLOBALS[ 'idea_board_pid' ] = get_query_var( 'pid' );
 	}
 }

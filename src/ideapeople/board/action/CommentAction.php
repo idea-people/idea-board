@@ -81,7 +81,7 @@ class CommentAction {
 
 		do_action( 'idea_board_action_comment_delete_pre', $comment_ID );
 
-		$return_url = Request::getParameter( 'return_url', wp_get_referer() );
+		$return_url = Request::get_parameter( 'return_url', wp_get_referer() );
 
 		$view = apply_filters( 'pre_cap_check_comment_view', null, $comment_ID );
 

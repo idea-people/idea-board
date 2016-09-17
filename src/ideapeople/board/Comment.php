@@ -70,4 +70,25 @@ class Comment {
 	public static function get_comment_password( $comment_ID ) {
 		return get_comment_meta( $comment_ID, 'comment_password', true );
 	}
+
+	public static function add_comment_fields() {
+		echo sprintf( '<input type="hidden" name="idea_comment_nonce" value="%s">', wp_create_nonce( 'idea_comment_edit' ) );
+		echo sprintf( '<input type="hidden" name="comment_ID" value="%s">', get_query_var( 'comment_ID' ) );
+	}
+
+	public static function add_comment_default_fields( $fields ) {
+		$post = get_post();
+
+		if ( $post->post_type != PluginConfig::$board_post_type ) {
+			return $fields;
+		}
+
+		$fields[ 'comment-form-password' ] =
+			'<p class="comment-form-password"><label for="comment_password">' . __( 'Password' ) . '<span class="required">*</span></label> ' .
+			'<input id="comment_password" name="comment_password" type="password" size="30" maxlength="200" required /></p>';
+
+		$fields = apply_filters( 'idea_board_add_comment_fields', $fields, $post );
+
+		return $fields;
+	}
 }

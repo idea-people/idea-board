@@ -46,7 +46,7 @@ class FileAction {
 		$idea_upload_attach = get_post_meta( $post->ID, 'idea_upload_attach' );
 
 		$max_upload_cnt = Setting::get_max_upload_cnt( $board->term_id );
-		$count          = count( $idea_upload_attach ) + count( Request::getFiles( 'files', false, false ) );
+		$count          = count( $idea_upload_attach ) + count( Request::get_files( 'files', false, false ) );
 
 		if ( $max_upload_cnt ) {
 			if ( $count > $max_upload_cnt ) {
@@ -54,7 +54,7 @@ class FileAction {
 			}
 		}
 
-		$files = Request::getFiles( 'files' );
+		$files = Request::get_files( 'files' );
 
 		foreach ( $files as $file ) {
 			$max_byte = GlobalSetting::get_max_update_file_size_byte();
@@ -87,12 +87,12 @@ class FileAction {
 
 	public function delete_attach_redirect( $attach_id = null ) {
 		if ( empty( $attach_id ) ) {
-			$attach_id = Request::getParameter( 'attach_id' );
+			$attach_id = Request::get_parameter( 'attach_id' );
 		}
 
 		$this->delete_attach( $attach_id );
 
-		$return_url = Request::getParameter( 'return_url' );
+		$return_url = Request::get_parameter( 'return_url' );
 
 		wp_redirect( $return_url );
 		die;

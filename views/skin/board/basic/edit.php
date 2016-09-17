@@ -31,7 +31,7 @@ $is_notice     = Post::is_notice();
 $post_page_id   = CommonUtils::get_post_page_id();
 $page_permalink = CommonUtils::get_post_page_link();
 
-$parent = Request::getParameter( 'parent', 0 );
+$parent = Request::get_parameter( 'parent', 0 );
 
 $action_url = Rewrite::edit_ajax_link();
 

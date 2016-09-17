@@ -38,8 +38,8 @@ class PostAction {
 		}
 
 		$post_data = wp_parse_args( $post_data, array(
-			'post_content' => Request::getParameter( 'idea_board_post_content' ),
-			'post_parent'  => Request::getParameter( 'parent', 0 )
+			'post_content' => Request::get_parameter( 'idea_board_post_content' ),
+			'post_parent'  => Request::get_parameter( 'parent', 0 )
 		) );
 
 		$post_data[ 'post_type' ]   = PluginConfig::$board_post_type;
@@ -54,7 +54,7 @@ class PostAction {
 
 		$error      = new \WP_Error();
 		$post_id    = ! empty( $post_data[ 'ID' ] ) ? $post_data[ 'ID' ] : $post_data[ 'pid' ];
-		$return_url = Request::getParameter( 'return_url', null );
+		$return_url = Request::get_parameter( 'return_url', null );
 		$nonce      = $post_data[ PluginConfig::$idea_board_edit_nonce_name ];
 
 		if ( ! $this->is_valid_nonce( $nonce ) ) {

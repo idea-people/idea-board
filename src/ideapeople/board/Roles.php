@@ -29,9 +29,6 @@ class Roles {
 		return $roles;
 	}
 
-	/**
-	 * 플러그인이 시작되면 관리자에게 최고 권한을 준다.
-	 */
 	public function add_role_caps() {
 		$roles     = array( PluginConfig::$board_admin_role, 'administrator' );
 		$post_type = PluginConfig::$board_post_type;

@@ -9,6 +9,7 @@
 namespace ideapeople\board;
 
 use ideapeople\board\setting\Setting;
+use ideapeople\util\wp\WpNoprivUploader;
 
 class Editor {
 	public static function get_editor( $name ) {
@@ -39,20 +40,25 @@ class Editor {
 	}
 
 	public static function text_area( $args ) { ?>
-		<label for="<?php echo $args['name'] ?>" class="idea-board-hide"></label>
-		<textarea name="<?php echo $args['name'] ?>"
-		          id="<?php echo $args['name'] ?>"
-		          class="<?php echo $args['name'] ?>"
-		          rows="10"><?php echo $args['content'] ?></textarea>
+		<label for="<?php echo $args[ 'name' ] ?>" class="idea-board-hide"></label>
+		<textarea name="<?php echo $args[ 'name' ] ?>"
+		          id="<?php echo $args[ 'name' ] ?>"
+		          class="<?php echo $args[ 'name' ] ?>"
+		          rows="10"><?php echo $args[ 'content' ] ?></textarea>
 		<?php
 	}
 
 	public static function wp_editor( $args ) {
 		if ( ! is_user_logged_in() ) {
-			idea_board_plugin()->nopriv_uploader->upload_button();
+			/**
+			 * @var $idea_board_nopriv_uploader WpNoprivUploader;
+			 */
+			global $idea_board_nopriv_uploader;
+
+			$idea_board_nopriv_uploader->upload_button();
 		}
 
-		wp_editor( $args['content'], $args['name'], array() );
+		wp_editor( $args[ 'content' ], $args[ 'name' ], array() );
 	}
 
 	public static function get_the_editor( $args = array(), $board = null ) {
@@ -65,13 +71,13 @@ class Editor {
 
 		$editor = self::get_editor( $board_editor );
 
-		if ( isset( $editor['args'] ) && ! empty( $editor['args'] ) ) {
-			$args = wp_parse_args( $editor['args'], $args );
+		if ( isset( $editor[ 'args' ] ) && ! empty( $editor[ 'args' ] ) ) {
+			$args = wp_parse_args( $editor[ 'args' ], $args );
 		}
 
 		ob_start();
 
-		call_user_func( $editor['callback'], $args );
+		call_user_func( $editor[ 'callback' ], $args );
 		$content = ob_get_contents();
 		ob_end_clean();
 

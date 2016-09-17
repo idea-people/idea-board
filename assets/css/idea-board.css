@@ -474,6 +474,10 @@ reset
     border: 1px solid #dedede;
 }
 
+#idea-board .idea-board-entry-content img {
+    border: inherit;
+}
+
 #idea-board .idea-text-over {
     overflow: hidden;
     white-space: nowrap;

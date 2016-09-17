@@ -11,6 +11,7 @@ namespace ideapeople\board;
 use ideapeople\board\action\FileAction;
 use ideapeople\util\html\HtmlUtils;
 use ideapeople\util\wp\PasswordUtils;
+use ideapeople\util\wp\PostOrderGenerator;
 use ideapeople\util\wp\PostUtils;
 use ideapeople\util\wp\TermUtils;
 
@@ -160,7 +161,7 @@ class Post {
 		return PostUtils::get_the_content( $more_link_text, $strip_teaser );
 	}
 
-	public static function get_the_author_nicename( $post = null ) {
+	public static function get_the_author_nicename( $author = null, $post = null ) {
 		$post = self::get_post( $post );
 
 		$author_id = $post->post_author;
@@ -294,6 +295,12 @@ class Post {
 	}
 
 	public static function get_user_email( $default = null, $post = null ) {
+		$post = self::get_post( $post );
+
+		if ( $post->post_author ) {
+			return get_userdata( $post->post_author )->user_email;
+		}
+
 		return self::get_post_meta( $post, 'idea_board_email', false );
 	}
 
@@ -310,7 +317,12 @@ class Post {
 	}
 
 	public static function get_depth( $post = null ) {
-		return idea_board_plugin()->post_order_generator->get_depth( $post );
+		/**
+		 * @var $idea_board_post_order_generator PostOrderGenerator
+		 */
+		global $idea_board_post_order_generator;
+
+		return $idea_board_post_order_generator->get_depth( $post );
 	}
 
 	public static function get_board_term( $post = null ) {
@@ -388,5 +400,15 @@ class Post {
 		ob_end_clean();
 
 		return apply_filters( 'idea_board_the_file_list', $result, $attah_files, $board, $post );
+	}
+
+	public static function remove_protected( $protected, $post ) {
+		$post = get_post( $post );
+
+		if ( $post->post_type == PluginConfig::$board_post_type ) {
+			return '%s';
+		}
+
+		return $protected;
 	}
 }

@@ -55,7 +55,7 @@ class WpNoprivUploader {
 	}
 
 	public function action_upload_media() {
-		$files = Request::getFiles( $this->file_param );
+		$files = Request::get_files( $this->file_param );
 
 		$error = new WP_Error();
 

@@ -79,7 +79,7 @@ class Utils {
 		}
 	}
 
-	static function getVar( $target, $key, $defaultValue = null, $trim = false ) {
+	static function get_value( $target, $key, $defaultValue = null, $trim = false ) {
 		if ( is_null( $target ) ) {
 			return $defaultValue;
 		}
