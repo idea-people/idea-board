@@ -48,14 +48,14 @@ function idea_board_taxonomy_term_in_query( $query ) {
 	$qv = &$query->query_vars;
 
 	if ( $pagenow == 'edit.php'
-	     && isset( $qv['post_type'] )
-	     && $qv['post_type'] == PluginConfig::$board_post_type
-	     && isset( $qv['term'] )
-	     && is_numeric( $qv['term'] )
-	     && $qv['term'] != 0
+	     && isset( $qv[ 'post_type' ] )
+	     && $qv[ 'post_type' ] == PluginConfig::$board_post_type
+	     && isset( $qv[ 'term' ] )
+	     && is_numeric( $qv[ 'term' ] )
+	     && $qv[ 'term' ] != 0
 	) {
-		$term            = get_term_by( 'id', $qv['term'], PluginConfig::$board_tax );
-		$qv['tax_query'] = array(
+		$term              = get_term_by( 'id', $qv[ 'term' ], PluginConfig::$board_tax );
+		$qv[ 'tax_query' ] = array(
 			'relation' => 'AND',
 			array(
 				'taxonomy' => PluginConfig::$board_tax,
@@ -86,7 +86,7 @@ function idea_board_add_search_category( $post_type ) {
 			'show_option_all' => __( "Show All {$business_taxonomy->label}" ),
 			'taxonomy'        => $taxonomy,
 			'name'            => 'term',
-			'selected'        => @$wp_query->query['term'],
+			'selected'        => @$wp_query->query[ 'term' ],
 			'hierarchical'    => true,
 			'depth'           => 3,
 			'show_count'      => true, // Show # listings in parens
@@ -104,7 +104,7 @@ function idea_board_add_comment_default_fields( $fields ) {
 		return $fields;
 	}
 
-	$fields['comment-form-password'] =
+	$fields[ 'comment-form-password' ] =
 		'<p class="comment-form-password"><label for="comment_password">' . __( 'Password' ) . '<span class="required">*</span></label> ' .
 		'<input id="comment_password" name="comment_password" type="password" size="30" maxlength="200" required /></p>';
 
@@ -184,9 +184,21 @@ function idea_board_auto_insert_in_page( $content ) {
 add_filter( 'the_content', 'idea_board_auto_insert_in_page' );
 
 function idea_board_allow_html( $t ) {
-	$t['input'] = array();
+	$t[ 'input' ] = array();
 
 	return $t;
 }
 
 add_filter( 'wp_kses_allowed_html', 'idea_board_allow_html' );
+
+function idea_board_pre_post_update( $data, $postarr ) {
+	if ( isset( $postarr[ 'post_ID' ] ) && $postarr[ 'post_ID' ] ) {
+		$post = get_post( $postarr[ 'post_ID' ] );
+
+		$data[ 'post_author' ] = $post->post_author;
+	}
+
+	return $data;
+}
+
+add_filter( 'wp_insert_post_data', 'idea_board_pre_post_update', 10, 2 );
