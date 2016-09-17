@@ -73,7 +73,14 @@ $board_skins = Skins::get_board_skins();
 </style>
 <table class="form-table idea-board-admin-table" style="margin-bottom: 10px;">
 	<tbody>
-
+	<?php if ( $board->name ) : ?>
+		<tr>
+			<th>
+				<strong><?php _e_idea_board( 'ShortCode' ); ?></strong>
+			</th>
+			<td><em>[idea_board name="<?php echo $board->name ?>"]</em></td>
+		</tr>
+	<?php endif; ?>
 	<tr>
 		<th><?php _e_idea_board( 'Forum Setting' ) ?></th>
 		<td>
@@ -92,7 +99,7 @@ $board_skins = Skins::get_board_skins();
 					<select name="board_editor" id="board_editor">
 						<?php foreach ( Editor::get_editors() as $key => $editor ) { ?>
 							<option value="<?php echo $key ?>"
-								<?php echo $key == Setting::get_editor( $board->term_id ) ? 'selected' : '' ?>><?php echo $editor[ 'name' ] ?></option>
+								<?php echo $key == Setting::get_editor( $board->term_id ) ? 'selected' : '' ?>><?php echo $editor['name'] ?></option>
 						<?php } ?>
 					</select>
 				</label>
@@ -119,11 +126,11 @@ $board_skins = Skins::get_board_skins();
 		<td>
 			<p>
 				<select name="board_skin" id="board_skin">
-					<?php foreach ( $board_skins[ 'board' ] as $skin ) : ?>
+					<?php foreach ( $board_skins['board'] as $skin ) : ?>
 						<option
-							value="<?php echo $skin[ 'name' ]; ?>"
-							<?php echo $skin[ 'name' ] == Setting::get_skin( $board->term_id ) ? 'selected' : '' ?>>
-							<?php echo $skin[ 'name' ]; ?>
+							value="<?php echo $skin['name']; ?>"
+							<?php echo $skin['name'] == Setting::get_skin( $board->term_id ) ? 'selected' : '' ?>>
+							<?php echo $skin['name']; ?>
 						</option>
 					<?php endforeach; ?>
 				</select>
@@ -134,7 +141,8 @@ $board_skins = Skins::get_board_skins();
 					<input type="checkbox" name="board_use_comment_skin" id="board_use_comment_skin" value="1"
 						<?php echo Setting::get_use_comment_skin( $board->term_id, false ) == 1 ? 'checked' : '' ?> />
 					<?php _e_idea_board( 'Whether to use bulletin board comments skins' ); ?>
-					<em><?php _e_idea_board( 'If you use other WordPress plugin or theme Comments Comments Form Please check off' ); ?>.</em>
+					<em><?php _e_idea_board( 'If you use other WordPress plugin or theme Comments Comments Form Please check off' ); ?>
+						.</em>
 				</label>
 			</p>
 		</td>
@@ -184,14 +192,15 @@ $board_skins = Skins::get_board_skins();
 			<p>
 				<input type="checkbox" name="board_comment_moderation" id="board_comment_moderation" value="1"
 					<?php echo Setting::get_comment_moderation( $board->term_id, false ) == 1 ? 'checked' : '' ?> />
-				<label for="board_comment_moderation"><?php _e_idea_board( 'Comments should be approved must be manually' ); ?></label>
+				<label
+					for="board_comment_moderation"><?php _e_idea_board( 'Comments should be approved must be manually' ); ?></label>
 			</p>
 
 			<p>
 				<input type="checkbox" name="board_comment_whitelist" id="board_comment_whitelist" value="1"
 					<?php echo Setting::get_comment_whitelist( $board->term_id, false ) == 1 ? 'checked' : '' ?> />
 				<label
-					for="board_comment_whitelist"><?php _e_idea_board( 'This person must have been written comments on the comments previously approve' ); ?></label>
+					for="board_comment_whitelist"><?php _e_idea_board( 'This person must have been written comments on the comments previously approved' ); ?></label>
 			</p>
 		</td>
 	</tr>
@@ -230,7 +239,7 @@ $board_skins = Skins::get_board_skins();
 			</p>
 
 			<p>
-				<label for="roles[notice_edit][]"><?php _e_idea_board( 'WriteNotice' ); ?></label>
+				<label for="roles[notice_edit][]"><?php _e_idea_board( 'Write Notice' ); ?></label>
 				<?php echo CommonUtils::role_as_select_box( 'roles[notice_edit][]', Setting::get_role( $board->term_id, 'notice_edit', Capability::get_default_cap( 'notice_edit' ) ) ); ?>
 			</p>
 		</td>

@@ -78,9 +78,32 @@ class Seo {
 	}
 
 	public function clear_other_seo() {
-		add_filter( 'jetpack_enable_open_graph', '__return_false' );
-
+		remove_action( 'wp_head', 'wpseo_head', 20 );
+		remove_action( 'wp_head', 'wpseo_opengraph', 20 );
 		remove_action( 'wp_head', 'rel_canonical' );
 		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+
+		add_filter( 'jetpack_enable_open_graph', '__return_false' );
+		add_filter( 'wpseo_canonical', '__return_false' );
+		add_filter( 'wpseo_title', '__return_false' );
+		add_filter( 'wpseo_metadesc', '__return_false' );
+		add_filter( 'wpseo_author_link', '__return_false' );
+		add_filter( 'wpseo_metakey', '__return_false' );
+		add_filter( 'wpseo_locale', '__return_false' );
+		add_filter( 'wpseo_opengraph_type', '__return_false' );
+		add_filter( 'wpseo_opengraph_image', '__return_false' );
+		add_filter( 'wpseo_opengraph_image_size', '__return_false' );
+		add_filter( 'wpseo_opengraph_site_name', '__return_false' );
+		add_filter( 'wpseo_whitelist_permalink_vars', '__return_false' );
+		add_filter( 'wpseo_prev_rel_link', '__return_false' );
+		add_filter( 'wpseo_next_rel_link', '__return_false' );
+		add_filter( 'wpseo_xml_sitemap_img_src', '__return_false' );
+		add_filter( 'wp_seo_get_bc_title', '__return_false' );
+		add_filter( 'wp_seo_get_bc_ancestors', '__return_false' );
+		
+		if ( defined( 'AIOSEOP_VERSION' ) ) {
+			global $aiosp;
+			remove_action( 'wp_head', array( $aiosp, 'wp_head' ) );
+		}
 	}
 }

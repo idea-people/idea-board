@@ -20,7 +20,7 @@ class Roles {
 		global $wp_roles;
 
 		$roles                 = array();
-		$roles[ 'all' ]        = __idea_board( 'All Open' );
+		$roles[ 'all' ]        = __idea_board( 'All open' );
 		$roles[ 'isLogin' ]    = __idea_board( 'Login Users' );
 		$roles[ 'onlyAuthor' ] = __idea_board( 'Only Author' );
 
