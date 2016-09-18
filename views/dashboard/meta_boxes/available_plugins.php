@@ -7,7 +7,8 @@ use ideapeople\board\helper\core\AbstractHelper;
 $helpers = apply_filters( 'idea_board_get_helpers' );
 ?>
 <table>
-	<?php foreach ( $helpers as $helper ): ?>
+	<?php foreach ( $helpers as $helper ):
+		?>
 		<tr>
 			<td>
 				<a href="<?php echo $helper->get_plugin_url(); ?>" target="_blank">
@@ -15,7 +16,10 @@ $helpers = apply_filters( 'idea_board_get_helpers' );
 				</a>
 			</td>
 			<td class="alignright">
-				<?php if ( ! $helper->is_installed() ) : ?>
+				<?php if ( ! $helper->is_installed() ) :
+//					$slug = $helper->get_plugin_name();
+//					$link = wp_nonce_url( 'plugin-install.php?tab=plugin-information&plugin=' . $slug, 'install-plugin_' . $slug ) . '&amp;TB_iframe=true&amp;width=600&amp;height=800';
+					?>
 					<a href="<?php echo $helper->get_plugin_url(); ?>" class="install">install</a>
 				<?php endif; ?>
 				<?php if ( ! $helper->is_activate() && $helper->is_installed() ) : ?>

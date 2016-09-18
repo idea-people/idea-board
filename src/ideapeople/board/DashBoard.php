@@ -55,6 +55,9 @@ class DashBoard {
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
+		add_thickbox();
+		wp_enqueue_script( 'plugin-install' );
+		wp_enqueue_script( 'updates' );
 
 		add_meta_box( 'idea_board_dashboard_today_posts', __( '오늘 등록된 글' ), array(
 			$this,
