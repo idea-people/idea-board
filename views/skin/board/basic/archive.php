@@ -1,12 +1,10 @@
 <?php
 use ideapeople\board\Button;
 use ideapeople\board\CategoryForm;
-use ideapeople\board\PostTable;
+use ideapeople\board\CommonUtils;
+use ideapeople\board\Post;
 use ideapeople\board\SearchForm;
 use ideapeople\board\setting\Setting;
-use ideapeople\board\Post;
-use ideapeople\board\Rewrite;
-use ideapeople\board\CommonUtils;
 
 $board_term     = Setting::get_board();
 $page_permalink = CommonUtils::get_post_page_link();

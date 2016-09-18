@@ -52,5 +52,11 @@ If you have any concerns, please contact your questions
 
 == Changelog ==
 
+= 0.2.1 =
+* Bug Fix
+
+= 0.2 =
+* Bug Fix
+
 = 0.1 =
 * 0.1 Beta Deployment
