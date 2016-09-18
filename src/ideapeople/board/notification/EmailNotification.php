@@ -10,6 +10,7 @@ namespace ideapeople\board\notification;
 
 use ideapeople\board\notification\core\Notification;
 use ideapeople\board\Post;
+use ideapeople\board\setting\Setting;
 
 class EmailNotification implements Notification {
 	function when_post_updated( $post_data, $post_id, $board ) {
@@ -37,6 +38,10 @@ class EmailNotification implements Notification {
 	}
 
 	function when_post_registered( $post_data, $post_id, $board ) {
+		if ( ! Setting::get_noti_post_admin( $board->term_id ) ) {
+			return;
+		}
+
 		$admin = get_bloginfo( 'admin_email' );
 
 		$this->wp_mail(
@@ -47,6 +52,10 @@ class EmailNotification implements Notification {
 	}
 
 	function when_post_comment_registered( $comment_data, $comment_id, $board, $mode ) {
+		if ( ! Setting::get_noti_post_comment_author( $board->term_id ) ) {
+			return;
+		}
+
 		$comment = get_comment( $comment_id );
 
 		$post = Post::get_post( $comment->comment_post_ID );
@@ -63,6 +72,10 @@ class EmailNotification implements Notification {
 	}
 
 	function when_post_reply_registered( $post_data, $post_id, $board ) {
+		if ( ! Setting::get_noti_post_reply_author( $board->term_id ) ) {
+			return;
+		}
+
 		$user_email = Post::get_user_email( $post_id );
 		$this->wp_mail(
 			$user_email,
@@ -72,6 +85,10 @@ class EmailNotification implements Notification {
 	}
 
 	function when_comment_comment_registered( $comment_data, $comment_id, $board, $mode ) {
+		if ( ! Setting::get_noti_comment_comment_author( $board->term_id ) ) {
+			return;
+		}
+
 		$comment = get_comment( $comment_id );
 		$parent  = get_comment( $comment->comment_parent );
 
