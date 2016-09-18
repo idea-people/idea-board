@@ -3,7 +3,7 @@
 Plugin Name: IDEA BOARD
 Plugin URI: http://www.ideapeople.co.kr
 Description: This plugin helps you to add simply a forum for WordPress
-Version: 0.2.4
+Version: 0.2.5
 Author: ideapeople
 Author URI: http://www.ideapeople.co.kr
 Text Domain: idea-board

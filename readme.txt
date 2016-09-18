@@ -74,6 +74,9 @@ If you have any concerns, please contact your questions
 
 == Changelog ==
 
+= 0.2.5 =
+* javascript bug fix
+
 = 0.2.4 =
 * Dash-board update
 
