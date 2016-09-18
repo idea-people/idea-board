@@ -1,0 +1,59 @@
+.idea-board-admin-table {
+    margin-bottom: 10px;
+}
+
+.form-wrap .idea-board-admin-table label {
+    display: inline-block;
+    font-style: normal;
+}
+
+.form-wrap .idea-board-admin-table th label {
+    font-weight: bold;
+}
+
+.term-description-wrap, .term-slug-wrap, .term-parent-wrap {
+    display: none;
+}
+
+.form-table th {
+    width: 100px;
+}
+
+.form-table td p:first-child {
+    margin-top: 0;
+}
+
+.form-table td p em {
+    display: block;
+}
+
+.form-table .role_row {
+    visibility: hidden;
+}
+
+.form-table .role_row p {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+.form-table .role_row label {
+    width: 90px;
+    display: inline-block;
+}
+
+.form-table .block {
+    width: 70%;
+}
+
+#col-left {
+    width: 65%;
+}
+
+#col-right {
+    width: 35%;
+}
+
+#tag-name {
+    width: 250px;
+}

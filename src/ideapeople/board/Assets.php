@@ -16,12 +16,12 @@ class Assets {
 			, array( 'jquery' )
 			, PluginConfig::$plugin_version );
 
-		wp_register_script( PluginConfig::$plugin_name, PluginConfig::$plugin_url . 'assets/js/idea-board.js', array(
+		wp_register_script( 'IDEA_BOARD', PluginConfig::$plugin_url . 'assets/js/idea-board.js', array(
 			'jquery',
 			'nice-file-input'
 		), PluginConfig::$plugin_version );
 
-		wp_localize_script( PluginConfig::$plugin_name, PluginConfig::$plugin_name, array(
+		wp_localize_script( 'IDEA_BOARD', 'IDEA_BOARD', array(
 			'lang' => array(
 				'File' => __idea_board( 'File' )
 			)
@@ -42,7 +42,7 @@ class Assets {
 
 		wp_enqueue_script( 'jquery-validate' );
 		wp_enqueue_script( 'jquery-validate-ko' );
-		wp_enqueue_script( PluginConfig::$plugin_name );
+		wp_enqueue_script( 'IDEA_BOARD' );
 	}
 
 	public function public_euqueue_styles() {
@@ -56,6 +56,6 @@ class Assets {
 	}
 
 	public function admin_enqueue_styles() {
-
+		wp_enqueue_style( 'idea-board-admin', PluginConfig::$plugin_url . '/assets/css/idea-board-admin.css' );
 	}
 }

@@ -177,6 +177,8 @@ class Plugin {
 		$notification_handler = new NotificationHandler();
 		$this->loader->add_action( 'idea_board_action_post_edit_after', $notification_handler, 'handle_post_edited', 10, 4 );
 		$this->loader->add_action( 'idea_board_action_comment_edit_after', $notification_handler, 'handle_comment_edited', 10, 4 );
+
+		new DashBoard();
 	}
 
 	public function run() {
@@ -191,20 +193,20 @@ class Plugin {
 
 		$this->helper_loader = new HelperHandler();
 
-		$GLOBALS['idea_board_session'] = WP_Session::get_instance();
+		$GLOBALS[ 'idea_board_session' ] = WP_Session::get_instance();
 
-		$GLOBALS['idea_board_post_order_generator'] = $this->post_order_generator;
+		$GLOBALS[ 'idea_board_post_order_generator' ] = $this->post_order_generator;
 
-		$GLOBALS['idea_board_nopriv_uploader'] = $this->nopriv_uploader;
+		$GLOBALS[ 'idea_board_nopriv_uploader' ] = $this->nopriv_uploader;
 
-		$GLOBALS['idea_board_loader'] = $this->loader;
+		$GLOBALS[ 'idea_board_loader' ] = $this->loader;
 
-		$GLOBALS['idea_board_helper_loader'] = $this->helper_loader;
+		$GLOBALS[ 'idea_board_helper_loader' ] = $this->helper_loader;
 	}
 
 	public function register_global_vars() {
-		$GLOBALS['idea_board_page_mode'] = get_query_var( 'page_mode' );
+		$GLOBALS[ 'idea_board_page_mode' ] = get_query_var( 'page_mode' );
 
-		$GLOBALS['idea_board_pid'] = get_query_var( 'pid' );
+		$GLOBALS[ 'idea_board_pid' ] = get_query_var( 'pid' );
 	}
 }

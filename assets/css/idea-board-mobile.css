@@ -36,22 +36,13 @@
         width: 100%;
     }
 
-    #idea-board-comment-form .comment-form-url,
-    #idea-board-comment-form .comment-form-author,
-    #idea-board-comment-form .comment-form-email {
+    #idea-board #idea-board-comment-form p,
+    #idea-board #idea-board-comment-form input {
         width: 100%;
+        clear: both;
     }
 
-    #idea-board-comment-form .comment-form-url input,
-    #idea-board-comment-form .comment-form-author input,
-    #idea-board-comment-form .comment-form-email input {
-        width: 100%;
-    }
-
-    #idea-board-comment-form .comment-form-url label,
-    #idea-board-comment-form .comment-form-author label,
-    #idea-board-comment-form .comment-form-email label,
-    #idea-board-comment-form .comment-form-comment label {
+    #idea-board #idea-board-comment-form label {
         margin-left: 0;
     }
 

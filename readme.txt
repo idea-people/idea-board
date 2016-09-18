@@ -27,6 +27,26 @@ Using the WordPress custom post type designed to enable a variety of plug-compat
 * Non-members can also add an image to a post.
 * You can set the number of file uploads.
 
+= Category =
+- Set each category Forum
+
+= Editor =
+- You can choose from the WordPress editor and a text editor. The editor will be added.
+
+= Theme =
+- You can set up a Forum skins
+
+= Posts =
+- You can set the number of rows to display in the list.
+- You can set the number of uploaded files.
+- Secret of the Secret letter to the presence and you can set whether to unconditionally saved.
+
+= discussion =
+- Behave more like wordpress comment.
+
+= authority =
+- List, reading, writing, reply, delete, download your files, you can notice by writing privileges.
+
 == Installation ==
 
 1. Plugin Download
@@ -41,6 +61,8 @@ If you have any concerns, please contact your questions
 
 [HOMEPAGE] (http://www.ideapeople.co.kr/plugin-qna)
 
+[FORUM] (https://wordpress.org/support/plugin/idea-board)
+
 == Screenshots ==
 
 1. Posts List
@@ -51,6 +73,18 @@ If you have any concerns, please contact your questions
 6. Admin Screen
 
 == Changelog ==
+
+= 0.2.5 =
+* javascript bug fix
+
+= 0.2.4 =
+* Dash-board update
+
+= 0.2.1 =
+* Bug Fix
+
+= 0.2 =
+* Bug Fix
 
 = 0.1 =
 * 0.1 Beta Deployment

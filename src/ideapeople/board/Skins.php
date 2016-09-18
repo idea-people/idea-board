@@ -9,7 +9,7 @@ namespace ideapeople\board;
 
 class Skins {
 	public static function get_board_skins() {
-		$skins['board'][] = array(
+		$skins[ 'board' ][] = array(
 			'name' => 'basic',
 			'path' => PluginConfig::$plugin_path . 'views/skin/board/basic',
 			'url'  => PluginConfig::$plugin_url . 'views/skin/board/basic'
@@ -22,7 +22,7 @@ class Skins {
 		$skins = self::get_board_skins();
 
 		foreach ( $skins[ $type ] as $skin ) {
-			if ( $skin['name'] == $name ) {
+			if ( $skin[ 'name' ] == $name ) {
 				return $skin;
 			}
 		}

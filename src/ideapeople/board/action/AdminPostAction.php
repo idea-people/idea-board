@@ -56,7 +56,7 @@ class AdminPostAction {
 		if ( $post->ID && $post->post_type == PluginConfig::$board_post_type ) {
 			switch ( $column ) {
 				case 'Email':
-					echo Post::get_user_email( '', $post->ID );
+					echo Post::get_user_email( $post->ID );
 					break;
 				case 'Forum':
 					$terms = get_the_terms( $post->ID, PluginConfig::$board_tax );

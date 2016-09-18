@@ -6,7 +6,7 @@
  * Time: 오후 12:18
  */
 
-namespace ideapeople\board\helper;
+namespace ideapeople\board\helper\helpers\wordpress_popular_posts;
 
 use ideapeople\board\helper\core\AbstractHelper;
 use ideapeople\board\PluginConfig;
@@ -28,8 +28,8 @@ class WordpressPopularPostsHelper extends AbstractHelper {
 	public function update_views( $post ) {
 		?>
 		<script type="text/javascript">
-			var _url = '<?php echo admin_url('admin-ajax.php', is_ssl() ? 'https' : 'http'); ?>';
-			var token = '<?php echo wp_create_nonce('wpp-token') ?>';
+			var _url = '<?php echo admin_url( 'admin-ajax.php', is_ssl() ? 'https' : 'http' ); ?>';
+			var token = '<?php echo wp_create_nonce( 'wpp-token' ) ?>';
 			var wpp_id = '<?php echo $post->ID; ?>';
 			<?php echo $this->javascript;?>
 		</script>

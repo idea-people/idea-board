@@ -33,7 +33,11 @@ class Setting {
 			'board_editor',
 			'board_basic_content',
 			'board_only_secret',
-			'board_use_page'
+			'board_use_page',
+			'board_noti_post_admin',
+			'board_noti_post_reply_author',
+			'board_noti_post_comment_author',
+			'board_noti_comment_comment_author',
 		) );
 
 		$args = apply_filters( 'idea_board_setting_meta_keys', $args );
@@ -270,5 +274,21 @@ class Setting {
 		ob_end_clean();
 
 		return apply_filters( "idea_board_get_the_{$type}_custom_field", $result, $custom_fields, $board, $post );
+	}
+
+	public static function get_noti_post_reply_author( $board_term = null, $defaultValue = null ) {
+		return self::get_meta( 'board_noti_post_reply_author', $board_term, $defaultValue );
+	}
+
+	public static function get_noti_post_comment_author( $board_term = null, $defaultValue = null ) {
+		return self::get_meta( 'board_noti_post_comment_author', $board_term, $defaultValue );
+	}
+
+	public static function get_noti_comment_comment_author( $board_term = null, $defaultValue = null ) {
+		return self::get_meta( 'board_noti_comment_comment_author', $board_term, $defaultValue );
+	}
+
+	public static function get_noti_post_admin( $board_term = null, $defaultValue = null ) {
+		return self::get_meta( 'board_noti_post_admin', $board_term, $defaultValue );
 	}
 }

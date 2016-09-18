@@ -10,31 +10,15 @@ namespace ideapeople\board\notification;
 
 use ideapeople\board\notification\core\Notification;
 use ideapeople\board\Post;
+use ideapeople\board\setting\Setting;
 
 class EmailNotification implements Notification {
-	function __construct() {
-//		add_action( 'wp_mail_failed', function ( $error ) {
-//			var_dump( $error );
-//			die;
-//		} );
-	}
-
-	function notification_admin() {
-
-	}
-
-	function when_post_registered( $post_data, $post_id, $board ) {
-
-	}
-
 	function when_post_updated( $post_data, $post_id, $board ) {
 	}
 
 	function when_post_deleted( $post_data, $post_id, $board ) {
 	}
-
 	function when_post_comment_updated( $comment_data, $comment_id, $board, $mode ) {
-
 	}
 
 	public function wp_mail( $user_email, $title, $message ) {
@@ -52,7 +36,25 @@ class EmailNotification implements Notification {
 		return $result;
 	}
 
+	function when_post_registered( $post_data, $post_id, $board ) {
+		if ( ! Setting::get_noti_post_admin( $board->term_id ) ) {
+			return;
+		}
+
+		$admin = get_bloginfo( 'admin_email' );
+
+		$this->wp_mail(
+			$admin,
+			sprintf( __idea_board( '%s A new article was added' ), Post::get_the_title( $post_id ) ),
+			sprintf( '<a href="%s">Read Post</a>', Post::get_the_permalink( $post_id ) )
+		);
+	}
+
 	function when_post_comment_registered( $comment_data, $comment_id, $board, $mode ) {
+		if ( ! Setting::get_noti_post_comment_author( $board->term_id ) ) {
+			return;
+		}
+
 		$comment = get_comment( $comment_id );
 
 		$post = Post::get_post( $comment->comment_post_ID );
@@ -64,20 +66,28 @@ class EmailNotification implements Notification {
 		$this->wp_mail(
 			$user_email,
 			sprintf( __idea_board( '%s Your comment has been registered in the article' ), Post::get_the_title( $post_id ) ),
-			sprintf( '<a href="%s">Direct LINK</a>', Post::get_the_permalink( $post_id ) )
+			sprintf( '<a href="%s">Read Post</a>', Post::get_the_permalink( $post_id ) )
 		);
 	}
 
 	function when_post_reply_registered( $post_data, $post_id, $board ) {
+		if ( ! Setting::get_noti_post_reply_author( $board->term_id ) ) {
+			return;
+		}
+
 		$user_email = Post::get_user_email( $post_id );
-		$result     = $this->wp_mail(
+		$this->wp_mail(
 			$user_email,
-			sprintf( '%s 글에 답글이 등록되었습니다.', Post::get_the_title( $post_id ) ),
-			sprintf( '<a href="%s">확인하러가기</a>', Post::get_the_permalink( $post_id ) )
+			sprintf( __idea_board( 'The replies were registered on %s posts' ), Post::get_the_title( $post_id ) ),
+			sprintf( '<a href="%s">Read Post</a>', Post::get_the_permalink( $post_id ) )
 		);
 	}
 
 	function when_comment_comment_registered( $comment_data, $comment_id, $board, $mode ) {
+		if ( ! Setting::get_noti_comment_comment_author( $board->term_id ) ) {
+			return;
+		}
+
 		$comment = get_comment( $comment_id );
 		$parent  = get_comment( $comment->comment_parent );
 
@@ -89,10 +99,8 @@ class EmailNotification implements Notification {
 
 		$this->wp_mail(
 			$user_email,
-			sprintf( '댓글에 댓글이 등록되었습니다.', $comment->comment_content ),
-			sprintf( '<a href="%s">확인하러가기</a>', Post::get_the_permalink( $post_id ) )
+			sprintf( __idea_board( 'Your comment has been registered to comment' ), $comment->comment_content ),
+			sprintf( '<a href="%s">Read Post</a>', Post::get_the_permalink( $post_id ) )
 		);
-
-
 	}
 }
