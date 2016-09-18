@@ -21,9 +21,11 @@ class TermUtils {
 	}
 
 	public static function get_term_meta( $term_id, $name, $defaultValue = null ) {
+		$has_meta = MetaUtils::has_meta( 'term', $name, $term_id );
+
 		$value = get_term_meta( $term_id, $name, true );
 
-		if ( ! $value && ! is_null( $defaultValue ) ) {
+		if ( ! $has_meta && ! $value && ! is_null( $defaultValue ) ) {
 			return $defaultValue;
 		}
 

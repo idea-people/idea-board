@@ -8,71 +8,17 @@
 use ideapeople\board\Capability;
 use ideapeople\board\CommonUtils;
 use ideapeople\board\Editor;
+use ideapeople\board\PluginConfig;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\Skins;
+use ideapeople\util\wp\MetaUtils;
 
 $board = Setting::get_board();
 
 $board_skins = Skins::get_board_skins();
 ?>
-<style>
-	.form-wrap .idea-board-admin-table label {
-		display: inline-block;
-		font-style: normal;
-	}
-
-	.form-wrap .idea-board-admin-table th label {
-		font-weight: bold;
-	}
-
-	.term-description-wrap, .term-slug-wrap, .term-parent-wrap {
-		display: none;
-	}
-
-	.form-table th {
-		width: 100px;
-	}
-
-	.form-table td p:first-child {
-		margin-top: 0;
-	}
-
-	.form-table td p em {
-		display: block;
-	}
-
-	.form-table .role_row {
-		visibility: hidden;
-	}
-
-	.form-table .role_row p {
-		clear: both;
-		float: left;
-		width: 100%;
-	}
-
-	.form-table .role_row label {
-		width: 90px;
-		display: inline-block;
-	}
-
-	.form-table .block {
-		width: 70%;
-	}
-
-	#col-left {
-		width: 65%;
-	}
-
-	#col-right {
-		width: 35%;
-	}
-
-	#tag-name {
-		width: 250px;
-	}
-</style>
-<table class="form-table idea-board-admin-table" style="margin-bottom: 10px;">
+<link rel="stylesheet" href="<?php echo PluginConfig::$plugin_url ?>/assets/css/idea-board-admin.css">
+<table class="form-table idea-board-admin-table">
 	<tbody>
 	<?php if ( $board->name ) : ?>
 		<tr>
@@ -186,7 +132,7 @@ $board_skins = Skins::get_board_skins();
 		<td>
 			<p>
 				<input type="checkbox" name="board_use_comment" id="board_use_comment" value="1"
-					<?php echo Setting::get_use_comment( $board->term_id, false ) == 1 ? 'checked' : '' ?> />
+					<?php echo Setting::get_use_comment( $board->term_id, true ) == 1 ? 'checked' : '' ?> />
 				<label for="board_use_comment"><?php _e_idea_board( 'It allows you to write a comment' ); ?></label>
 			</p>
 
@@ -205,9 +151,53 @@ $board_skins = Skins::get_board_skins();
 			</p>
 		</td>
 	</tr>
-
 	<tr>
-		<th><?php _e_idea_board( '권한' ) ?></th>
+		<th><?php _e_idea_board( 'Notification' ) ?></th>
+		<td>
+			<p>
+				<input type="checkbox" name="board_noti_post_admin"
+				       id="board_noti_post_admin" value="1"
+					<?php echo Setting::get_noti_post_admin( $board->term_id, true ) ? 'checked' : '' ?> />
+				<label
+					for="board_noti_post_admin">
+					<?php _e_idea_board( 'Notification to the administrator when a new article has been registered' ); ?>
+				</label>
+			</p>
+
+			<p>
+				<input type="checkbox" name="board_noti_post_comment_author"
+				       id="board_noti_post_comment_author" value="1"
+					<?php echo Setting::get_noti_post_comment_author( $board->term_id, true ) ? 'checked' : '' ?> />
+				<label
+					for="board_noti_post_comment_author">
+					<?php _e_idea_board( 'Notify authors when writing comments have been registered' ); ?>
+				</label>
+			</p>
+
+			<p>
+				<input type="checkbox" name="board_noti_post_reply_author"
+				       id="board_noti_post_reply_author" value="1"
+					<?php echo Setting::get_noti_post_reply_author( $board->term_id, true ) ? 'checked' : '' ?> />
+				<label
+					for="board_noti_post_reply_author">
+					<?php _e_idea_board( 'Notify authors when writing this reply was registered' ); ?>
+				</label>
+			</p>
+
+			<p>
+				<input type="checkbox" name="board_noti_comment_comment_author"
+				       id="board_noti_comment_comment_author" value="1"
+					<?php echo Setting::get_noti_comment_comment_author( $board->term_id, true ) ? 'checked' : '' ?> />
+				<label
+					for="board_noti_comment_comment_author">
+					<?php _e_idea_board( 'Notification to the author of the comment in the comments when comments have been registered' ); ?>
+				</label>
+			</p>
+
+		</td>
+	</tr>
+	<tr>
+		<th><?php _e_idea_board( 'Authority' ) ?></th>
 		<td class="role_row">
 			<p>
 				<label for="roles[list][]"><?php _e_idea_board( 'List' ); ?></label>

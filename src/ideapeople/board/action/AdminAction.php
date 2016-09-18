@@ -11,6 +11,7 @@ namespace ideapeople\board\action;
 use ideapeople\board\setting\Setting;
 use ideapeople\board\PluginConfig;
 use ideapeople\util\view\PathView;
+use ideapeople\util\wp\MetaUtils;
 
 class AdminAction {
 	public function validate_edit_term( $term ) {
@@ -37,18 +38,21 @@ class AdminAction {
 
 		foreach ( $meta_keys as $meta_key ) {
 			$new_meta_value = ( isset( $_POST[ $meta_key ] ) ? $_POST[ $meta_key ] : '' );
+			$meta_value     = get_term_meta( $term_id, $meta_key, true );
 
-			$this->update_meta_value( $term_id, $meta_key, get_term_meta( $term_id, $meta_key, true ), $new_meta_value );
+			$this->update_meta_value( $term_id, $meta_key, $meta_value, $new_meta_value );
 		}
 	}
 
 	public function update_meta_value( $term_id, $meta_key, $meta_value, $new_meta_value ) {
-		if ( $new_meta_value && '' == $meta_value ) {
+		$has_meta = MetaUtils::has_meta( 'term', $meta_key, $term_id );
+
+		if ( ! $has_meta && $new_meta_value && '' == $meta_value ) {
 			add_term_meta( $term_id, $meta_key, $new_meta_value, true );
 		} elseif ( $new_meta_value && $new_meta_value != $meta_value ) {
 			update_term_meta( $term_id, $meta_key, $new_meta_value );
 		} elseif ( '' == $new_meta_value && $meta_value ) {
-			delete_term_meta( $term_id, $meta_key, $meta_value );
+			update_term_meta( $term_id, $meta_key, null );
 		}
 	}
 

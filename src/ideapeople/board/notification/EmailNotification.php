@@ -12,12 +12,6 @@ use ideapeople\board\notification\core\Notification;
 use ideapeople\board\Post;
 
 class EmailNotification implements Notification {
-	function notification_admin() {
-	}
-
-	function when_post_registered( $post_data, $post_id, $board ) {
-	}
-
 	function when_post_updated( $post_data, $post_id, $board ) {
 	}
 
@@ -40,6 +34,16 @@ class EmailNotification implements Notification {
 		remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
 
 		return $result;
+	}
+
+	function when_post_registered( $post_data, $post_id, $board ) {
+		$admin = get_bloginfo( 'admin_email' );
+
+		$this->wp_mail(
+			$admin,
+			sprintf( __idea_board( '%s A new article was added' ), Post::get_the_title( $post_id ) ),
+			sprintf( '<a href="%s">Read Post</a>', Post::get_the_permalink( $post_id ) )
+		);
 	}
 
 	function when_post_comment_registered( $comment_data, $comment_id, $board, $mode ) {

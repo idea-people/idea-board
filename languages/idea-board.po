@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: idea-board v1.0\n"
 "Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
 "POT-Creation-Date: 2016-08-12 22:51+0900\n"
-"PO-Revision-Date: 2016-09-18 11:30+0900\n"
+"PO-Revision-Date: 2016-09-18 12:20+0900\n"
 "Last-Translator: IdeaPeople<>\n"
 "Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
 "MIME-Version: 1.0\n"
@@ -261,4 +261,25 @@ msgid "Your comment has been registered to comment"
 msgstr ""
 
 msgid "The replies were registered on %s posts"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "ShortCode"
+msgstr ""
+
+msgid "%s A new article was added"
+msgstr ""
+
+msgid "Notification to the administrator when a new article has been registered"
+msgstr ""
+
+msgid "Notify authors when writing comments have been registered"
+msgstr ""
+
+msgid "Notify authors when writing this reply was registered"
+msgstr ""
+
+msgid "Notification to the author of the comment in the comments when comments have been registered"
 msgstr ""

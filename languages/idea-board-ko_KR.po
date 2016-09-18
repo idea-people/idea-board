@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: idea-board v1.0\n"
 "Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
 "POT-Creation-Date: 2016-08-12 22:51+0900\n"
-"PO-Revision-Date: 2016-09-18 11:30+0900\n"
+"PO-Revision-Date: 2016-09-18 12:20+0900\n"
 "Last-Translator: IdeaPeople<>\n"
 "Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
 "MIME-Version: 1.0\n"
@@ -262,3 +262,24 @@ msgstr "댓글에 댓글이 등록되었습니다"
 
 msgid "The replies were registered on %s posts"
 msgstr "%s 글에 답글이 등록되었습니다"
+
+msgid "Notification"
+msgstr "알림"
+
+msgid "ShortCode"
+msgstr "숏코드"
+
+msgid "%s A new article was added"
+msgstr "%s 새 글이 등록 되었습니다"
+
+msgid "Notification to the administrator when a new article has been registered"
+msgstr "새 글이 등록되었을때 관리자에게 알림"
+
+msgid "Notify authors when writing comments have been registered"
+msgstr "댓글이 등록되었을때 글 작성자에게 알림"
+
+msgid "Notify authors when writing this reply was registered"
+msgstr "답글이 등록되었을때 글 작성자에게 알림"
+
+msgid "Notification to the author of the comment in the comments when comments have been registered"
+msgstr "댓글에 댓글이 등록되었을때 댓글 작성자에게 알림"
