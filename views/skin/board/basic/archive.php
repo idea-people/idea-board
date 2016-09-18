@@ -34,6 +34,7 @@ CategoryForm::get_category_form( $board_term->term_id, $page_permalink );
 			$permalink   = Post::get_the_permalink();
 			$title       = Post::get_the_title();
 			$author_name = Post::get_the_author_nicename();
+			$author_url  = Post::get_the_author_profile_url();
 			$reg_date    = Post::get_the_date( 'Y-m-d' );
 			$read_cnt    = Post::get_the_read_cnt();
 			?>
@@ -44,7 +45,7 @@ CategoryForm::get_category_form( $board_term->term_id, $page_permalink );
 				</td>
 				<td class="idea-col-date"><?php echo $reg_date; ?></td>
 				<td class="idea-col-author idea-text-over">
-					<?php echo $author_name; ?>
+					<a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a>
 				</td>
 				<td class="idea-col-hit"><?php echo $read_cnt; ?></td>
 			</tr>

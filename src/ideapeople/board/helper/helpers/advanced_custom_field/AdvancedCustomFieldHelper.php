@@ -6,7 +6,7 @@
  * Time: 오후 1:03
  */
 
-namespace ideapeople\board\helper;
+namespace ideapeople\board\helper\helpers\advanced_custom_field;
 
 
 use ideapeople\board\helper\core\AbstractHelper;

@@ -14,6 +14,7 @@ $author_name        = Post::get_the_author_nicename();
 $read_cnt           = Post::get_the_read_cnt();
 $reg_date           = Post::get_the_date( 'Y-m-d' );
 $attachments        = Post::get_attachments();
+$author_url         = Post::get_the_author_profile_url();
 $custom_fields      = Setting::get_custom_fields();
 $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'single' );
 
@@ -26,7 +27,7 @@ $custom_fields_html = Setting::get_the_custom_field( $custom_fields, 'single' );
 			<ul>
 				<li class="user_nm">
 					<span class="t1"><?php _e_idea_board( 'Author' ); ?></span>
-					<span class="t2"><?php echo $author_name; ?></span>
+					<span class="t2"><a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a></span>
 				</li>
 				<li class="reg_date">
 					<span class="t1"><?php _e_idea_board( 'Date' ); ?></span>

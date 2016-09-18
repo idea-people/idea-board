@@ -6,7 +6,7 @@
  * Time: 오후 10:14
  */
 
-namespace ideapeople\board\helper;
+namespace ideapeople\board\helper\helpers\bws_captcha;
 
 
 use ideapeople\board\helper\core\AbstractHelper;

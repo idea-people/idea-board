@@ -5,15 +5,24 @@
  * Homepage : ideapeople@ideapeople.co.kr
  */
 
-namespace ideapeople\board\helper;
+namespace ideapeople\board\helper\helpers\buddypress;
 
 use ideapeople\board\helper\core\AbstractHelper;
+use ideapeople\board\Post;
 
 class BpHelper extends AbstractHelper {
 	public function run() {
 		add_action( 'bp_register_activity_actions', array( $this, 'custom_plugin_register_activity_actions' ) );
 		add_action( 'idea_board_action_post_edit_after', array( $this, 'edit_post' ), 10, 4 );
 		add_action( 'idea_board_action_comment_edit_after', array( $this, 'edit_comment' ), 10, 4 );
+
+		add_filter( 'idea_board_get_the_author_profile_url', array( $this, 'author_url' ), 10, 2 );
+	}
+
+	public function author_url( $author_url, $user_ID ) {
+		$u = bp_core_get_user_domain( $user_ID );
+
+		return $u;
 	}
 
 	function custom_plugin_register_activity_actions() {
@@ -50,15 +59,23 @@ class BpHelper extends AbstractHelper {
 	 * @param $post_id
 	 * @param $board \WP_Term
 	 * @param $mode
+	 *
+	 * @return bool
 	 */
 	public function edit_post( $post_data, $post_id, $board, $mode ) {
 		$post = get_post( $post_id );
+
+		if ( Post::is_secret( $post_id ) ) {
+			$content = 'Secret Post';
+		} else {
+			$content = $post->post_content;
+		}
 
 		if ( is_user_logged_in() ) {
 			bp_activity_add( array(
 				'component'    => 'idea-board',
 				'item_id'      => $post_id,
-				'content'      => $post->post_content,
+				'content'      => wp_strip_all_tags( $content ),
 				'primary_link' => get_permalink( $post->ID ),
 				'type'         => 'idea_board_' . $mode,
 				'action'       =>

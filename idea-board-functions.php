@@ -1,8 +1,9 @@
 <?php
-use ideapeople\board\helper\AdvancedCustomFieldHelper;
-use ideapeople\board\helper\BpHelper;
-use ideapeople\board\helper\BwsCaptchaHelper;
-use ideapeople\board\helper\WordpressPopularPostsHelper;
+use ideapeople\board\helper\helpers\advanced_custom_field\AdvancedCustomFieldHelper;
+use ideapeople\board\helper\helpers\buddypress\BpHelper;
+use ideapeople\board\helper\helpers\bws_captcha\BwsCaptchaHelper;
+use ideapeople\board\helper\helpers\ultimate_member\UltimateMemberHelper;
+use ideapeople\board\helper\helpers\wordpress_popular_posts\WordpressPopularPostsHelper;
 use ideapeople\board\notification\EmailNotification;
 use ideapeople\board\PluginConfig;
 
@@ -21,7 +22,7 @@ function _e_idea_board( $text ) {
 }
 
 function idea_board_allow_html( $t ) {
-	$t['input'] = array();
+	$t[ 'input' ] = array();
 
 	return $t;
 }
@@ -33,7 +34,8 @@ function idea_board_add_helpers( $helpers = array() ) {
 		new WordpressPopularPostsHelper(),
 		new AdvancedCustomFieldHelper(),
 		new BwsCaptchaHelper(),
-		new BpHelper()
+		new BpHelper(),
+		new UltimateMemberHelper()
 	);
 
 	return wp_parse_args( $helpers, $new_helpers );
@@ -50,3 +52,29 @@ function idea_board_add_notification( $notifications = array() ) {
 }
 
 add_filter( 'idea_board_get_notifications', 'idea_board_add_notification' );
+
+function idea_board_taxonomy_term_in_query( $query ) {
+	global $pagenow;
+
+	$qv = &$query->query_vars;
+
+	if ( $pagenow == 'edit.php'
+	     && isset( $qv[ 'post_type' ] )
+	     && $qv[ 'post_type' ] == PluginConfig::$board_post_type
+	     && isset( $qv[ 'term' ] )
+	     && is_numeric( $qv[ 'term' ] )
+	     && $qv[ 'term' ] != 0
+	) {
+		$term              = get_term_by( 'id', $qv[ 'term' ], PluginConfig::$board_tax );
+		$qv[ 'tax_query' ] = array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => PluginConfig::$board_tax,
+				'field'    => 'name',
+				'terms'    => $term->slug
+			)
+		);
+	}
+}
+
+add_filter( 'parse_query', 'idea_board_taxonomy_term_in_query' );

@@ -160,6 +160,14 @@ class Post {
 		return PostUtils::get_the_content( $more_link_text, $strip_teaser );
 	}
 
+	public static function get_the_author_profile_url( $post = null ) {
+		$post = self::get_post( $post );
+
+		$author_url = get_the_author_meta( 'url', $post->post_author );
+
+		return apply_filters( 'idea_board_get_the_author_profile_url', $author_url, $post->post_author );
+	}
+
 	public static function get_the_author_nicename( $author = null, $post = null ) {
 		$post = self::get_post( $post );
 
