@@ -1,4 +1,9 @@
 <?php
+use ideapeople\board\helper\AdvancedCustomFieldHelper;
+use ideapeople\board\helper\BpHelper;
+use ideapeople\board\helper\BwsCaptchaHelper;
+use ideapeople\board\helper\WordpressPopularPostsHelper;
+use ideapeople\board\notification\EmailNotification;
 use ideapeople\board\PluginConfig;
 
 function idea_board_text_domain() {
@@ -16,9 +21,32 @@ function _e_idea_board( $text ) {
 }
 
 function idea_board_allow_html( $t ) {
-	$t[ 'input' ] = array();
+	$t['input'] = array();
 
 	return $t;
 }
 
 add_filter( 'wp_kses_allowed_html', 'idea_board_allow_html' );
+
+function idea_board_add_helpers( $helpers = array() ) {
+	$new_helpers = array(
+		new WordpressPopularPostsHelper(),
+		new AdvancedCustomFieldHelper(),
+		new BwsCaptchaHelper(),
+		new BpHelper()
+	);
+
+	return wp_parse_args( $helpers, $new_helpers );
+}
+
+add_filter( 'idea_board_get_helpers', 'idea_board_add_helpers' );
+
+function idea_board_add_notification( $notifications = array() ) {
+	$new_notifications = array(
+		new EmailNotification()
+	);
+
+	return wp_parse_args( $notifications, $new_notifications );
+}
+
+add_filter( 'idea_board_get_notifications', 'idea_board_add_notification' );

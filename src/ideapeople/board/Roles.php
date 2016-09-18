@@ -11,18 +11,14 @@ namespace ideapeople\board;
 use WP_Roles;
 
 class Roles {
-	public $roles;
-
-	public $admin_role;
-
 	public function get_roles() {
 		/* @var $wp_roles WP_Roles */
 		global $wp_roles;
 
-		$roles                 = array();
-		$roles[ 'all' ]        = __idea_board( 'All open' );
-		$roles[ 'isLogin' ]    = __idea_board( 'Login Users' );
-		$roles[ 'onlyAuthor' ] = __idea_board( 'Only Author' );
+		$roles               = array();
+		$roles['all']        = __idea_board( 'All open' );
+		$roles['isLogin']    = __idea_board( 'Login Users' );
+		$roles['onlyAuthor'] = __idea_board( 'Only Author' );
 
 		$roles = array_merge( $roles, $wp_roles->get_names() );
 
@@ -75,8 +71,6 @@ class Roles {
 	}
 
 	public function remove_roles() {
-		foreach ( $this->roles as $role ) {
-			remove_role( $role );
-		}
+		remove_role( PluginConfig::$board_admin_role . '_ADMIN' );
 	}
 }

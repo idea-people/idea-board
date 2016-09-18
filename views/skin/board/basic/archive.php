@@ -1,5 +1,6 @@
 <?php
 use ideapeople\board\Button;
+use ideapeople\board\CategoryForm;
 use ideapeople\board\PostTable;
 use ideapeople\board\SearchForm;
 use ideapeople\board\setting\Setting;
@@ -11,17 +12,9 @@ $board_term     = Setting::get_board();
 $page_permalink = CommonUtils::get_post_page_link();
 
 SearchForm::get_search_form();
-CommonUtils::get_category_form( $board_term->term_id, $page_permalink );
 
-$columns = array(
-	'no'     => __idea_board( 'No' ),
-	'title'  => __idea_board( 'Title' ),
-	'date'   => __idea_board( 'Date' ),
-	'author' => __idea_board( 'Author' ),
-	'hit'    => __idea_board( 'Hit' )
-);
+CategoryForm::get_category_form( $board_term->term_id, $page_permalink );
 
-$t = new PostTable();
 ?>
 <table class="idea-board-reset2 idea-board-table">
 	<thead>

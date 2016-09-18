@@ -59,9 +59,7 @@ class Setting {
 		$board = self::get_board( $board );
 		$post  = Post::get_post( $post );
 
-		$meta_fields = apply_filters( 'idea_board_custom_fields', array(), $board, $post );
-
-		return $meta_fields;
+		return apply_filters( 'idea_board_custom_fields', array(), $board, $post );
 	}
 
 	public static function get_board( $value = null ) {
@@ -140,7 +138,7 @@ class Setting {
 		$skin_name = self::get_meta( 'board_skin', $board_term, $defaultValue );
 		$result    = Skins::get_board_skin_info( 'board', $skin_name );
 
-		return $result;
+		return apply_filters( 'idea_board_get_skin_info', $result );
 	}
 
 	public static function is_only_secret( $board_term = null, $defaultValue = '' ) {
@@ -213,8 +211,8 @@ class Setting {
 	public static function get_board_skin_path( $board_term = null, $defaultValue = '' ) {
 		$skin_info = self::get_skin_info( $board_term );
 
-		if ( ! empty( $skin_info ) && isset( $skin_info[ 'path' ] ) ) {
-			return $skin_info[ 'path' ];
+		if ( ! empty( $skin_info ) && isset( $skin_info['path'] ) ) {
+			return $skin_info['path'];
 		}
 
 		return $defaultValue;
@@ -235,7 +233,9 @@ class Setting {
 	public static function get_meta( $key, $board_term = null, $defaultValue = '' ) {
 		$board_term = self::get_board( $board_term );
 
-		return TermUtils::get_term_meta( $board_term->term_id, $key, $defaultValue );
+		$result = TermUtils::get_term_meta( $board_term->term_id, $key, $defaultValue );
+
+		return apply_filters( 'idea_board_get_term_meta_' . $key, $result, $board_term );
 	}
 
 	/**
@@ -268,8 +268,6 @@ class Setting {
 		}
 		$result = ob_get_contents();
 		ob_end_clean();
-
-//		$result = apply_filters( 'idea_board_custom_fields', $result );
 
 		return apply_filters( "idea_board_get_the_{$type}_custom_field", $result, $custom_fields, $board, $post );
 	}

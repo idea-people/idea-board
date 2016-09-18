@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: idea-board v1.0\n"
 "Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
 "POT-Creation-Date: 2016-08-12 22:51+0900\n"
-"PO-Revision-Date: 2016-09-16 21:46+0900\n"
+"PO-Revision-Date: 2016-09-18 01:24+0900\n"
 "Last-Translator: IdeaPeople<>\n"
 "Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgid "Email"
 msgstr "이메일"
 
 msgid "Notice"
-msgstr "공지사항"
+msgstr "공지"
 
 msgid "I will use this article to Notice"
 msgstr "이 글을 공지사항으로 사용하겠습니다"
@@ -250,3 +250,9 @@ msgstr "<a href='%s'> %s이 IDEA-BOARD %s에서 댓글을 %s 하였습니다</a>
 
 msgid "File"
 msgstr "파일"
+
+msgid "Search Type"
+msgstr "검색유형"
+
+msgid "%s Your comment has been registered in the article"
+msgstr "%s 글에 댓글이 등록되었습니다"

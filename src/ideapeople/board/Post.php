@@ -60,16 +60,18 @@ class Post {
 
 		$read_cnt = PostUtils::get_post_meta( $post->ID, $meta_key, 0 );
 
-		if ( ! isset( $session[ 'idea_board_read_keys' ] ) ) {
-			$session[ 'idea_board_read_keys' ] = array();
+		if ( ! isset( $session['idea_board_read_keys'] ) ) {
+			$session['idea_board_read_keys'] = array();
 		}
 
-		if ( ! @in_array( $session_key, $session[ 'idea_board_read_keys' ]->toArray() ) ) {
-			$session[ 'idea_board_read_keys' ][] = $session_key;
+		if ( ! @in_array( $session_key, $session['idea_board_read_keys']->toArray() ) ) {
+			$session['idea_board_read_keys'][] = $session_key;
 
 			$read_cnt += 1;
 
 			PostUtils::insert_or_update_meta( $post->ID, $meta_key, $read_cnt );
+
+			do_action( 'idea_board_update_read_cnt', $post, $read_cnt );
 		}
 
 		return $read_cnt;
@@ -105,7 +107,7 @@ class Post {
 		}
 
 
-		return $result;
+		return apply_filters( 'idea_board_post_password_required', $result );
 	}
 
 	public static function get_post( $post = null ) {
@@ -138,11 +140,6 @@ class Post {
 
 	public static function the_content( $more_link_text = null, $strip_teaser = false, $echo = true ) {
 		$content = self::get_the_content( $more_link_text, $strip_teaser );
-
-//		if ( has_shortcode( $content, 'br' ) ) {
-//			$data = PostUtils::get_shortcode_data( 'br', $content );
-//			$content = preg_replace( '/\[idea_board.*\]/', '', $content );
-//		}
 
 		remove_filter( 'the_content', 'do_shortcode', 11 );
 		$content = apply_filters( 'the_content', $content );
@@ -240,7 +237,7 @@ class Post {
 				if ( Capability::current_user_can( 'file_down' ) ) {
 					$attachment->guid = add_query_arg( array(
 						'attach_id' => $attachment_id,
-						'action'    => $file_action->board_file_uils->get_ajax_name()
+						'action'    => $file_action->board_file_utils->get_ajax_name()
 					), admin_url( '/admin-ajax.php' ) );
 
 					$attachment->delete_url = add_query_arg( array(
@@ -258,7 +255,7 @@ class Post {
 			}
 		}
 
-		return $result;
+		return apply_filters( 'idea_board_get_attachments', $result, $attachment_ids );
 	}
 
 	public static function get_board_page_id( $post = null ) {
@@ -281,7 +278,9 @@ class Post {
 	}
 
 	public static function is_secret( $post = null ) {
-		return self::get_post_meta( $post, 'idea_board_is_secret', false );
+		$result = self::get_post_meta( $post, 'idea_board_is_secret', false );
+
+		return apply_filters( 'idea_board_post_is_secret', $result );
 	}
 
 	public static function get_the_permalink( $post = null ) {
@@ -294,14 +293,16 @@ class Post {
 		return self::get_post_meta( $post, 'idea_board_user_name', false );
 	}
 
-	public static function get_user_email( $default = null, $post = null ) {
+	public static function get_user_email( $post = null ) {
 		$post = self::get_post( $post );
 
 		if ( $post->post_author ) {
-			return get_userdata( $post->post_author )->user_email;
+			$email = get_userdata( $post->post_author )->user_email;
+		} else {
+			$email = self::get_post_meta( $post, 'idea_board_email', false );
 		}
 
-		return self::get_post_meta( $post, 'idea_board_email', false );
+		return apply_filters( 'idea_board_post_user_email', $email );
 	}
 
 	public static function get_category( $post = null ) {
@@ -313,7 +314,7 @@ class Post {
 			$cate = PostUtils::get_post_meta( $post->ID, 'idea_board_category', '' );
 		}
 
-		return $cate;
+		return apply_filters( 'idea_board_post_category', $cate );
 	}
 
 	public static function get_depth( $post = null ) {
@@ -329,7 +330,7 @@ class Post {
 		$terms = wp_get_post_terms( $post->ID, PluginConfig::$board_tax );
 
 		if ( ! empty( $terms ) && count( $terms ) == 1 ) {
-			return $terms[ 0 ]->term_id;
+			return $terms[0]->term_id;
 		}
 
 		return self::get_post_meta( $post, 'idea_board_term', false );
@@ -346,7 +347,9 @@ class Post {
 			return $defaultValue;
 		}
 
-		return PostUtils::get_post_meta( $post->ID, $key, $defaultValue );
+		$result = PostUtils::get_post_meta( $post->ID, $key, $defaultValue );
+
+		return apply_filters( 'idea_board_post_meta_' . $key, $result, $post );
 	}
 
 	public static function get_start_no( $post = null ) {
@@ -357,7 +360,7 @@ class Post {
 		$post = self::get_post( $post );
 
 		if ( self::is_notice( $post ) ) {
-			$text = __( "공지" );
+			$text = __idea_board( "Notice" );
 
 			$result = "<i class='ib2_notice'>{$text}</i>";
 		} else {

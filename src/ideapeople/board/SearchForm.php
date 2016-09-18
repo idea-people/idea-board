@@ -9,14 +9,21 @@
 namespace ideapeople\board;
 
 
-class SearchForm {
+use ideapeople\util\wp\WpQuerySearch;
 
-	public static function get_search_form() {
-		$search_types = apply_filters( 'idea_board_search_types', array(
+class SearchForm {
+	public static function get_search_types() {
+		$search_types = array(
 			'post_title'         => __idea_board( 'Title' ),
 			'post_content'       => __idea_board( 'Content' ),
 			'post_title_content' => __idea_board( 'Title' ) . '+' . __idea_board( 'Content' )
-		) );
+		);
+
+		return apply_filters( 'idea_board_search_types', $search_types );
+	}
+
+	public static function get_search_form() {
+		$search_types = self::get_search_types();
 
 		$search_type    = get_query_var( 'searchType' );
 		$search_value   = get_query_var( 'searchValue' );
@@ -25,6 +32,9 @@ class SearchForm {
 		?>
 		<div class="idea-search-form idea-board-reset">
 			<form method="get">
+				<label for="searchType" class="idea-board-hidden">
+					<?php _e_idea_board( 'Search Type' ) ?>
+				</label>
 				<select name="searchType" id="searchType">
 					<?php foreach ( $search_types as $key => $value ) : ?>
 						<option value="<?php echo $key; ?>"
@@ -46,5 +56,21 @@ class SearchForm {
 			</form>
 		</div>
 		<?php
+	}
+
+	public function _search_query() {
+		add_filter( 'posts_where', array( $this, 'search_query' ) );
+	}
+
+	public function _reset_search_query() {
+		remove_filter( 'posts_where', array( $this, 'search_query' ) );
+	}
+
+	public function search_query( $where ) {
+		$query_search = new WpQuerySearch( $where );
+
+		$where = $query_search->where( $where );
+
+		return $where;
 	}
 }
