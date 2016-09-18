@@ -25,11 +25,11 @@ class DashBoard {
 		$menu = $submenu[ $key ];
 
 		$arr   = array();
-		$arr[] = $menu[ 16 ];
-		$arr[] = $menu[ 5 ];
-		$arr[] = $menu[ 10 ];
-		$arr[] = $menu[ 15 ];
-		$arr[] = $menu[ 17 ];
+		$arr[] = $menu[16];
+		$arr[] = $menu[5];
+		$arr[] = $menu[10];
+		$arr[] = $menu[15];
+		$arr[] = $menu[17];
 
 		$submenu[ $key ] = $arr;
 
@@ -59,34 +59,34 @@ class DashBoard {
 		wp_enqueue_script( 'plugin-install' );
 		wp_enqueue_script( 'updates' );
 
-		add_meta_box( 'idea_board_dashboard_today_posts', __( '오늘 등록된 글' ), array(
+		add_meta_box( 'idea_board_dashboard_today_posts', __idea_board( 'Today registered post' ), array(
 			$this,
 			'meta_box_view'
 		), $this->page, 'core', 'core', 'today_posts' );
 
-		add_meta_box( 'idea_board_dashboard_today_comments', __( '오늘 등록된 댓글' ), array(
+		add_meta_box( 'idea_board_dashboard_today_comments', __idea_board( 'Today registered comments' ), array(
 			$this,
 			'meta_box_view'
 		), $this->page, 'normal', 'core', 'today_comments' );
 
-		add_meta_box( 'idea_board_dashboard_available_plugins', __( '연동 가능한 플러그인' ), array(
+		add_meta_box( 'idea_board_dashboard_available_plugins', __idea_board( 'Available plug-in connection' ), array(
 			$this,
 			'meta_box_view'
 		), $this->page, 'side', 'core', 'available_plugins' );
 
-		add_meta_box( 'idea_board_dashboard_system_info', __( '시스템 정보' ), array(
+		add_meta_box( 'idea_board_dashboard_system_info', __idea_board( 'System Info' ), array(
 			$this,
 			'meta_box_view'
 		), $this->page, 'core', 'core', 'system_info' );
 
-		add_meta_box( 'idea_board_dashboard_forum_list', __( '게시판 목록' ), array(
+		add_meta_box( 'idea_board_dashboard_forum_list', __idea_board( 'Forum' ), array(
 			$this,
 			'meta_box_view'
 		), $this->page, 'side', 'core', 'forum_list' );
 	}
 
 	public function meta_box_view( $null, $args ) {
-		$view_file = $args[ 'args' ];
+		$view_file = $args['args'];
 
 		$file = PluginConfig::$plugin_path . '/views/dashboard/meta_boxes/' . $view_file . '.php';
 

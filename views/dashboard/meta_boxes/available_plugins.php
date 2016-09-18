@@ -16,19 +16,32 @@ $helpers = apply_filters( 'idea_board_get_helpers' );
 				</a>
 			</td>
 			<td class="alignright">
-				<?php if ( ! $helper->is_installed() ) :
-//					$slug = $helper->get_plugin_name();
-//					$link = wp_nonce_url( 'plugin-install.php?tab=plugin-information&plugin=' . $slug, 'install-plugin_' . $slug ) . '&amp;TB_iframe=true&amp;width=600&amp;height=800';
+				<?php
+				$link = add_query_arg( array(
+					'action'        => 'activate',
+					'plugin'        => $helper->get_name(),
+					'plugin_status' => 'all',
+					'_wp_nonce'     => wp_create_nonce()
+				), admin_url( 'plugins.php' ) );
+
+				if ( ! $helper->is_installed() ) {
+					$plugin_file = $helper->get_plugin_name();
+					$link        = wp_nonce_url( 'plugin-install.php?tab=plugin-information&plugin=' . $plugin_file, 'install-plugin_' . $plugin_file ) . '&amp;TB_iframe=true&amp;width=600&amp;height=800';
 					?>
-					<a href="<?php echo $helper->get_plugin_url(); ?>" class="install">install</a>
-				<?php endif; ?>
-				<?php if ( ! $helper->is_activate() && $helper->is_installed() ) : ?>
-					<a href="<?php echo admin_url( 'plugins.php' ); ?>"
+					<a href="<?php echo $link; ?>" class="thickbox open-plugin-details-modal">install</a>
+				<?php } else if ( ! $helper->is_activate() && $helper->is_installed() ) {
+					?>
+					<a href="<?php echo wp_nonce_url( $link, 'activate-plugin_' . $helper->get_name() ); ?>"
 					   class="activate">activate</a>
-				<?php endif; ?>
+				<?php } else {
+					$link = add_query_arg( array( 'action' => 'deactivate' ), $link );
+					?>
+					<a href="<?php echo wp_nonce_url( $link, 'deactivate-plugin_' . $helper->get_name() ); ?>"
+					   class="activate">deactivate</a>
+				<?php } ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 </table>
 
-<p>플러그인을 설치해서 마음껏 확장해 보세요</p>
+<p><?php _e_idea_board( 'As much as you want to install the plug-in expansion' ); ?></p>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: idea-board v1.0\n"
 "Report-Msgid-Bugs-To: http://www.ideapeople.co.kr\n"
 "POT-Creation-Date: 2016-08-12 22:51+0900\n"
-"PO-Revision-Date: 2016-09-18 12:20+0900\n"
+"PO-Revision-Date: 2016-09-19 03:33+0900\n"
 "Last-Translator: IdeaPeople<>\n"
 "Language-Team: ideapeople <ideapeople@ideapeople.co.kr>\n"
 "MIME-Version: 1.0\n"
@@ -283,3 +283,36 @@ msgstr "답글이 등록되었을때 글 작성자에게 알림"
 
 msgid "Notification to the author of the comment in the comments when comments have been registered"
 msgstr "댓글에 댓글이 등록되었을때 댓글 작성자에게 알림"
+
+msgid "Thank you for using %s"
+msgstr "%s를 이용해주셔서 감사합니다."
+
+msgid "Try to start immediately"
+msgstr "바로 시작해 보세요"
+
+msgid "Please feel free to contact us"
+msgstr "언제든지 연락 주세요"
+
+msgid "Inquiries or suggestions to"
+msgstr "문의 또는 건의하기"
+
+msgid "Help more people can use"
+msgstr "더 많은 사람이 사용할수 있도록 도와주세요"
+
+msgid "It can be quickly developed"
+msgstr "더 빨리 발전할수 있습니다"
+
+msgid "As much as you want to install the plug-in expansion"
+msgstr "플러그인을 설치해서 마음껏 확장해 보세요"
+
+msgid "Today registered post"
+msgstr "오늘 등록된 글"
+
+msgid "System Info"
+msgstr "시스템정보"
+
+msgid "Available plug-in connection"
+msgstr "연계 가능한 플러그인"
+
+msgid "Today registered comments"
+msgstr "오늘 등록된 댓글"

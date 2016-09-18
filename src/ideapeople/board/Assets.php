@@ -52,7 +52,7 @@ class Assets {
 	}
 
 	public function admin_enqueue_scripts() {
-
+		wp_enqueue_script( 'idea-board-admin', PluginConfig::$plugin_url . '/assets/js/idea-board-admin.js' );
 	}
 
 	public function admin_enqueue_styles() {

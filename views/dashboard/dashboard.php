@@ -8,26 +8,26 @@
 
 	<div id="welcome-panel" class="welcome-panel">
 		<div class="welcome-panel-content">
-			<h2><?php _e_idea_board( PluginConfig::$plugin_name ) ?>를 이용해주셔서 감사합니다!</h2>
+			<h2><?php _e_idea_board( sprintf( 'Thank you for using %s', PluginConfig::$plugin_name ) ) ?>!</h2>
 			<p class="about-description"></p>
 			<div class="welcome-panel-column-container">
 				<div class="welcome-panel-column ">
-					<h3>시작하기</h3>
+					<h3><?php _e( 'Get Started' ); ?></h3>
 					<a class="button button-primary button-hero load-customize hide-if-no-customize"
 					   href="<?php echo sprintf( admin_url( 'edit-tags.php' ) . '?taxonomy=%s&post_type=%s', PluginConfig::$board_tax, PluginConfig::$board_post_type ); ?>">
-						게시판 만들기</a>
-					<p>바로 시작해보세요</p>
+						<?php _e_idea_board( 'Add Forum' ); ?></a>
+					<p><?php _e_idea_board( 'Try to start immediately' ); ?></p>
 				</div>
 				<div class="welcome-panel-column">
-					<h3>언제든지 연락주세요!</h3>
+					<h3><?php _e_idea_board( 'Please feel free to contact us' ); ?>!</h3>
 					<p>
 						<a href="http://www.ideapeople.co.kr/plugin-qna/" target="_blank"
-						   class="button button-primary button-hero load-customize hide-if-no-customize">문의 또는 건의하기</a>
+						   class="button button-primary button-hero load-customize hide-if-no-customize"><?php _e_idea_board( 'Inquiries or suggestions to' ); ?></a>
 					</p>
 				</div>
 				<div class="welcome-panel-column welcome-panel-last">
-					<h3>더 많은 사람이 사용할수 있도록 도와주세요</h3>
-					<p>더 빨리 발전할수 있습니다.</p>
+					<h3><?php _e_idea_board( 'Help more people can use' ); ?></h3>
+					<p><?php _e_idea_board( 'It can be quickly developed' ); ?></p>
 					<p>
 						<span class="fb-like" data-href="https://www.facebook.com/ipeople2014/" data-layout="button"
 						      data-action="like"
