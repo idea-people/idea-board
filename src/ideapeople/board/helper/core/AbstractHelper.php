@@ -23,4 +23,22 @@ abstract class AbstractHelper implements Helper {
 	public function get_plugin_data() {
 		return get_plugin_data( $this->get_helper_file() );
 	}
+
+	public function get_plugin_name() {
+		return dirname( $this->get_name() );
+	}
+
+	public function get_plugin_url() {
+		return 'https://wordpress.org/plugins/' . $this->get_plugin_name();
+	}
+
+	public function is_installed() {
+		$data = $this->get_plugin_data();
+
+		if ( empty( $data[ 'Name' ] ) ) {
+			return false;
+		}
+
+		return true;
+	}
 }

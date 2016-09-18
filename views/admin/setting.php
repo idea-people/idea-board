@@ -17,7 +17,7 @@ $board = Setting::get_board();
 
 $board_skins = Skins::get_board_skins();
 ?>
-<link rel="stylesheet" href="<?php echo PluginConfig::$plugin_url ?>/assets/css/idea-board-admin.css">
+<link rel="stylesheet" href="<?php echo PluginConfig::$plugin_url ?>/assets/css/idea-board-admin-setting.css">
 <table class="form-table idea-board-admin-table">
 	<tbody>
 	<?php if ( $board->name ) : ?>

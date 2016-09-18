@@ -29,7 +29,7 @@ function idea_board_allow_html( $t ) {
 
 add_filter( 'wp_kses_allowed_html', 'idea_board_allow_html' );
 
-function idea_board_add_helpers( $helpers = array() ) {
+function idea_board_helpers( $helpers = array() ) {
 	$new_helpers = array(
 		new WordpressPopularPostsHelper(),
 		new AdvancedCustomFieldHelper(),
@@ -41,7 +41,7 @@ function idea_board_add_helpers( $helpers = array() ) {
 	return wp_parse_args( $helpers, $new_helpers );
 }
 
-add_filter( 'idea_board_get_helpers', 'idea_board_add_helpers' );
+add_filter( 'idea_board_get_helpers', 'idea_board_helpers' );
 
 function idea_board_add_notification( $notifications = array() ) {
 	$new_notifications = array(
@@ -78,3 +78,34 @@ function idea_board_taxonomy_term_in_query( $query ) {
 }
 
 add_filter( 'parse_query', 'idea_board_taxonomy_term_in_query' );
+
+function idea_board_activation_redirect() {
+	if ( isset( $_GET[ 'activate-multi' ] ) ) {
+		return;
+	}
+
+	set_transient( 'idea_board_activation_redirect', true, 30 );
+}
+
+add_action( 'idea_board_activation', 'idea_board_activation_redirect' );
+
+function idea_board_do_activation_redirect() {
+	if ( ! get_transient( 'idea_board_activation_redirect' ) ) {
+		return;
+	}
+
+	delete_transient( 'idea_board_activation_redirect' );
+
+	if ( isset( $_GET[ 'activate-multi' ] ) ) {
+		return;
+	}
+
+	$query_args = array(
+		'page'      => 'idea_board_dash_board',
+		'post_type' => PluginConfig::$board_post_type
+	);
+
+	wp_safe_redirect( add_query_arg( $query_args, admin_url( 'edit.php' ) ) );
+}
+
+add_action( 'admin_init', 'idea_board_do_activation_redirect' );

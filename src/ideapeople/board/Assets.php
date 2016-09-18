@@ -56,6 +56,6 @@ class Assets {
 	}
 
 	public function admin_enqueue_styles() {
-
+		wp_enqueue_style( 'idea-board-admin', PluginConfig::$plugin_url . '/assets/css/idea-board-admin.css' );
 	}
 }

@@ -18,7 +18,6 @@ class EmailNotification implements Notification {
 
 	function when_post_deleted( $post_data, $post_id, $board ) {
 	}
-
 	function when_post_comment_updated( $comment_data, $comment_id, $board, $mode ) {
 	}
 

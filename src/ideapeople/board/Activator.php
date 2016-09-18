@@ -26,6 +26,8 @@ class Activator {
 		$this->post_type->flush();
 		$this->roles->add_roles();
 		$this->file_action->board_file_utils->create_block_http();
+
+		do_action( 'idea_board_activation', $this );
 	}
 
 	public function register_deactivation_hook() {

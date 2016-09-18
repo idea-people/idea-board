@@ -12,10 +12,9 @@ class PluginConfig {
 	static $support_php_version = 5.3;
 	static $support_wp_version = 4.4;
 
-	static $plugin_name = 'IDEA_BOARD';
+	static $plugin_name;
 	static $plugin_author_email = 'ideapeople@ideapeople.co.kr';
-	static $plugin_version = 1.0;
-	static $plugin_url, $plugin_path;
+	static $plugin_url, $plugin_path, $plugin_version, $plugin_data;
 
 	static $__FILE__;
 
@@ -28,6 +27,19 @@ class PluginConfig {
 		self::$plugin_url  = plugin_dir_url( $__FILE__ );
 
 		self::$permalink_structure = get_option( 'permalink_structure' );
+
+		self::$plugin_data = self::_plugin_data();
+
+		self::$plugin_name    = self::$plugin_data[ 'Name' ];
+		self::$plugin_version = self::$plugin_data[ 'Version' ];
+	}
+
+	static function _plugin_data() {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+		$plugin_file = WP_CONTENT_DIR . '/plugins/idea-board/idea-board.php';
+
+		return get_plugin_data( $plugin_file );
 	}
 
 	static $board_tax = 'idea_board';

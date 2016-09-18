@@ -13,4 +13,6 @@ interface Helper {
 	public function run();
 
 	public function get_name();
+
+	public function get_plugin_url();
 }
