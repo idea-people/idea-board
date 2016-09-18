@@ -60,12 +60,12 @@ class Post {
 
 		$read_cnt = PostUtils::get_post_meta( $post->ID, $meta_key, 0 );
 
-		if ( ! isset( $session['idea_board_read_keys'] ) ) {
-			$session['idea_board_read_keys'] = array();
+		if ( ! isset( $session[ 'idea_board_read_keys' ] ) ) {
+			$session[ 'idea_board_read_keys' ] = array();
 		}
 
-		if ( ! @in_array( $session_key, $session['idea_board_read_keys']->toArray() ) ) {
-			$session['idea_board_read_keys'][] = $session_key;
+		if ( ! @in_array( $session_key, $session[ 'idea_board_read_keys' ]->toArray() ) ) {
+			$session[ 'idea_board_read_keys' ][] = $session_key;
 
 			$read_cnt += 1;
 
@@ -152,6 +152,8 @@ class Post {
 		}
 
 		echo $content;
+
+		return null;
 	}
 
 	public static function get_the_content( $more_link_text = null, $strip_teaser = false ) {
@@ -330,7 +332,7 @@ class Post {
 		$terms = wp_get_post_terms( $post->ID, PluginConfig::$board_tax );
 
 		if ( ! empty( $terms ) && count( $terms ) == 1 ) {
-			return $terms[0]->term_id;
+			return $terms[ 0 ]->term_id;
 		}
 
 		return self::get_post_meta( $post, 'idea_board_term', false );
